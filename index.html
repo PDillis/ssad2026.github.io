@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ELLIS Summer School on Autonomous Driving — Barcelona 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#06090f;
+  --surface:#0d1420;
+  --surface-raised:#121a28;
+  --border:rgba(255,255,255,0.07);
+  --border-accent:rgba(255,255,255,0.13);
+  --text:#f0f4ff;
+  --text-muted:#7d8fa3;
+  --text-dim:#4a5568;
+  --blue:#3b82f6;
+  --blue-light:#60a5fa;
+  --orange:#f97316;
+  --purple:#a855f7;
+  --cyan:#22d3ee;
+  --green:#22c55e;
+  --radius:12px;
+  --radius-lg:20px;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:16px;line-height:1.6;overflow-x:hidden;
+}
+
+/* ── NAV ─────────────────────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 2.5rem;
+  transition:background .3s,backdrop-filter .3s,border-bottom .3s;
+}
+nav.scrolled{
+  background:rgba(6,9,15,0.88);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  display:flex;align-items:center;gap:.75rem;
+  text-decoration:none;color:var(--text);
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:700;font-size:.9rem;cursor:pointer;user-select:none;
+}
+.nav-logo-icon{width:30px;height:30px}
+.nav-ellis{
+  font-size:.65rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--blue);display:block;line-height:1;
+}
+.nav-name{display:block;line-height:1.2}
+.nav-links{display:flex;gap:1.75rem;list-style:none}
+.nav-links a{
+  text-decoration:none;color:var(--text-muted);
+  font-size:.875rem;font-weight:500;transition:color .2s;
+}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{
+  background:var(--blue);color:#fff;
+  padding:.5rem 1.2rem;border-radius:8px;
+  text-decoration:none;font-size:.85rem;font-weight:600;
+  transition:opacity .2s;
+}
+.nav-cta:hover{opacity:.85}
+
+/* ── HERO ────────────────────────────────────────────────────── */
+#hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero-content{
+  position:relative;z-index:2;text-align:center;
+  padding:8rem 2rem 4rem;max-width:800px;margin:0 auto;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);
+  color:var(--blue);border-radius:100px;
+  padding:.35rem 1rem;font-size:.8rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;margin-bottom:2rem;
+}
+.hero-eyebrow::before{
+  content:'';width:6px;height:6px;background:var(--blue);
+  border-radius:50%;animation:pulse-dot 2s infinite;
+}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.3}}
+
+.hero-logo-wrap{
+  display:flex;align-items:center;justify-content:center;
+  gap:1.25rem;margin-bottom:1.75rem;
+  cursor:pointer;user-select:none;
+}
+.hero-logo-wrap:hover .hero-logo-svg{transform:rotate(12deg) scale(1.04)}
+.hero-logo-svg{width:68px;height:68px;transition:transform .35s}
+.hero-title-small{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(.95rem,2.5vw,1.35rem);font-weight:400;
+  color:var(--text-muted);line-height:1;
+}
+.hero-title-big{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(1.55rem,4vw,2.35rem);font-weight:700;
+  color:var(--text);line-height:1;margin-top:.15rem;
+}
+
+.hero-heading{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(2.2rem,5.5vw,4rem);font-weight:700;
+  line-height:1.06;letter-spacing:-.02em;margin-bottom:1.25rem;
+  background:linear-gradient(135deg,#fff 35%,rgba(255,255,255,.5));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{
+  font-size:1.05rem;color:var(--text-muted);
+  max-width:530px;margin:0 auto 2.25rem;line-height:1.75;
+}
+.hero-meta{
+  display:flex;align-items:center;justify-content:center;
+  gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem;
+}
+.hero-badge{
+  display:flex;align-items:center;gap:.45rem;
+  background:var(--surface-raised);border:1px solid var(--border-accent);
+  border-radius:8px;padding:.55rem .9rem;
+  font-size:.83rem;font-weight:500;
+}
+.hero-badge.ellis{
+  background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.22);
+  color:var(--blue-light);
+}
+.hero-dot{color:var(--border-accent);font-size:1.1rem}
+.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{
+  background:var(--blue);color:#fff;
+  padding:.85rem 2rem;border-radius:10px;text-decoration:none;
+  font-weight:600;font-size:.95rem;
+  transition:transform .2s,box-shadow .2s;
+  box-shadow:0 0 30px rgba(59,130,246,.25);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 4px 40px rgba(59,130,246,.4)}
+.btn-ghost{
+  background:rgba(255,255,255,.05);border:1px solid var(--border-accent);
+  color:var(--text);padding:.85rem 2rem;border-radius:10px;
+  text-decoration:none;font-weight:500;font-size:.95rem;
+  transition:background .2s,border-color .2s;
+}
+.btn-ghost:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.2)}
+
+.scroll-indicator{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  color:var(--text-dim);font-size:.73rem;letter-spacing:.1em;text-transform:uppercase;
+  animation:float 2s ease-in-out infinite;
+}
+.scroll-arrow{width:18px;height:18px;border-right:1.5px solid;border-bottom:1.5px solid;
+  color:var(--text-dim);transform:rotate(45deg)}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* ── SECTIONS ────────────────────────────────────────────────── */
+section{padding:6rem 2rem}
+.container{max-width:1080px;margin:0 auto}
+.section-eyebrow{
+  font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:.875rem;
+}
+.section-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(1.75rem,3.5vw,2.6rem);
+  font-weight:700;letter-spacing:-.02em;margin-bottom:1rem;
+}
+.section-sub{color:var(--text-muted);font-size:1rem;max-width:540px;line-height:1.75}
+
+/* ── ABOUT ───────────────────────────────────────────────────── */
+#about{background:var(--surface)}
+.about-grid{display:grid;grid-template-columns:3fr 2fr;gap:5rem;align-items:start;margin-top:3.5rem}
+.about-text p{color:var(--text-muted);margin-bottom:1rem;line-height:1.8}
+.about-text p strong{color:var(--text)}
+.about-topics{margin-top:1.75rem}
+.about-topics-label{
+  font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text-dim);margin-bottom:.75rem;
+}
+.topics-list{display:flex;flex-wrap:wrap;gap:.45rem}
+.topic-tag{
+  background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.18);
+  color:var(--blue-light);border-radius:6px;padding:.28rem .7rem;
+  font-size:.78rem;font-weight:500;
+}
+
+.about-sidebar{}
+.info-card{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;margin-bottom:1rem;
+}
+.info-card-header{
+  padding:.75rem 1.1rem;
+  border-bottom:1px solid var(--border);
+  font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text-dim);
+}
+.info-row{
+  display:flex;align-items:flex-start;gap:.7rem;
+  padding:.75rem 1.1rem;
+  border-bottom:1px solid var(--border);
+  font-size:.875rem;
+}
+.info-row:last-child{border-bottom:none}
+.info-icon{font-size:.95rem;margin-top:1px;flex-shrink:0}
+.info-label{display:block;font-size:.72rem;color:var(--text-dim);margin-bottom:.1rem}
+.info-val{color:var(--text);font-weight:500}
+
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.stat-card{
+  background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.25rem 1rem;text-align:center;
+  transition:border-color .2s;
+}
+.stat-card:hover{border-color:var(--border-accent)}
+.stat-number{
+  font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;
+  background:linear-gradient(135deg,var(--blue),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:.2rem;line-height:1;
+}
+.stat-label{color:var(--text-muted);font-size:.78rem;line-height:1.4}
+
+/* ── SPEAKERS ────────────────────────────────────────────────── */
+#speakers{}
+.speakers-header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;margin-bottom:2.75rem;
+}
+.badge-pill{
+  display:inline-flex;align-items:center;gap:.4rem;
+  border-radius:100px;padding:.3rem .85rem;
+  font-size:.73rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+}
+.badge-confirmed{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:var(--green)}
+.badge-preliminary{background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.25);color:var(--orange)}
+.badge-ellis-fellow{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);color:var(--blue-light)}
+.badge-ellis-scholar{background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.25);color:#c084fc}
+.badge-ellis-member{background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.25);color:var(--cyan)}
+
+.speakers-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:1.1rem;
+}
+.speaker-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:1.6rem 1.25rem;text-align:center;
+  transition:border-color .25s,transform .25s,box-shadow .25s;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;
+}
+.speaker-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 60%,rgba(59,130,246,.04));
+  pointer-events:none;
+}
+.speaker-card:hover{
+  border-color:rgba(59,130,246,.3);transform:translateY(-4px);
+  box-shadow:0 10px 36px rgba(0,0,0,.35);
+}
+.speaker-card.tba{border-style:dashed;opacity:.7}
+.speaker-card.tba:hover{opacity:1}
+.speaker-avatar{
+  width:68px;height:68px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;
+  margin-bottom:.875rem;flex-shrink:0;
+}
+.speaker-name{
+  font-family:'Space Grotesk',sans-serif;font-weight:600;
+  font-size:.9rem;margin-bottom:.2rem;line-height:1.3;
+}
+.speaker-affil{color:var(--text-muted);font-size:.77rem;line-height:1.4;margin-bottom:.6rem}
+.speaker-topic{
+  color:var(--text-dim);font-size:.72rem;
+  font-style:italic;line-height:1.4;margin-bottom:.75rem;flex:1;
+}
+.speaker-link{
+  text-decoration:none;color:var(--blue);font-size:.76rem;font-weight:500;
+  transition:color .2s;
+  display:inline-flex;align-items:center;gap:.25rem;
+}
+.speaker-link:hover{color:var(--blue-light)}
+.speaker-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem;margin-bottom:.6rem}
+.speakers-more{
+  text-align:center;margin-top:2.25rem;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1.25rem;
+  color:var(--text-muted);font-size:.875rem;
+}
+.speakers-more strong{color:var(--text)}
+
+/* ── ORGANIZERS ──────────────────────────────────────────────── */
+#organizers{background:var(--surface)}
+.org-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:1rem;margin-top:2.5rem;
+}
+.org-card{
+  background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.25rem 1.25rem;
+  display:flex;align-items:flex-start;gap:1rem;
+  transition:border-color .2s;
+}
+.org-card:hover{border-color:var(--border-accent)}
+.org-initial{
+  width:44px;height:44px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;
+  background:var(--surface-raised);color:var(--text-muted);
+}
+.org-info{}
+.org-name{
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.9rem;
+  margin-bottom:.15rem;
+}
+.org-name a{
+  text-decoration:none;color:var(--text);transition:color .2s;
+}
+.org-name a:hover{color:var(--blue-light)}
+.org-role{color:var(--text-muted);font-size:.78rem;line-height:1.4;margin-bottom:.4rem}
+.org-badges{display:flex;flex-wrap:wrap;gap:.3rem}
+
+/* ── PROGRAM ─────────────────────────────────────────────────── */
+#program{}
+.days-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.875rem;margin-top:2.5rem}
+.day-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;
+}
+.day-header{
+  padding:.875rem 1rem;
+  border-bottom:1px solid var(--border);
+}
+.day-number{
+  font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:.2rem;
+}
+.day-date{
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.9rem;
+  color:var(--text);
+}
+.day-body{padding:.75rem 1rem}
+.day-items{list-style:none}
+.day-items li{
+  color:var(--text-muted);font-size:.8rem;
+  padding:.3rem 0;border-bottom:1px solid var(--border);
+  display:flex;align-items:flex-start;gap:.5rem;line-height:1.4;
+}
+.day-items li:last-child{border-bottom:none}
+.day-items li::before{
+  content:'';width:4px;height:4px;border-radius:50%;
+  background:var(--text-dim);flex-shrink:0;margin-top:6px;
+}
+.program-note{
+  background:var(--surface);border:1px solid var(--border);
+  border-left:3px solid var(--blue);border-radius:var(--radius);
+  padding:1.1rem 1.4rem;color:var(--text-muted);margin-top:1.5rem;font-size:.875rem;
+}
+
+/* ── VENUE ───────────────────────────────────────────────────── */
+#venue{background:var(--surface)}
+.venue-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:3rem}
+.venue-info h3{
+  font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:600;margin-bottom:.7rem;
+}
+.venue-info p{color:var(--text-muted);margin-bottom:1.25rem;line-height:1.8;font-size:.95rem}
+.venue-detail{display:flex;align-items:flex-start;gap:.7rem;margin-bottom:.7rem;font-size:.875rem}
+.venue-detail-icon{
+  width:30px;height:30px;flex-shrink:0;
+  background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.15);
+  border-radius:7px;display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;margin-top:1px;
+}
+.venue-detail-text{color:var(--text-muted)}
+.venue-detail-text strong{color:var(--text);display:block;font-size:.8rem;margin-bottom:.05rem}
+
+.venue-map{
+  border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:1;
+  background:var(--bg);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:1rem;color:var(--text-muted);
+}
+.map-pin{
+  width:48px;height:48px;background:rgba(59,130,246,.12);
+  border:2px solid var(--blue);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;
+}
+.map-cta{
+  text-decoration:none;color:var(--blue);font-size:.8rem;
+  font-weight:500;transition:color .2s;
+}
+.map-cta:hover{color:var(--blue-light)}
+
+/* ── REGISTER ────────────────────────────────────────────────── */
+#register{text-align:center}
+.register-card{
+  background:linear-gradient(135deg,rgba(59,130,246,.05),rgba(168,85,247,.05));
+  border:1px solid rgba(59,130,246,.14);border-radius:var(--radius-lg);
+  padding:4rem 2rem;max-width:580px;margin:0 auto;
+}
+.register-card h3{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.75rem;font-weight:700;margin-bottom:.75rem;
+}
+.register-card p{color:var(--text-muted);margin-bottom:1.5rem;font-size:.95rem}
+.fee-info{
+  display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  margin-bottom:1.75rem;
+}
+.fee-badge{
+  background:var(--surface-raised);border:1px solid var(--border-accent);
+  border-radius:8px;padding:.6rem 1rem;font-size:.82rem;
+}
+.fee-badge strong{
+  display:block;font-size:1.1rem;font-family:'Space Grotesk',sans-serif;
+  color:var(--text);margin-bottom:.1rem;
+}
+.fee-badge span{color:var(--text-muted)}
+.notify-form{
+  display:flex;gap:.7rem;max-width:380px;margin:0 auto;flex-wrap:wrap;justify-content:center;
+}
+.notify-input{
+  flex:1;min-width:190px;background:var(--bg);
+  border:1px solid var(--border-accent);border-radius:8px;
+  padding:.7rem 1rem;color:var(--text);font-size:.875rem;
+  outline:none;transition:border-color .2s;
+}
+.notify-input:focus{border-color:var(--blue)}
+.notify-input::placeholder{color:var(--text-dim)}
+.notify-btn{
+  background:var(--blue);color:#fff;border:none;
+  border-radius:8px;padding:.7rem 1.4rem;
+  font-weight:600;font-size:.875rem;cursor:pointer;transition:opacity .2s;
+}
+.notify-btn:hover{opacity:.85}
+.diversity-note{
+  margin-top:1.25rem;color:var(--text-dim);font-size:.8rem;line-height:1.6;
+}
+
+/* ── PARTNERS ────────────────────────────────────────────────── */
+#partners{background:var(--surface);text-align:center}
+.partners-grid{
+  display:flex;align-items:center;justify-content:center;
+  gap:3rem;flex-wrap:wrap;margin-top:2.75rem;
+}
+.partner-item{
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  opacity:.55;transition:opacity .2s;
+}
+.partner-item:hover{opacity:1}
+.partner-logo{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:1.2rem;color:var(--text);letter-spacing:.04em;
+  height:36px;display:flex;align-items:center;
+}
+.partner-label{font-size:.73rem;color:var(--text-dim);text-align:center;max-width:120px}
+.eu-flag{
+  width:46px;height:30px;background:#003399;border-radius:4px;
+  display:grid;place-items:center;
+}
+.eu-stars-wrap{
+  display:grid;grid-template-columns:repeat(4,auto);gap:2px;
+  color:#FFCC00;font-size:.4rem;
+}
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+footer{
+  background:var(--bg);border-top:1px solid var(--border);
+  padding:2.5rem 2rem;
+}
+.footer-inner{
+  max-width:1080px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1.25rem;
+}
+.footer-logo{
+  display:flex;align-items:center;gap:.6rem;
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.82rem;color:var(--text);
+}
+.footer-logo svg{width:22px;height:22px}
+.footer-links{display:flex;gap:1.5rem;list-style:none}
+.footer-links a{
+  text-decoration:none;color:var(--text-dim);font-size:.78rem;transition:color .2s;
+}
+.footer-links a:hover{color:var(--text)}
+.footer-copy{color:var(--text-dim);font-size:.75rem}
+
+/* ── GAME ────────────────────────────────────────────────────── */
+#game-modal{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,.87);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  display:none;align-items:center;justify-content:center;
+}
+#game-modal.active{display:flex;animation:modal-in .22s ease}
+@keyframes modal-in{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+.game-window{
+  background:var(--surface);border:1px solid var(--border-accent);
+  border-radius:var(--radius-lg);overflow:hidden;width:min(660px,95vw);
+}
+.game-header{
+  display:flex;align-items:center;padding:.875rem 1.25rem;
+  border-bottom:1px solid var(--border);gap:1rem;
+}
+.game-title{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;
+}
+.game-title span{color:var(--blue)}
+.game-stats{display:flex;gap:1.5rem;flex:1}
+.game-stat span{color:var(--text-muted);font-size:.8rem;margin-right:.35rem}
+.game-stat strong{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--text);
+}
+.game-close{
+  background:none;border:none;color:var(--text-muted);
+  cursor:pointer;font-size:1.4rem;line-height:1;transition:color .2s;
+}
+.game-close:hover{color:var(--text)}
+#game-canvas{display:block;width:100%}
+.game-footer{
+  padding:.7rem 1.25rem;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;
+}
+.game-hint{color:var(--text-dim);font-size:.76rem}
+.game-restart{
+  background:var(--surface-raised);border:1px solid var(--border-accent);
+  color:var(--text);font-size:.78rem;font-weight:500;
+  padding:.38rem .85rem;border-radius:6px;cursor:pointer;transition:background .2s;
+}
+.game-restart:hover{background:rgba(255,255,255,.08)}
+.logo-hint{
+  position:fixed;bottom:2rem;right:2rem;z-index:50;
+  background:var(--surface);border:1px solid var(--border-accent);
+  border-radius:var(--radius);padding:.55rem .95rem;
+  font-size:.76rem;color:var(--text-muted);
+  animation:hint-fade 3.5s forwards;pointer-events:none;
+  box-shadow:0 4px 20px rgba(0,0,0,.3);
+}
+@keyframes hint-fade{0%,70%{opacity:1}100%{opacity:0}}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media(max-width:900px){
+  .days-grid{grid-template-columns:1fr 1fr}
+  .about-grid,.venue-grid{grid-template-columns:1fr;gap:2.5rem}
+}
+@media(max-width:720px){
+  nav{padding:1rem 1.25rem}
+  .nav-links{display:none}
+  section{padding:4rem 1.25rem}
+  .footer-inner{flex-direction:column;text-align:center}
+  .footer-links{justify-content:center}
+  .days-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="#hero">
+    <svg class="nav-logo-icon" viewBox="0 0 80 80" fill="none">
+      <line x1="40" y1="40" x2="40" y2="5" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity=".9"/>
+      <line x1="40" y1="40" x2="55" y2="7" stroke="#f97316" stroke-width="3" stroke-linecap="round"/>
+      <line x1="40" y1="40" x2="67" y2="13" stroke="#3b82f6" stroke-width="3" stroke-linecap="round" opacity=".85"/>
+      <line x1="40" y1="40" x2="75" y2="40" stroke="#ef4444" stroke-width="3" stroke-linecap="round" opacity=".9"/>
+      <line x1="40" y1="40" x2="5" y2="40" stroke="white" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+      <line x1="40" y1="40" x2="13" y2="13" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
+      <line x1="40" y1="40" x2="25" y2="7" stroke="white" stroke-width="3" stroke-linecap="round" opacity=".85"/>
+      <line x1="40" y1="40" x2="7" y2="25" stroke="#a855f7" stroke-width="2.5" stroke-linecap="round" opacity=".75"/>
+      <line x1="40" y1="40" x2="13" y2="67" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
+    </svg>
+    <div>
+      <span class="nav-ellis">ELLIS School</span>
+      <span class="nav-name">Autonomous Driving 2026</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#speakers">Speakers</a></li>
+    <li><a href="#program">Program</a></li>
+    <li><a href="#organizers">Organizers</a></li>
+    <li><a href="#venue">Venue</a></li>
+    <li><a href="#register">Register</a></li>
+  </ul>
+  <a class="nav-cta" href="#register">Registration →</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-eyebrow">ELLIS School · Barcelona · September 2026</div>
+
+    <div class="hero-logo-wrap" id="hero-logo" title="Psst…">
+      <svg class="hero-logo-svg" viewBox="0 0 100 100" fill="none">
+        <line x1="50" y1="50" x2="50" y2="3" stroke="white" stroke-width="4" stroke-linecap="round" opacity=".95"/>
+        <line x1="50" y1="50" x2="63" y2="4" stroke="#f97316" stroke-width="3.5" stroke-linecap="round"/>
+        <line x1="50" y1="50" x2="76" y2="10" stroke="#3b82f6" stroke-width="3.5" stroke-linecap="round" opacity=".9"/>
+        <line x1="50" y1="50" x2="87" y2="20" stroke="white" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+        <line x1="50" y1="50" x2="93" y2="32" stroke="#ef4444" stroke-width="3.5" stroke-linecap="round" opacity=".9"/>
+        <line x1="50" y1="50" x2="97" y2="46" stroke="white" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+        <line x1="50" y1="50" x2="97" y2="50" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity=".85"/>
+        <line x1="50" y1="50" x2="93" y2="62" stroke="white" stroke-width="3" stroke-linecap="round" opacity=".65"/>
+        <line x1="50" y1="50" x2="79" y2="81" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity=".5"/>
+        <line x1="50" y1="50" x2="50" y2="97" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity=".4"/>
+        <line x1="50" y1="50" x2="21" y2="81" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" opacity=".6"/>
+        <line x1="50" y1="50" x2="3" y2="50" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity=".8"/>
+        <line x1="50" y1="50" x2="7" y2="32" stroke="#a855f7" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+        <line x1="50" y1="50" x2="13" y2="20" stroke="white" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+        <line x1="50" y1="50" x2="24" y2="10" stroke="#f97316" stroke-width="3.5" stroke-linecap="round" opacity=".85"/>
+        <line x1="50" y1="50" x2="37" y2="4" stroke="white" stroke-width="4" stroke-linecap="round" opacity=".9"/>
+      </svg>
+      <div>
+        <div class="hero-title-small">Summer School on</div>
+        <div class="hero-title-big">Autonomous Driving</div>
+      </div>
+    </div>
+
+    <h1 class="hero-heading">Learn from Europe's<br>leading AD researchers</h1>
+    <p class="hero-sub">
+      An intensive 4-day ELLIS school bringing together leading researchers
+      and students to explore the frontiers of autonomous driving, perception,
+      end-to-end systems, and intelligent transportation.
+    </p>
+
+    <div class="hero-meta">
+      <div class="hero-badge">
+        <span>📅</span> Sep 15–18, 2026
+      </div>
+      <span class="hero-dot">·</span>
+      <div class="hero-badge">
+        <span>📍</span> Barcelona, Spain
+      </div>
+      <span class="hero-dot">·</span>
+      <div class="hero-badge ellis">
+        <span>◆</span> Official ELLIS School
+      </div>
+    </div>
+
+    <div class="hero-actions">
+      <a href="#register" class="btn-primary">Get Notified →</a>
+      <a href="https://ellis.eu/news/2026-schedule-of-ellis-phd-winter-and-summer-schools" target="_blank" rel="noopener" class="btn-ghost">ELLIS Announcement ↗</a>
+    </div>
+  </div>
+
+  <div class="scroll-indicator" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="section-eyebrow">About the School</div>
+        <h2 class="section-title">Four intensive days at the frontier of autonomous driving</h2>
+        <div class="about-text">
+          <p>
+            The <strong>ELLIS Summer School on Autonomous Driving</strong> is an official
+            <a href="https://ellis.eu" target="_blank" rel="noopener" style="color:var(--blue-light);text-decoration:none">ELLIS PhD Program</a>
+            school, approved for 2026. It is designed for PhD students, postdocs, and junior
+            researchers working at the intersection of machine learning, computer vision, and robotics.
+          </p>
+          <p>
+            Hosted at the <strong>UAB Casa Convalescència in Barcelona</strong> and organized by the
+            Computer Vision Center (CVC) and ELLIS Unit Barcelona, the school combines expert lectures,
+            hands-on workshops, a hackathon using real driving data, and a student poster session.
+          </p>
+          <p>
+            The timing in late September may coincide with Barcelona's <strong>La Mercè festival</strong>
+            (Sept 23–27), offering participants a unique cultural experience in one of Europe's most
+            vibrant cities.
+          </p>
+          <div class="about-topics">
+            <div class="about-topics-label">Research Topics</div>
+            <div class="topics-list">
+              <span class="topic-tag">End-to-End Driving</span>
+              <span class="topic-tag">3D Perception</span>
+              <span class="topic-tag">Dataset Curation</span>
+              <span class="topic-tag">Sensor Synthesis</span>
+              <span class="topic-tag">Foundation Models</span>
+              <span class="topic-tag">BEV Perception</span>
+              <span class="topic-tag">Reinforcement Learning</span>
+              <span class="topic-tag">World Models</span>
+              <span class="topic-tag">Sim-to-Real</span>
+              <span class="topic-tag">Safety & Robustness</span>
+              <span class="topic-tag">SLAM</span>
+              <span class="topic-tag">VLA Models</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-sidebar">
+        <div class="info-card">
+          <div class="info-card-header">Key Details</div>
+          <div class="info-row">
+            <span class="info-icon">📅</span>
+            <div>
+              <span class="info-label">Dates</span>
+              <span class="info-val">Sep 15–18, 2026 (Tue–Fri)</span>
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">📍</span>
+            <div>
+              <span class="info-label">Venue</span>
+              <span class="info-val">Casa Convalescència, UAB Barcelona</span>
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">🪑</span>
+            <div>
+              <span class="info-label">Capacity</span>
+              <span class="info-val">100 participants (limited)</span>
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">◆</span>
+            <div>
+              <span class="info-label">Status</span>
+              <span class="info-val">Official ELLIS School 2026</span>
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">💻</span>
+            <div>
+              <span class="info-label">Hands-on</span>
+              <span class="info-val">Hackathon · CARLA · Poster Session</span>
+            </div>
+          </div>
+        </div>
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-number">4</div>
+            <div class="stat-label">Days of lectures & workshops</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">5+</div>
+            <div class="stat-label">Invited speakers (growing)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">100</div>
+            <div class="stat-label">Max participants</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">BCN</div>
+            <div class="stat-label">Barcelona, Catalonia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPEAKERS -->
+<section id="speakers">
+  <div class="container">
+    <div class="speakers-header">
+      <div>
+        <div class="section-eyebrow">Invited Speakers</div>
+        <h2 class="section-title">World-class researchers</h2>
+      </div>
+      <div class="badge-confirmed">✓ Confirmed speakers — more to come</div>
+    </div>
+    <div class="speakers-grid" id="speakers-grid"></div>
+    <div class="speakers-more">
+      <strong>Additional speakers being confirmed.</strong> Full lineup will be announced closer to the event. Follow <a href="https://ellis.eu" target="_blank" rel="noopener" style="color:var(--blue)">ELLIS Society</a> and <a href="https://www.cvc.uab.cat" target="_blank" rel="noopener" style="color:var(--blue)">CVC Barcelona</a> for updates.
+    </div>
+  </div>
+</section>
+
+<!-- ORGANIZERS -->
+<section id="organizers">
+  <div class="container">
+    <div class="section-eyebrow">Organizing Committee</div>
+    <h2 class="section-title">Who's behind the school</h2>
+    <p class="section-sub">Organized by researchers from CVC, Valeo/Inria, and ELLIS Unit Barcelona.</p>
+    <div class="org-grid" id="org-grid"></div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section id="program">
+  <div class="container">
+    <div class="section-eyebrow">Program</div>
+    <h2 class="section-title">Preliminary Schedule</h2>
+    <p class="section-sub">Sessions run 09:00–17:00 each day. Mix of keynotes, tutorials, panels, and hands-on workshops.</p>
+    <div class="days-grid">
+      <div class="day-card">
+        <div class="day-header">
+          <div class="day-number">Day 1 · Tuesday</div>
+          <div class="day-date">September 15</div>
+        </div>
+        <div class="day-body">
+          <ul class="day-items">
+            <li>Opening ceremony & welcome</li>
+            <li>Keynote: End-to-End Driving</li>
+            <li>Keynote: Perception & Sensing</li>
+            <li>Student poster session</li>
+            <li>Welcome social event</li>
+          </ul>
+        </div>
+      </div>
+      <div class="day-card">
+        <div class="day-header">
+          <div class="day-number">Day 2 · Wednesday</div>
+          <div class="day-date">September 16</div>
+        </div>
+        <div class="day-body">
+          <ul class="day-items">
+            <li>Keynote: Dataset Construction</li>
+            <li>Keynote: Simulation & Synthesis</li>
+            <li>Visit to CVC campus</li>
+            <li>Autonomous vehicle demos</li>
+            <li>Panel #1: European AD research</li>
+          </ul>
+        </div>
+      </div>
+      <div class="day-card">
+        <div class="day-header">
+          <div class="day-number">Day 3 · Thursday</div>
+          <div class="day-date">September 17</div>
+        </div>
+        <div class="day-body">
+          <ul class="day-items">
+            <li>Keynote: Foundation Models</li>
+            <li>Hackathon: Catalunya dataset</li>
+            <li>Hands-on: CARLA simulation</li>
+            <li>TrafficRL competition</li>
+            <li>Gala dinner & awards</li>
+          </ul>
+        </div>
+      </div>
+      <div class="day-card">
+        <div class="day-header">
+          <div class="day-number">Day 4 · Friday</div>
+          <div class="day-date">September 18</div>
+        </div>
+        <div class="day-body">
+          <ul class="day-items">
+            <li>Keynote: Evaluation of AD models</li>
+            <li>Panel #2: The road ahead</li>
+            <li>Open research forum</li>
+            <li>Closing ceremony & certificates</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="program-note">
+      📋 Detailed schedule and speaker assignments will be published ~6 weeks before the school.
+      Hands-on sessions use the <strong>6,000+ km Catalunya driving dataset</strong> from the ELLIOT project,
+      with fallback options using CARLA simulation and open-source datasets.
+    </div>
+  </div>
+</section>
+
+<!-- VENUE -->
+<section id="venue">
+  <div class="container">
+    <div class="section-eyebrow">Location</div>
+    <h2 class="section-title">Barcelona, Spain</h2>
+    <div class="venue-grid">
+      <div class="venue-info">
+        <h3>UAB Casa Convalescència</h3>
+        <p>
+          A stunning modernist building in the heart of Barcelona, part of the
+          Recinte Modernista de Sant Pau. With a capacity for 190 people, this
+          iconic UAB venue offers state-of-the-art lecture facilities and
+          break-out spaces in one of the city's most remarkable architectural settings.
+        </p>
+        <div class="venue-detail">
+          <div class="venue-detail-icon">📍</div>
+          <div class="venue-detail-text">
+            <strong>Address</strong>
+            Carrer de Sant Antoni Maria Claret, 171, 08041 Barcelona
+          </div>
+        </div>
+        <div class="venue-detail">
+          <div class="venue-detail-icon">🚇</div>
+          <div class="venue-detail-text">
+            <strong>Metro</strong>
+            L5 (Hospital de Sant Pau) · L2/L4 (Passeig de Gràcia)
+          </div>
+        </div>
+        <div class="venue-detail">
+          <div class="venue-detail-icon">🎉</div>
+          <div class="venue-detail-text">
+            <strong>La Mercè 2026</strong>
+            Barcelona's biggest festival (Sep 23–27) just after the school — stay on!
+          </div>
+        </div>
+        <div class="venue-detail">
+          <div class="venue-detail-icon">✈️</div>
+          <div class="venue-detail-text">
+            <strong>Airport</strong>
+            Barcelona–El Prat (BCN) · ~35 min by metro L9 Sud
+          </div>
+        </div>
+      </div>
+      <div class="venue-map">
+        <div class="map-pin">📍</div>
+        <div style="text-align:center">
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:.25rem">UAB Casa Convalescència</div>
+          <div style="font-size:.82rem;color:var(--text-muted)">Barcelona, Spain</div>
+        </div>
+        <a href="https://maps.google.com/?q=UAB+Casa+Convalescencia+Barcelona" target="_blank" rel="noopener" class="map-cta">
+          Open in Google Maps →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER -->
+<section id="register">
+  <div class="container">
+    <div class="register-card">
+      <div class="section-eyebrow" style="text-align:center;margin-bottom:.6rem">Registration</div>
+      <h3>Registration Opens Soon</h3>
+      <p>Application-based. Priority given to PhD students and early-career researchers, especially from underrepresented groups. Sponsorship available for students with limited funding.</p>
+      <div class="fee-info">
+        <div class="fee-badge">
+          <strong>€350</strong>
+          <span>PhD Students</span>
+        </div>
+        <div class="fee-badge">
+          <strong>€550</strong>
+          <span>Industry / Postdoc</span>
+        </div>
+      </div>
+      <form class="notify-form" id="notify-form" onsubmit="handleNotify(event)">
+        <input type="email" class="notify-input" placeholder="your@email.com" required id="notify-email">
+        <button type="submit" class="notify-btn">Notify Me</button>
+      </form>
+      <p id="notify-success" style="display:none;color:#22c55e;margin-top:1rem;font-size:.875rem">
+        ✓ You're on the list — we'll be in touch when registration opens!
+      </p>
+      <div class="diversity-note">
+        We are committed to diversity and inclusion. Sponsorships from industry partners will fund
+        registration waivers for students from underrepresented groups and regions with limited research funding.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section id="partners">
+  <div class="container">
+    <div class="section-eyebrow" style="text-align:center">Organized with Support from</div>
+    <div class="partners-grid">
+      <div class="partner-item">
+        <div class="partner-logo" style="font-size:1.35rem;font-weight:800;letter-spacing:.06em">ELLIS</div>
+        <div class="partner-label">European Laboratory for Learning & Intelligent Systems</div>
+      </div>
+      <div class="partner-item">
+        <div class="partner-logo">CVC</div>
+        <div class="partner-label">Computer Vision Center, Barcelona</div>
+      </div>
+      <div class="partner-item">
+        <div class="partner-logo">UAB</div>
+        <div class="partner-label">Universitat Autònoma de Barcelona</div>
+      </div>
+      <div class="partner-item">
+        <div class="partner-logo" style="font-size:.9rem;display:flex;align-items:center;gap:.4rem">
+          <svg width="20" height="20" viewBox="0 0 80 80" fill="none">
+            <line x1="40" y1="40" x2="40" y2="6" stroke="white" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+            <line x1="40" y1="40" x2="55" y2="8" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+            <line x1="40" y1="40" x2="67" y2="14" stroke="#3b82f6" stroke-width="4" stroke-linecap="round" opacity=".9"/>
+            <line x1="40" y1="40" x2="74" y2="40" stroke="#ef4444" stroke-width="4.5" stroke-linecap="round" opacity=".9"/>
+            <line x1="40" y1="40" x2="6" y2="40" stroke="white" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+            <line x1="40" y1="40" x2="14" y2="14" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity=".7"/>
+            <line x1="40" y1="40" x2="26" y2="8" stroke="white" stroke-width="4" stroke-linecap="round" opacity=".85"/>
+          </svg>
+          ELLIOT
+        </div>
+        <div class="partner-label">EU-funded project (logistics support)</div>
+      </div>
+      <div class="partner-item">
+        <div class="eu-flag">
+          <div class="eu-stars-wrap" style="display:flex;flex-wrap:wrap;width:18px;gap:1px;color:#FFCC00;font-size:.42rem;justify-content:center">
+            ★★★★★★★★★★★★
+          </div>
+        </div>
+        <div class="partner-label">Funded by the European Union</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg viewBox="0 0 80 80" fill="none">
+        <line x1="40" y1="40" x2="40" y2="8" stroke="white" stroke-width="4.5" stroke-linecap="round" opacity=".8"/>
+        <line x1="40" y1="40" x2="55" y2="10" stroke="#f97316" stroke-width="3.5" stroke-linecap="round"/>
+        <line x1="40" y1="40" x2="70" y2="26" stroke="#3b82f6" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+        <line x1="40" y1="40" x2="72" y2="40" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity=".7"/>
+        <line x1="40" y1="40" x2="8" y2="40" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity=".7"/>
+        <line x1="40" y1="40" x2="10" y2="26" stroke="#f97316" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+        <line x1="40" y1="40" x2="26" y2="10" stroke="white" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+      </svg>
+      ELLIS Summer School on Autonomous Driving 2026
+    </div>
+    <ul class="footer-links">
+      <li><a href="https://ellis.eu" target="_blank" rel="noopener">ELLIS Society</a></li>
+      <li><a href="https://www.cvc.uab.cat" target="_blank" rel="noopener">CVC Barcelona</a></li>
+      <li><a href="#register">Register</a></li>
+      <li><a href="mailto:dporres@cvc.uab.es">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 SSAD · CVC / ELLIS Unit Barcelona</div>
+  </div>
+</footer>
+
+<!-- GAME MODAL -->
+<div id="game-modal" role="dialog" aria-modal="true" aria-label="Mini driving game">
+  <div class="game-window">
+    <div class="game-header">
+      <div class="game-title">🏎️ <span>TrafficRL</span> Mini — Easter egg!</div>
+      <div class="game-stats">
+        <div class="game-stat"><span>Speed</span><strong id="g-speed">0</strong> km/h</div>
+        <div class="game-stat"><span>Score</span><strong id="g-score">0</strong></div>
+        <div class="game-stat"><span>Best</span><strong id="g-best">0</strong></div>
+      </div>
+      <button class="game-close" id="game-close-btn" aria-label="Close">×</button>
+    </div>
+    <canvas id="game-canvas" width="640" height="370"></canvas>
+    <div class="game-footer">
+      <div class="game-hint">Arrow keys or WASD · Dodge traffic · Stay on the road!</div>
+      <button class="game-restart" id="game-restart-btn">Restart (R)</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── NAV SCROLL ─────────────────────────────────────── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', scrollY > 30), {passive:true});
+
+/* ── HERO CANVAS ────────────────────────────────────── */
+(function(){
+  const cv = document.getElementById('hero-canvas');
+  const cx = cv.getContext('2d');
+  let W, H, trails = [];
+  function resize(){ W = cv.width = cv.offsetWidth; H = cv.height = cv.offsetHeight; }
+  window.addEventListener('resize', resize, {passive:true});
+  resize();
+  const COLS = [[59,130,246],[168,85,247],[249,115,22],[34,211,238],[239,68,68]];
+  function mk(){
+    const c = COLS[Math.floor(Math.random()*COLS.length)];
+    const fromLeft = Math.random() < .5;
+    return {
+      x: fromLeft ? -60 : W+60, y: Math.random()*H*.75+H*.1,
+      vx: (fromLeft?1:-1)*(3+Math.random()*4.5),
+      vy: (Math.random()-.5)*.8,
+      len: 120+Math.random()*180, w: 1+Math.random()*1.5,
+      r:c[0],g:c[1],b:c[2],
+      alpha:0, maxAlpha:.35+Math.random()*.35,
+      life:0, maxLife:70+Math.random()*55
+    };
+  }
+  for(let i=0;i<14;i++){const t=mk();t.life=Math.random()*t.maxLife;trails.push(t);}
+  function draw(){
+    cx.clearRect(0,0,W,H);
+    // ambient glow
+    const g = cx.createRadialGradient(W*.5,H*.2,0,W*.5,H*.3,W*.65);
+    g.addColorStop(0,'rgba(25,45,95,.14)');g.addColorStop(1,'rgba(0,0,0,0)');
+    cx.fillStyle=g;cx.fillRect(0,0,W,H);
+    trails.forEach(t=>{
+      const f=t.life/t.maxLife;
+      t.alpha=f<.2?f/.2*t.maxAlpha:f>.8?(1-f)/.2*t.maxAlpha:t.maxAlpha;
+      const ang=Math.atan2(t.vy,t.vx);
+      const tx=t.x-Math.cos(ang)*t.len, ty=t.y-Math.sin(ang)*t.len;
+      const lg=cx.createLinearGradient(tx,ty,t.x,t.y);
+      lg.addColorStop(0,`rgba(${t.r},${t.g},${t.b},0)`);
+      lg.addColorStop(1,`rgba(${t.r},${t.g},${t.b},${t.alpha})`);
+      cx.strokeStyle=lg;cx.lineWidth=t.w;
+      cx.beginPath();cx.moveTo(tx,ty);cx.lineTo(t.x,t.y);cx.stroke();
+      t.x+=t.vx;t.y+=t.vy;t.life++;
+      if(t.life>t.maxLife||t.x<-350||t.x>W+350) Object.assign(t,mk());
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── SPEAKERS DATA ──────────────────────────────────── */
+const speakers = [
+  {
+    name:"Antonio M. López",
+    affil:"Computer Vision Center (CVC) / UAB",
+    topic:"Simulation & sensor synthesis for autonomous driving",
+    ellis:"ELLIS Fellow", ellisColor:"var(--blue)",
+    init:"AL", color:"#3b82f6",
+    url:"https://www.cvc.uab.cat/people/antonio-m-lopez/"
+  },
+  {
+    name:"Holger Caesar",
+    affil:"TU Delft",
+    topic:"Dataset construction and curation",
+    ellis:"ELLIS Scholar", ellisColor:"#c084fc",
+    init:"HC", color:"#a855f7",
+    url:"https://scholar.google.com/citations?user=Jlue9uoAAAAJ"
+  },
+  {
+    name:"Fatma Güney",
+    affil:"Koç University",
+    topic:"Reliable perception for autonomous driving",
+    ellis:"ELLIS Member", ellisColor:"var(--cyan)",
+    init:"FG", color:"#22d3ee",
+    url:"https://mysite.ku.edu.tr/fguney/"
+  },
+  {
+    name:"José M. Álvarez",
+    affil:"NVIDIA",
+    topic:"End-to-end driving & vision-language-action models",
+    ellis:null,
+    init:"JA", color:"#22c55e",
+    url:"https://scholar.google.com/citations?user=Oyx-_UIAAAAJ"
+  },
+  {
+    name:"Kashyap Chitta",
+    affil:"NVIDIA",
+    topic:"Evaluation and benchmarking of driving models",
+    ellis:null,
+    init:"KC", color:"#f97316",
+    url:"https://kashyap7.github.io/"
+  },
+  {
+    name:"More TBA",
+    affil:"ELLIS Fellows · Members · Industry",
+    topic:"Additional topics: world models, RL, SLAM, federated learning…",
+    ellis:null, tba:true,
+    init:"?", color:"#374151",
+    url:null
+  },
+];
+
+const sg = document.getElementById('speakers-grid');
+speakers.forEach(s => {
+  const c = document.createElement('div');
+  c.className = 'speaker-card' + (s.tba?' tba':'');
+  c.innerHTML = `
+    <div class="speaker-avatar" style="background:${s.tba?'var(--surface-raised)':s.color+'18'};border:2px solid ${s.tba?'var(--border)':s.color+'44'}">
+      <span style="color:${s.tba?'var(--text-dim)':s.color}">${s.init}</span>
+    </div>
+    ${s.ellis?`<div class="speaker-badges"><span class="badge-pill" style="background:${s.ellisColor}18;border:1px solid ${s.ellisColor}33;color:${s.ellisColor};font-size:.64rem;padding:.2rem .6rem">${s.ellis}</span></div>`:''}
+    <div class="speaker-name">${s.tba?`<span style="color:var(--text-dim)">To Be Announced</span>`:s.url?`<a href="${s.url}" target="_blank" rel="noopener" style="color:var(--text);text-decoration:none">${s.name}</a>`:s.name}</div>
+    <div class="speaker-affil">${s.affil}</div>
+    <div class="speaker-topic">${s.topic}</div>
+    ${s.url?`<a href="${s.url}" target="_blank" rel="noopener" class="speaker-link">Profile ↗</a>`:''}
+  `;
+  sg.appendChild(c);
+});
+
+/* ── ORGANIZERS DATA ────────────────────────────────── */
+const organizers = [
+  {
+    name:"Diego Porres",
+    role:"Postdoctoral Researcher · CVC",
+    ellis:null,
+    ellisCls:null,
+    init:"DP",
+    url:"https://scholar.google.com/citations?user=diegolpporres"
+  },
+  {
+    name:"Andrei Bursuc",
+    role:"PI · Valeo.ai / Inria",
+    ellis:"ELLIS Member",
+    ellisCls:"badge-ellis-member",
+    init:"AB",
+    url:"https://abursuc.github.io/"
+  },
+  {
+    name:"Gabriel Villalonga",
+    role:"Postdoctoral Researcher · CVC",
+    ellis:null,
+    ellisCls:null,
+    init:"GV",
+    url:"https://www.cvc.uab.cat/"
+  },
+  {
+    name:"Damar Hoogland",
+    role:"Postdoctoral Researcher · JSI",
+    ellis:null,
+    ellisCls:null,
+    init:"DH",
+    url:"https://www.ijs.si/"
+  },
+  {
+    name:"Antonio M. López",
+    role:"PI · Computer Vision Center (CVC) / UAB",
+    ellis:"ELLIS Fellow",
+    ellisCls:"badge-ellis-fellow",
+    init:"AL",
+    url:"https://www.cvc.uab.cat/people/antonio-m-lopez/"
+  },
+  {
+    name:"Meritxell Bassolas",
+    role:"ELLIS Unit Barcelona Manager · UAB",
+    ellis:null,
+    ellisCls:null,
+    init:"MB",
+    url:"https://ellis.eu/units/barcelona"
+  },
+];
+
+const og = document.getElementById('org-grid');
+organizers.forEach(o => {
+  const c = document.createElement('div');
+  c.className = 'org-card';
+  c.innerHTML = `
+    <div class="org-initial">${o.init}</div>
+    <div class="org-info">
+      <div class="org-name"><a href="${o.url}" target="_blank" rel="noopener">${o.name}</a></div>
+      <div class="org-role">${o.role}</div>
+      ${o.ellis?`<div class="org-badges"><span class="badge-pill ${o.ellisCls}" style="font-size:.63rem;padding:.18rem .6rem">${o.ellis}</span></div>`:''}
+    </div>
+  `;
+  og.appendChild(c);
+});
+
+/* ── NOTIFY FORM ────────────────────────────────────── */
+function handleNotify(e){
+  e.preventDefault();
+  document.getElementById('notify-form').style.display='none';
+  document.getElementById('notify-success').style.display='block';
+}
+
+/* ── EASTER EGG ─────────────────────────────────────── */
+let logoClicks=0, logoTimer=null;
+document.getElementById('hero-logo').addEventListener('click', () => {
+  logoClicks++;
+  clearTimeout(logoTimer);
+  logoTimer = setTimeout(() => logoClicks=0, 2000);
+  if(logoClicks===1) showHint('Click 2 more times… 🚗');
+  else if(logoClicks===2) showHint('One more… 🏎️');
+  else if(logoClicks>=3){ logoClicks=0; openGame(); }
+});
+let hintEl=null;
+function showHint(msg){
+  if(hintEl) hintEl.remove();
+  hintEl = document.createElement('div');
+  hintEl.className='logo-hint'; hintEl.textContent=msg;
+  document.body.appendChild(hintEl);
+  setTimeout(() => { if(hintEl){hintEl.remove();hintEl=null;} },3200);
+}
+
+/* ── MINI GAME ──────────────────────────────────────── */
+const gameModal = document.getElementById('game-modal');
+const gc = document.getElementById('game-canvas');
+const gctx = gc.getContext('2d');
+const GW=640, GH=370;
+const LANES=[140,210,280,350,420,490];
+const LW=68;
+let gameRunning=false, gameOver=false, animId=null, bestScore=0;
+const player={x:280,y:285,w:32,h:52,lane:2,targetX:280,speed:0,maxSpeed:190,_lc:false};
+const keys={};
+let score=0,roadY=0,traffic=[],spawnT=0,diff=1;
+
+function openGame(){
+  gameModal.classList.add('active');
+  resetGame();
+  if(!gameRunning){gameRunning=true; requestAnimationFrame(gameLoop);}
+}
+function closeGame(){
+  gameModal.classList.remove('active');
+  gameRunning=false;
+  if(animId) cancelAnimationFrame(animId);
+}
+function resetGame(){
+  player.lane=2;player.x=LANES[2];player.targetX=LANES[2];
+  player.y=285;player.speed=0;player._lc=false;
+  traffic=[];score=0;roadY=0;spawnT=0;diff=1;gameOver=false;
+  document.getElementById('g-score').textContent='0';
+  document.getElementById('g-speed').textContent='0';
+}
+document.getElementById('game-close-btn').addEventListener('click',closeGame);
+document.getElementById('game-restart-btn').addEventListener('click',()=>{resetGame();if(!gameRunning){gameRunning=true;requestAnimationFrame(gameLoop);}});
+gameModal.addEventListener('click',e=>{if(e.target===gameModal)closeGame();});
+window.addEventListener('keydown',e=>{keys[e.key]=true;if(e.key==='Escape'&&gameModal.classList.contains('active'))closeGame();});
+window.addEventListener('keyup',e=>{keys[e.key]=false;});
+
+const TCOLS=['#ef4444','#f59e0b','#22c55e','#a855f7','#e5e7eb','#60a5fa'];
+function spawnCar(){
+  const lane=Math.floor(Math.random()*6);
+  if(traffic.some(c=>c.lane===lane&&c.y<100)) return;
+  traffic.push({lane,x:LANES[lane],y:-65,w:32,h:52,speed:55+Math.random()*65,color:TCOLS[Math.floor(Math.random()*TCOLS.length)]});
+}
+
+function drawRoad(){
+  gctx.fillStyle='#0f1720';gctx.fillRect(0,0,GW,GH);
+  // shoulders
+  gctx.fillStyle='#0a1018';
+  gctx.fillRect(0,0,LANES[0]-LW/2,GH);
+  gctx.fillRect(LANES[5]+LW/2,0,GW-(LANES[5]+LW/2),GH);
+  // road
+  gctx.fillStyle='#1a2535';
+  gctx.fillRect(LANES[0]-LW/2,0,LANES[5]-LANES[0]+LW,GH);
+  // dashes
+  gctx.strokeStyle='rgba(255,255,255,.18)';gctx.lineWidth=2;gctx.setLineDash([18,14]);
+  for(let i=0;i<5;i++){
+    const x=LANES[i]+LW/2;
+    gctx.lineDashOffset=-(roadY%32);
+    gctx.beginPath();gctx.moveTo(x,0);gctx.lineTo(x,GH);gctx.stroke();
+  }
+  gctx.setLineDash([]);
+  // edges
+  gctx.strokeStyle='rgba(249,115,22,.65)';gctx.lineWidth=3;
+  gctx.beginPath();gctx.moveTo(LANES[0]-LW/2,0);gctx.lineTo(LANES[0]-LW/2,GH);gctx.stroke();
+  gctx.beginPath();gctx.moveTo(LANES[5]+LW/2,0);gctx.lineTo(LANES[5]+LW/2,GH);gctx.stroke();
+}
+
+function drawCar(x,y,w,h,color,isP){
+  const rx=x-w/2,ry=y-h/2;
+  gctx.fillStyle='rgba(0,0,0,.28)';gctx.fillRect(rx+3,ry+3,w,h);
+  gctx.fillStyle=color;gctx.beginPath();gctx.roundRect(rx,ry,w,h,6);gctx.fill();
+  gctx.fillStyle='rgba(255,255,255,.22)';
+  gctx.fillRect(rx+4,ry+7,w-8,11);gctx.fillRect(rx+4,ry+h-17,w-8,9);
+  if(isP){
+    gctx.fillStyle='rgba(255,250,180,.9)';
+    gctx.fillRect(rx+3,ry+2,7,4);gctx.fillRect(rx+w-10,ry+2,7,4);
+    gctx.fillStyle='rgba(255,50,50,.9)';
+    gctx.fillRect(rx+3,ry+h-6,7,4);gctx.fillRect(rx+w-10,ry+h-6,7,4);
+    const sp=player.speed/player.maxSpeed;
+    gctx.strokeStyle=`rgba(59,130,246,${sp*.45})`;gctx.lineWidth=3;
+    gctx.beginPath();gctx.roundRect(rx-2,ry-2,w+4,h+4,8);gctx.stroke();
+  }
+}
+
+function drawOverlay(){
+  gctx.fillStyle='rgba(0,0,0,.72)';gctx.fillRect(0,0,GW,GH);
+  gctx.fillStyle='#fff';gctx.textAlign='center';
+  gctx.font=`bold 2rem 'Space Grotesk', sans-serif`;
+  gctx.fillText('GAME OVER',GW/2,GH/2-30);
+  gctx.font=`1rem Inter, sans-serif`;gctx.fillStyle='#94a3b8';
+  gctx.fillText(`Score: ${Math.floor(score)}  ·  Best: ${bestScore}`,GW/2,GH/2+10);
+  gctx.font=`.85rem Inter, sans-serif`;gctx.fillStyle='#60a5fa';
+  gctx.fillText('Press R or Restart to play again',GW/2,GH/2+42);
+}
+
+let lastT=0;
+function gameLoop(t=0){
+  if(!gameRunning){return;}
+  animId=requestAnimationFrame(gameLoop);
+  const dt=Math.min((t-lastT)/1000,.05);lastT=t;
+  if(dt<=0) return;
+  if(gameOver){
+    if(keys['r']||keys['R']) resetGame();
+    drawRoad();
+    traffic.forEach(c=>drawCar(c.x,c.y,c.w,c.h,c.color,false));
+    drawCar(player.x,player.y,player.w,player.h,'#3b82f6',true);
+    drawOverlay();return;
+  }
+  const L=keys['ArrowLeft']||keys['a']||keys['A'];
+  const R=keys['ArrowRight']||keys['d']||keys['D'];
+  const U=keys['ArrowUp']||keys['w']||keys['W'];
+  const D=keys['ArrowDown']||keys['s']||keys['S'];
+  if(L&&player.lane>0&&!player._lc){player.lane--;player.targetX=LANES[player.lane];player._lc=true;setTimeout(()=>player._lc=false,220);}
+  if(R&&player.lane<5&&!player._lc){player.lane++;player.targetX=LANES[player.lane];player._lc=true;setTimeout(()=>player._lc=false,220);}
+  const tspd=U?player.maxSpeed:D?player.maxSpeed*.25:player.maxSpeed*.65;
+  player.speed+=(tspd-player.speed)*dt*2.2;
+  player.speed=Math.max(0,Math.min(player.maxSpeed,player.speed));
+  player.x+=(player.targetX-player.x)*dt*9;
+  roadY+=player.speed*dt;
+  score+=player.speed*dt/100;
+  diff=1+Math.floor(score/30)*.15;
+  bestScore=Math.max(bestScore,Math.floor(score));
+  spawnT-=dt;
+  if(spawnT<=0){spawnCar();spawnT=.75/diff;}
+  traffic.forEach(c=>c.y+=dt*(c.speed-player.speed*.55));
+  traffic=traffic.filter(c=>c.y<GH+80);
+  for(const c of traffic){
+    if(Math.abs(c.x-player.x)<(player.w+c.w)*.46&&Math.abs(c.y-player.y)<(player.h+c.h)*.46){
+      gameOver=true;break;
+    }
+  }
+  document.getElementById('g-speed').textContent=Math.floor(player.speed);
+  document.getElementById('g-score').textContent=Math.floor(score);
+  document.getElementById('g-best').textContent=bestScore;
+  drawRoad();
+  traffic.forEach(c=>drawCar(c.x,c.y,c.w,c.h,c.color,false));
+  drawCar(player.x,player.y,player.w,player.h,'#3b82f6',true);
+}
+</script>
+</body>
+</html>
