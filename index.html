@@ -375,7 +375,7 @@ section{padding:6rem 2rem}
 
 /* ── VENUE ───────────────────────────────────────────────────── */
 #venue{background:var(--surface)}
-.venue-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:3rem}
+.venue-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:stretch;margin-top:3rem}
 .venue-info h3{
   font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:600;margin-bottom:.7rem;
 }
@@ -391,11 +391,11 @@ section{padding:6rem 2rem}
 .venue-detail-text strong{color:var(--text);display:block;font-size:.8rem;margin-bottom:.05rem}
 
 .venue-map{
-  border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:1;
+  border-radius:var(--radius-lg);overflow:hidden;
   background:var(--bg);border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  flex-direction:column;gap:1rem;color:var(--text-muted);
+  min-height:400px;
 }
+.venue-map iframe{width:100%;height:100%;display:block}
 .map-pin{
   width:48px;height:48px;background:rgba(59,130,246,.12);
   border:2px solid var(--blue);border-radius:50%;
@@ -911,15 +911,14 @@ footer{
           <div class="venue-detail-icon">🚉</div>
           <div class="venue-detail-text">
             <strong>Train</strong>
-            Renfe (Sant Pau | Dos de Maig) · FGC (Sant Pau | Dos de Maig)
+            Renfe (La Sagrera-Meridiana station; ~15 min)
           </div>
         </div>
-        <!-- Taxi -->
         <div class="venue-detail">
           <div class="venue-detail-icon">🚕</div>
           <div class="venue-detail-text">
             <strong>Taxi</strong>
-            Readily available throughout the city.
+            Readily available throughout the city (FreeNow is the typical app to use), as well as Ubers.
           </div>
         </div>
         <div class="venue-detail">
@@ -928,6 +927,7 @@ footer{
             <strong>Hotels</strong>
             Many options within walking distance, including Hotel Sant Pau, Sant Jordi Hostels, and Hotel Medicis.
           </div>
+        </div>
         <div class="venue-detail">
           <div class="venue-detail-icon">🎉</div>
           <div class="venue-detail-text">
@@ -1002,39 +1002,44 @@ footer{
     <div class="section-eyebrow" style="text-align:center">Organized with Support from</div>
     <div class="partners-grid">
       <div class="partner-item">
-        <div class="partner-logo" style="font-size:1.35rem;font-weight:800;letter-spacing:.06em">ELLIS</div>
-        <div class="partner-label">European Laboratory for Learning & Intelligent Systems</div>
-      </div>
-      <div class="partner-item">
-        <div class="partner-logo">CVC</div>
-        <div class="partner-label">Computer Vision Center, Barcelona</div>
-      </div>
-      <div class="partner-item">
-        <div class="partner-logo">UAB</div>
-        <div class="partner-label">Universitat Autònoma de Barcelona</div>
-      </div>
-      <div class="partner-item">
-        <div class="partner-logo" style="font-size:.9rem;display:flex;align-items:center;gap:.4rem">
-          <svg width="20" height="20" viewBox="0 0 80 80" fill="none">
-            <line x1="40" y1="40" x2="40" y2="6" stroke="white" stroke-width="5" stroke-linecap="round" opacity=".9"/>
-            <line x1="40" y1="40" x2="55" y2="8" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
-            <line x1="40" y1="40" x2="67" y2="14" stroke="#3b82f6" stroke-width="4" stroke-linecap="round" opacity=".9"/>
-            <line x1="40" y1="40" x2="74" y2="40" stroke="#ef4444" stroke-width="4.5" stroke-linecap="round" opacity=".9"/>
-            <line x1="40" y1="40" x2="6" y2="40" stroke="white" stroke-width="4" stroke-linecap="round" opacity=".8"/>
-            <line x1="40" y1="40" x2="14" y2="14" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity=".7"/>
-            <line x1="40" y1="40" x2="26" y2="8" stroke="white" stroke-width="4" stroke-linecap="round" opacity=".85"/>
-          </svg>
-          ELLIOT
-        </div>
-        <div class="partner-label">EU-funded project (logistics support)</div>
-      </div>
-      <div class="partner-item">
-        <div class="eu-flag">
-          <div class="eu-stars-wrap" style="display:flex;flex-wrap:wrap;width:18px;gap:1px;color:#FFCC00;font-size:.42rem;justify-content:center">
-            ★★★★★★★★★★★★
+        <a href="https://ellisbarcelona.eu/" target="_blank" rel="noopener" style="display:contents">
+          <div class="partner-logo" style="border-radius:8px;padding:6px 10px;height:auto; filter:brightness(0) invert(1);">
+            <img src="logos/ellis-logo_barcelona.png" alt="ELLIS Unit Barcelona" style="max-height:60px;max-width:180px;object-fit:contain;">
           </div>
-        </div>
-        <div class="partner-label">Funded by the European Union</div>
+          <!-- <div class="partner-label">ELLIS Unit Barcelona</div> -->
+        </a>
+      </div>
+      <div class="partner-item">
+        <a href="https://www.cvc.uab.es/" target="_blank" rel="noopener" style="display:contents">
+          <div class="partner-logo" style="border-radius:8px;padding:6px 10px;height:auto; filter:brightness(0) invert(1);">
+            <img src="logos/CVC-logo-eng-1-scaled.png" alt="CVC" style="max-height:40px;max-width:140px;object-fit:contain; ">
+          </div>
+          <!-- <div class="partner-label">Computer Vision Center, Barcelona</div> -->
+        </a>
+      </div>
+      <div class="partner-item">
+        <a href="https://valeoai.github.io/" target="_blank" rel="noopener" style="display:contents">
+          <div class="partner-logo" style="border-radius:8px;padding:6px 10px;height:auto; filter:brightness(0) invert(1);">
+            <img src="logos/valeoai_logo.png" alt="valeo.ai" style="max-height:50px;max-width:140px;object-fit:contain;">
+          </div>
+          <!-- <div class="partner-label">valeo.ai</div> -->
+        </a>
+      </div>
+      <div class="partner-item">
+        <a href="https://www.uab.cat" target="_blank" rel="noopener" style="display:contents">
+          <div class="partner-logo" style="border-radius:8px;padding:6px 10px;height:auto; filter:brightness(0) invert(1);">
+            <img src="logos/logotipuab-v1-verd.png" alt="UAB" style="max-height:40px;max-width:140px;object-fit:contain;">
+          </div>
+          <!-- <div class="partner-label">Universitat Autònoma de Barcelona</div> -->
+        </a>
+      </div>
+      <div class="partner-item">
+        <a href="https://www.elliot-ai.eu/" target="_blank" rel="noopener" style="display:contents">
+          <div class="partner-logo" style="border:none;padding:0;height:auto; filter:brightness(0) invert(1);">
+            <img src="logos/ELLIOT_white.png" alt="ELLIOT" style="max-height:50px;max-width:170px;object-fit:contain;">
+          </div>
+          <!-- <div class="partner-label">Developing open, trustworthy, and multimodal foundation models</div> -->
+        </a>
       </div>
     </div>
   </div>
@@ -1072,14 +1077,14 @@ footer{
       <div class="game-title">🏎️ <span>TrafficRL</span> Mini — Easter egg!</div>
       <div class="game-stats">
         <div class="game-stat"><span>Speed</span><strong id="g-speed">0</strong> km/h</div>
-        <div class="game-stat"><span>Score</span><strong id="g-score">0</strong></div>
+        <div class="game-stat"><span>Passed</span><strong id="g-score">0</strong></div>
         <div class="game-stat"><span>Best</span><strong id="g-best">0</strong></div>
       </div>
       <button class="game-close" id="game-close-btn" aria-label="Close">×</button>
     </div>
     <canvas id="game-canvas" width="640" height="370"></canvas>
     <div class="game-footer">
-      <div class="game-hint">Arrow keys or WASD · Dodge traffic · Stay on the road!</div>
+      <div class="game-hint">Arrow keys or WASD · Dodge traffic · Watch for emergency vehicles!</div>
       <button class="game-restart" id="game-restart-btn">Restart (R)</button>
     </div>
   </div>
@@ -1307,9 +1312,10 @@ const GW=640, GH=370;
 const LANES=[140,210,280,350,420,490];
 const LW=68;
 let gameRunning=false, gameOver=false, animId=null, bestScore=0;
-const player={x:280,y:285,w:32,h:52,lane:2,targetX:280,speed:0,maxSpeed:190,_lc:false};
+const player={x:280,y:285,w:32,h:52,lane:2,targetX:280,speed:0,maxSpeed:150,_lc:false};
 const keys={};
 let score=0,roadY=0,traffic=[],spawnT=0,diff=1;
+let emergencyTimer=0,emergencyWarning=null;
 
 function openGame(){
   gameModal.classList.add('active');
@@ -1325,6 +1331,7 @@ function resetGame(){
   player.lane=2;player.x=LANES[2];player.targetX=LANES[2];
   player.y=285;player.speed=0;player._lc=false;
   traffic=[];score=0;roadY=0;spawnT=0;diff=1;gameOver=false;
+  emergencyTimer=0;emergencyWarning=null;
   document.getElementById('g-score').textContent='0';
   document.getElementById('g-speed').textContent='0';
 }
@@ -1335,10 +1342,18 @@ window.addEventListener('keydown',e=>{keys[e.key]=true;if(e.key==='Escape'&&game
 window.addEventListener('keyup',e=>{keys[e.key]=false;});
 
 const TCOLS=['#ef4444','#f59e0b','#22c55e','#a855f7','#e5e7eb','#60a5fa'];
+const LANE_SPEEDS=[100,90,78,68,58,48];
+function laneSpeed(lane){return LANE_SPEEDS[lane]+(Math.random()-0.5)*14;}
+
 function spawnCar(){
-  const lane=Math.floor(Math.random()*6);
-  if(traffic.some(c=>c.lane===lane&&c.y<100)) return;
-  traffic.push({lane,x:LANES[lane],y:-65,w:32,h:52,speed:55+Math.random()*65,color:TCOLS[Math.floor(Math.random()*TCOLS.length)]});
+  const order=[0,1,2,3,4,5].sort(()=>Math.random()-0.5);
+  for(const lane of order){
+    if(!traffic.some(c=>c.lane===lane&&c.y<80)){
+      traffic.push({lane,x:LANES[lane],y:-65,w:32,h:52,speed:laneSpeed(lane),
+        color:TCOLS[Math.floor(Math.random()*TCOLS.length)],passed:false,emergency:false,shiftTarget:null});
+      return;
+    }
+  }
 }
 
 function drawRoad(){
@@ -1364,8 +1379,28 @@ function drawRoad(){
   gctx.beginPath();gctx.moveTo(LANES[5]+LW/2,0);gctx.lineTo(LANES[5]+LW/2,GH);gctx.stroke();
 }
 
-function drawCar(x,y,w,h,color,isP){
+function drawCar(x,y,w,h,color,isP,eCar){
   const rx=x-w/2,ry=y-h/2;
+  if(eCar){
+    // Draw emergency vehicle flipped (facing player)
+    gctx.save();
+    gctx.translate(x,y);
+    gctx.rotate(Math.PI);
+    const ex=-w/2,ey=-h/2;
+    gctx.fillStyle='rgba(0,0,0,.28)';gctx.fillRect(ex+3,ey+3,w,h);
+    gctx.fillStyle=color;gctx.beginPath();gctx.roundRect(ex,ey,w,h,6);gctx.fill();
+    gctx.fillStyle='rgba(255,255,255,.22)';
+    gctx.fillRect(ex+4,ey+7,w-8,11);gctx.fillRect(ex+4,ey+h-17,w-8,9);
+    const flash=Math.floor(Date.now()/200)%2;
+    if(eCar.eType==='police') gctx.fillStyle=flash?'#3b82f6':'#ef4444';
+    else if(eCar.eType==='ambulance') gctx.fillStyle=flash?'#ef4444':'#ffffff';
+    else gctx.fillStyle=flash?'#ef4444':'#f59e0b';
+    gctx.fillRect(ex+w/2-7,ey+1,14,5);
+    gctx.restore();
+    gctx.strokeStyle='rgba(255,50,50,0.5)';gctx.lineWidth=3;
+    gctx.beginPath();gctx.roundRect(rx-3,ry-3,w+6,h+6,8);gctx.stroke();
+    return;
+  }
   gctx.fillStyle='rgba(0,0,0,.28)';gctx.fillRect(rx+3,ry+3,w,h);
   gctx.fillStyle=color;gctx.beginPath();gctx.roundRect(rx,ry,w,h,6);gctx.fill();
   gctx.fillStyle='rgba(255,255,255,.22)';
@@ -1387,7 +1422,7 @@ function drawOverlay(){
   gctx.font=`bold 2rem 'Space Grotesk', sans-serif`;
   gctx.fillText('GAME OVER',GW/2,GH/2-30);
   gctx.font=`1rem Inter, sans-serif`;gctx.fillStyle='#94a3b8';
-  gctx.fillText(`Score: ${Math.floor(score)}  ·  Best: ${bestScore}`,GW/2,GH/2+10);
+  gctx.fillText(`Passed: ${Math.floor(score)}  ·  Best: ${bestScore}`,GW/2,GH/2+10);
   gctx.font=`.85rem Inter, sans-serif`;gctx.fillStyle='#60a5fa';
   gctx.fillText('Press R or Restart to play again',GW/2,GH/2+42);
 }
@@ -1401,7 +1436,7 @@ function gameLoop(t=0){
   if(gameOver){
     if(keys['r']||keys['R']) resetGame();
     drawRoad();
-    traffic.forEach(c=>drawCar(c.x,c.y,c.w,c.h,c.color,false));
+    traffic.forEach(c=>drawCar(c.x,c.y,c.w,c.h,c.color,false,c.emergency?c:null));
     drawCar(player.x,player.y,player.w,player.h,'#3b82f6',true);
     drawOverlay();return;
   }
@@ -1416,13 +1451,89 @@ function gameLoop(t=0){
   player.speed=Math.max(0,Math.min(player.maxSpeed,player.speed));
   player.x+=(player.targetX-player.x)*dt*9;
   roadY+=player.speed*dt;
-  score+=player.speed*dt/100;
-  diff=1+Math.floor(score/30)*.15;
+
+  // Move NPCs — corrected relative motion:
+  // Cars slower than player scroll DOWN (player overtakes them)
+  // Cars faster than player scroll UP (they pull ahead and disappear)
+  traffic.forEach(c=>{
+    if(c.emergency){
+      c.y+=dt*player.speed*1.0; // stationary on road, scrolls at road speed
+    } else {
+      c.y+=dt*(player.speed-c.speed)*2.0;
+    }
+    if(c.shiftTarget!==null){
+      c.x+=(c.shiftTarget-c.x)*dt*9;
+      if(Math.abs(c.x-c.shiftTarget)<1){c.x=c.shiftTarget;c.shiftTarget=null;}
+    }
+  });
+
+  // NPC-NPC collision avoidance (per lane, skip emergency)
+  for(let lane=0;lane<6;lane++){
+    const inLane=traffic.filter(c=>c.lane===lane&&!c.emergency).sort((a,b)=>a.y-b.y);
+    for(let i=1;i<inLane.length;i++){
+      const ahead=inLane[i-1],behind=inLane[i];
+      const minGap=(ahead.h+behind.h)*0.5+8;
+      if(behind.y-ahead.y<minGap){
+        behind.y=ahead.y+minGap;
+        behind.speed=Math.min(behind.speed,ahead.speed);
+      }
+    }
+  }
+
+  // Score: cars that scroll past player (only happens when player is faster)
+  traffic.forEach(c=>{
+    if(!c.passed&&!c.emergency&&c.y>player.y+player.h/2+c.h/2){c.passed=true;score++;}
+  });
+  diff=1+Math.floor(score/10)*.15;
   bestScore=Math.max(bestScore,Math.floor(score));
+
+  // Remove cars that left the screen (below OR above)
+  traffic=traffic.filter(c=>c.y>-120&&c.y<GH+80);
+
+  // Spawn NPCs (pause during emergency)
+  const eActive=!!emergencyWarning;
   spawnT-=dt;
-  if(spawnT<=0){spawnCar();spawnT=.75/diff;}
-  traffic.forEach(c=>c.y+=dt*(c.speed-player.speed*.55));
-  traffic=traffic.filter(c=>c.y<GH+80);
+  if(spawnT<=0&&!eActive){spawnCar();spawnT=1.0/diff;}
+  // Fill empty lanes (gentle, skip during emergency)
+  if(!eActive&&Math.random()<dt*0.5){
+    const empty=[0,1,2,3,4,5].filter(l=>!traffic.some(c=>c.lane===l&&c.y>0&&c.y<GH));
+    if(empty.length>0){
+      const lane=empty[Math.floor(Math.random()*empty.length)];
+      traffic.push({lane,x:LANES[lane],y:-65,w:32,h:52,speed:laneSpeed(lane),
+        color:TCOLS[Math.floor(Math.random()*TCOLS.length)],passed:false,emergency:false,shiftTarget:null});
+    }
+  }
+
+  // Emergency events (stationary accident/breakdown)
+  emergencyTimer-=dt;
+  if(emergencyTimer<=0&&diff>=1.3){
+    emergencyTimer=12+Math.random()*18;
+    const eLane=Math.floor(Math.random()*6);
+    const types=['police','ambulance','firetruck'];
+    const eType=types[Math.floor(Math.random()*types.length)];
+    emergencyWarning={lane:eLane,timer:2.5,type:eType,spawned:false};
+  }
+  if(emergencyWarning){
+    emergencyWarning.timer-=dt;
+    // Spawn the stationary obstacle once warning is halfway done
+    if(!emergencyWarning.spawned&&emergencyWarning.timer<1.2){
+      emergencyWarning.spawned=true;
+      const eLane=emergencyWarning.lane,eType=emergencyWarning.type;
+      traffic.push({lane:eLane,x:LANES[eLane],y:-70,w:34,h:56,speed:0,
+        color:eType==='police'?'#2563eb':eType==='ambulance'?'#ffffff':'#dc2626',
+        passed:false,emergency:true,eType:eType,shiftTarget:null});
+    }
+    // NPCs in warned lane shift to adjacent lane
+    traffic.forEach(c=>{
+      if(!c.emergency&&c.lane===emergencyWarning.lane&&c.shiftTarget===null){
+        const adj=c.lane>0&&c.lane<5?(Math.random()<0.5?c.lane-1:c.lane+1):
+                  c.lane===0?1:4;
+        c.shiftTarget=LANES[adj];c.lane=adj;
+      }
+    });
+    if(emergencyWarning.timer<=0) emergencyWarning=null;
+  }
+  // Player collision
   for(const c of traffic){
     if(Math.abs(c.x-player.x)<(player.w+c.w)*.46&&Math.abs(c.y-player.y)<(player.h+c.h)*.46){
       gameOver=true;break;
@@ -1431,8 +1542,23 @@ function gameLoop(t=0){
   document.getElementById('g-speed').textContent=Math.floor(player.speed);
   document.getElementById('g-score').textContent=Math.floor(score);
   document.getElementById('g-best').textContent=bestScore;
+
+  // Draw
   drawRoad();
-  traffic.forEach(c=>drawCar(c.x,c.y,c.w,c.h,c.color,false));
+  // Emergency warning indicator
+  if(emergencyWarning){
+    const wx=LANES[emergencyWarning.lane];
+    const blink=Math.floor(Date.now()/300)%2;
+    if(blink){
+      gctx.fillStyle='rgba(255,50,50,0.08)';
+      gctx.fillRect(wx-LW/2,0,LW,GH);
+      gctx.fillStyle='rgba(255,50,50,0.7)';
+      gctx.beginPath();gctx.moveTo(wx,8);gctx.lineTo(wx-14,33);gctx.lineTo(wx+14,33);gctx.closePath();gctx.fill();
+      gctx.fillStyle='#fff';gctx.font='bold 14px sans-serif';gctx.textAlign='center';
+      gctx.fillText('!',wx,29);
+    }
+  }
+  traffic.forEach(c=>drawCar(c.x,c.y,c.w,c.h,c.color,false,c.emergency?c:null));
   drawCar(player.x,player.y,player.w,player.h,'#3b82f6',true);
 }
 </script>
