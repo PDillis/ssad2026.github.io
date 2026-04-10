@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ELLIS Summer School on Autonomous Driving — Barcelona 2026</title>
+<link rel="icon" type="image/svg+xml" href="logos/just_logo_negative.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="style.css">
@@ -79,8 +80,11 @@ nav.scrolled{
   position:relative;min-height:100vh;
   display:flex;align-items:center;justify-content:center;
   overflow:hidden;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size:100px 100px;
 }
-#hero-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .hero-content{
   position:relative;z-index:2;text-align:center;
   padding:8rem 2rem 4rem;max-width:800px;margin:0 auto;
@@ -98,23 +102,50 @@ nav.scrolled{
 }
 @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.3}}
 
-.hero-logo-wrap{
-  display:flex;align-items:center;justify-content:center;
-  gap:1.25rem;margin-bottom:1.75rem;
-  cursor:pointer;user-select:none;
+#hero-logo{max-width:580px;width:90%;margin:0 auto 2.5rem;cursor:pointer;user-select:none;}
+.hero-logo-svg{width:100%;height:auto;display:block;}
+#hero-logo .cls-1{fill:#ff6734}
+#hero-logo .cls-2{fill:#2a00e2}
+#hero-logo .cls-3{fill:#fff}
+/* car-fwd: appear at +20px offset, travel to -20px, fade out — one direction, then loop */
+@keyframes car-fwd{
+  0%  {transform:translateY(20px);opacity:0}
+  10% {opacity:1}
+  80% {opacity:1}
+  100%{transform:translateY(-20px);opacity:0}
 }
-.hero-logo-wrap:hover .hero-logo-svg{transform:rotate(12deg) scale(1.04)}
-.hero-logo-svg{width:68px;height:68px;transition:transform .35s}
-.hero-title-small{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:clamp(.95rem,2.5vw,1.35rem);font-weight:400;
-  color:var(--text-muted);line-height:1;
-}
-.hero-title-big{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:clamp(1.55rem,4vw,2.35rem);font-weight:700;
-  color:var(--text);line-height:1;margin-top:.15rem;
-}
+/* vertical road (bottom→top): 5s, 4 staggered cars */
+.car-v4{animation:car-fwd 5s linear infinite}
+.car-v3{animation:car-fwd 5s linear infinite -1.25s}
+.car-v1{animation:car-fwd 5s linear infinite -2.5s}
+.car-v2{animation:car-fwd 5s linear infinite -3.75s}
+/* 45° diagonal: 4.5s, 8 cars evenly spaced (upper-left arm → lower-right arm) */
+.car-d2{animation:car-fwd 4.5s linear infinite}
+.car-d1{animation:car-fwd 4.5s linear infinite -.56s}
+.car-d3{animation:car-fwd 4.5s linear infinite -1.12s}
+.car-d4{animation:car-fwd 4.5s linear infinite -1.69s}
+.car-d5{animation:car-fwd 4.5s linear infinite -2.25s}
+.car-d6{animation:car-fwd 4.5s linear infinite -2.81s}
+.car-d7{animation:car-fwd 4.5s linear infinite -3.37s}
+.car-d8{animation:car-fwd 4.5s linear infinite -3.93s}
+/* 112.47° line: 5s, 9 cars */
+.car-e1{animation:car-fwd 5s linear infinite}
+.car-e2{animation:car-fwd 5s linear infinite -.56s}
+.car-e3{animation:car-fwd 5s linear infinite -1.12s}
+.car-e4{animation:car-fwd 5s linear infinite -1.67s}
+.car-e5{animation:car-fwd 5s linear infinite -2.23s}
+.car-e6{animation:car-fwd 5s linear infinite -2.78s}
+.car-e7{animation:car-fwd 5s linear infinite -3.33s}
+.car-e8{animation:car-fwd 5s linear infinite -3.89s}
+.car-e9{animation:car-fwd 5s linear infinite -4.44s}
+/* -22.53° line: 4.5s, 7 cars */
+.car-f1{animation:car-fwd 4.5s linear infinite}
+.car-f2{animation:car-fwd 4.5s linear infinite -.64s}
+.car-f3{animation:car-fwd 4.5s linear infinite -1.93s}
+.car-f4{animation:car-fwd 4.5s linear infinite -2.57s}
+.car-f5{animation:car-fwd 4.5s linear infinite -3.21s}
+.car-f6{animation:car-fwd 4.5s linear infinite -3.86s}
+.car-f7{animation:car-fwd 4.5s linear infinite -4.29s}
 
 .hero-heading{
   font-family:'Space Grotesk',sans-serif;
@@ -135,29 +166,13 @@ nav.scrolled{
   display:flex;align-items:center;gap:.45rem;
   background:var(--surface-raised);border:1px solid var(--border-accent);
   border-radius:8px;padding:.55rem .9rem;
-  font-size:.83rem;font-weight:500;
+  font-size:.83rem;font-weight:500;text-decoration:none;
 }
 .hero-badge.ellis{
   background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.22);
   color:var(--blue-light);
 }
 .hero-dot{color:var(--border-accent);font-size:1.1rem}
-.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.btn-primary{
-  background:var(--blue);color:#fff;
-  padding:.85rem 2rem;border-radius:10px;text-decoration:none;
-  font-weight:600;font-size:.95rem;
-  transition:transform .2s,box-shadow .2s;
-  box-shadow:0 0 30px rgba(59,130,246,.25);
-}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 4px 40px rgba(59,130,246,.4)}
-.btn-ghost{
-  background:rgba(255,255,255,.05);border:1px solid var(--border-accent);
-  color:var(--text);padding:.85rem 2rem;border-radius:10px;
-  text-decoration:none;font-weight:500;font-size:.95rem;
-  transition:background .2s,border-color .2s;
-}
-.btn-ghost:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.2)}
 
 .scroll-indicator{
   position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
@@ -573,16 +588,43 @@ footer{
 <!-- NAV -->
 <nav id="navbar">
   <a class="nav-logo" href="#hero">
-    <svg class="nav-logo-icon" viewBox="0 0 80 80" fill="none">
-      <line x1="40" y1="40" x2="40" y2="5" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity=".9"/>
-      <line x1="40" y1="40" x2="55" y2="7" stroke="#f97316" stroke-width="3" stroke-linecap="round"/>
-      <line x1="40" y1="40" x2="67" y2="13" stroke="#3b82f6" stroke-width="3" stroke-linecap="round" opacity=".85"/>
-      <line x1="40" y1="40" x2="75" y2="40" stroke="#ef4444" stroke-width="3" stroke-linecap="round" opacity=".9"/>
-      <line x1="40" y1="40" x2="5" y2="40" stroke="white" stroke-width="3" stroke-linecap="round" opacity=".75"/>
-      <line x1="40" y1="40" x2="13" y2="13" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
-      <line x1="40" y1="40" x2="25" y2="7" stroke="white" stroke-width="3" stroke-linecap="round" opacity=".85"/>
-      <line x1="40" y1="40" x2="7" y2="25" stroke="#a855f7" stroke-width="2.5" stroke-linecap="round" opacity=".75"/>
-      <line x1="40" y1="40" x2="13" y2="67" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
+    <svg class="nav-logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="38 38 112 112">
+      <rect fill="#fff" x="90.93" y="43.15" width="5.29" height="100.06"/>
+      <rect fill="#fff" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(.39 186.76) rotate(-90)"/>
+      <rect fill="#fff" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(93.3 -38.88) rotate(45)"/>
+      <rect fill="#fff" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(-38.48 93.46) rotate(-45)"/>
+      <rect fill="#fff" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(-28.56 42.97) rotate(-22.53)"/>
+      <rect fill="#fff" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(43.36 215.32) rotate(-112.53)"/>
+      <rect fill="#fff" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(42.71 -28.69) rotate(22.47)"/>
+      <rect fill="#fff" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(-28.3 144.04) rotate(-67.53)"/>
+      <rect fill="#2a00e2" x="90.93" y="53.73" width="5.29" height="5.29"/>
+      <rect fill="#ff6734" x="90.93" y="43.15" width="5.29" height="5.29"/>
+      <rect fill="#2a00e2" x="90.93" y="127.34" width="5.29" height="5.29"/>
+      <rect fill="#ff6734" x="90.93" y="137.92" width="5.29" height="5.29"/>
+      <rect fill="#ff6734" x="64.9" y="64.51" width="5.29" height="5.29" transform="translate(-27.7 67.43) rotate(-45)"/>
+      <rect fill="#2a00e2" x="57.42" y="57.03" width="5.29" height="5.29" transform="translate(-24.6 59.95) rotate(-45)"/>
+      <rect fill="#2a00e2" x="68.65" y="68.25" width="5.29" height="5.29" transform="translate(-29.25 71.18) rotate(-45)"/>
+      <rect fill="#2a00e2" x="72.39" y="71.99" width="5.29" height="5.29" transform="translate(-30.8 74.92) rotate(-45)"/>
+      <rect fill="#2a00e2" x="105.73" y="105.34" width="5.29" height="5.29" transform="translate(-44.61 108.26) rotate(-45)"/>
+      <rect fill="#2a00e2" x="113.22" y="112.82" width="5.29" height="5.29" transform="translate(-47.71 115.75) rotate(-45)"/>
+      <rect fill="#ff6734" x="116.96" y="116.56" width="5.29" height="5.29" transform="translate(-49.26 119.49) rotate(-45)"/>
+      <rect fill="#2a00e2" x="120.7" y="120.3" width="5.29" height="5.29" transform="translate(-50.81 123.23) rotate(-45)"/>
+      <rect fill="#2a00e2" x="134.72" y="108.65" width="5.29" height="5.29" transform="translate(292.71 26.9) rotate(112.47)"/>
+      <rect fill="#2a00e2" x="129.83" y="106.63" width="5.29" height="5.29" transform="translate(284.08 28.62) rotate(112.47)"/>
+      <rect fill="#2a00e2" x="120.05" y="102.58" width="5.29" height="5.29" transform="translate(266.83 32.07) rotate(112.47)"/>
+      <rect fill="#ff6734" x="115.17" y="100.56" width="5.29" height="5.29" transform="translate(258.21 33.79) rotate(112.47)"/>
+      <rect fill="#2a00e2" x="110.28" y="98.54" width="5.29" height="5.29" transform="translate(249.58 35.51) rotate(112.47)"/>
+      <rect fill="#2a00e2" x="71.58" y="82.54" width="5.29" height="5.29" transform="translate(181.31 49.14) rotate(112.47)"/>
+      <rect fill="#ff6734" x="66.7" y="80.51" width="5.29" height="5.29" transform="translate(172.69 50.87) rotate(112.47)"/>
+      <rect fill="#2a00e2" x="56.92" y="76.47" width="5.29" height="5.29" transform="translate(155.44 54.31) rotate(112.47)"/>
+      <rect fill="#2a00e2" x="47.14" y="72.43" width="5.29" height="5.29" transform="translate(138.19 57.76) rotate(112.47)"/>
+      <rect fill="#ff6734" x="74.8" y="51.65" width="5.29" height="5.29" transform="translate(-14.89 33.82) rotate(-22.53)"/>
+      <rect fill="#2a00e2" x="78.86" y="61.43" width="5.29" height="5.29" transform="translate(-18.33 36.12) rotate(-22.53)"/>
+      <rect fill="#2a00e2" x="98.95" y="109.88" width="5.29" height="5.29" transform="translate(-35.36 47.51) rotate(-22.53)"/>
+      <rect fill="#2a00e2" x="100.98" y="114.76" width="5.29" height="5.29" transform="translate(-37.08 48.66) rotate(-22.53)"/>
+      <rect fill="#2a00e2" x="105.03" y="124.53" width="5.29" height="5.29" transform="translate(-40.51 50.96) rotate(-22.53)"/>
+      <rect fill="#ff6734" x="107.06" y="129.42" width="5.29" height="5.29" transform="translate(-42.23 52.11) rotate(-22.53)"/>
+      <rect fill="#2a00e2" x="109.09" y="134.31" width="5.29" height="5.29" transform="translate(-43.95 53.26) rotate(-22.53)"/>
     </svg>
     <div>
       <span class="nav-ellis">ELLIS School</span>
@@ -602,36 +644,96 @@ footer{
 
 <!-- HERO -->
 <section id="hero">
-  <canvas id="hero-canvas"></canvas>
   <div class="hero-content">
     <div class="hero-eyebrow">ELLIS School · Barcelona · September 2026</div>
 
-    <div class="hero-logo-wrap" id="hero-logo" title="Psst…">
-      <svg class="hero-logo-svg" viewBox="0 0 100 100" fill="none">
-        <line x1="50" y1="50" x2="50" y2="3" stroke="white" stroke-width="4" stroke-linecap="round" opacity=".95"/>
-        <line x1="50" y1="50" x2="63" y2="4" stroke="#f97316" stroke-width="3.5" stroke-linecap="round"/>
-        <line x1="50" y1="50" x2="76" y2="10" stroke="#3b82f6" stroke-width="3.5" stroke-linecap="round" opacity=".9"/>
-        <line x1="50" y1="50" x2="87" y2="20" stroke="white" stroke-width="3" stroke-linecap="round" opacity=".75"/>
-        <line x1="50" y1="50" x2="93" y2="32" stroke="#ef4444" stroke-width="3.5" stroke-linecap="round" opacity=".9"/>
-        <line x1="50" y1="50" x2="97" y2="46" stroke="white" stroke-width="3" stroke-linecap="round" opacity=".7"/>
-        <line x1="50" y1="50" x2="97" y2="50" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity=".85"/>
-        <line x1="50" y1="50" x2="93" y2="62" stroke="white" stroke-width="3" stroke-linecap="round" opacity=".65"/>
-        <line x1="50" y1="50" x2="79" y2="81" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity=".5"/>
-        <line x1="50" y1="50" x2="50" y2="97" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity=".4"/>
-        <line x1="50" y1="50" x2="21" y2="81" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" opacity=".6"/>
-        <line x1="50" y1="50" x2="3" y2="50" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity=".8"/>
-        <line x1="50" y1="50" x2="7" y2="32" stroke="#a855f7" stroke-width="3" stroke-linecap="round" opacity=".8"/>
-        <line x1="50" y1="50" x2="13" y2="20" stroke="white" stroke-width="3" stroke-linecap="round" opacity=".75"/>
-        <line x1="50" y1="50" x2="24" y2="10" stroke="#f97316" stroke-width="3.5" stroke-linecap="round" opacity=".85"/>
-        <line x1="50" y1="50" x2="37" y2="4" stroke="white" stroke-width="4" stroke-linecap="round" opacity=".9"/>
+    <div id="hero-logo" title="Psst…">
+      <svg class="hero-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850.39 186.81">
+        <g>
+          <g>
+            <path class="cls-3" d="M164.84,80.72l3.8-4.68c3.8,3.62,8.29,5.99,14.09,5.99s8.98-3.12,8.98-6.55c0-4.05-3.55-5.61-10.72-7.23-8.73-2.06-14.53-4.68-14.53-12.41,0-7.17,6.23-12.6,14.84-12.6,6.61,0,11.53,2.43,15.65,6.05l-3.62,4.74c-3.62-3.31-7.92-5.24-12.28-5.24-4.8,0-8.17,3.06-8.17,6.49,0,3.99,3.68,5.36,10.72,7.05,8.54,1.99,14.46,4.86,14.46,12.54,0,7.23-5.49,12.72-15.59,12.72-7.17,0-13.09-2.49-17.64-6.86Z"/>
+            <path class="cls-3" d="M233.99,54.65v32.24h-6.17v-4.68c-1.93,3.18-5.86,5.43-10.22,5.43-7.11,0-12.09-5.18-12.09-12.47v-20.52h6.05v19.46c0,4.8,3.05,8.17,7.42,8.17s8.35-2.93,8.85-6.74v-20.89h6.17Z"/>
+            <path class="cls-3" d="M290.6,66.38v20.52h-6.05v-19.58c0-4.74-2.81-8.05-6.86-8.05-4.61,0-7.85,3.06-7.85,7.48v20.15h-6.05v-19.58c0-4.74-2.81-8.05-6.86-8.05-4.61,0-7.85,3.06-7.85,7.48v20.15h-6.17v-32.24h6.17v4.49c1.62-3.18,4.99-5.24,9.1-5.24,4.68,0,8.48,2.5,10.35,6.49,1.5-3.99,5.61-6.49,10.47-6.49,6.73,0,11.6,5.18,11.6,12.47Z"/>
+            <path class="cls-3" d="M347.09,66.38v20.52h-6.05v-19.58c0-4.74-2.81-8.05-6.86-8.05-4.61,0-7.85,3.06-7.85,7.48v20.15h-6.05v-19.58c0-4.74-2.81-8.05-6.86-8.05-4.61,0-7.85,3.06-7.85,7.48v20.15h-6.17v-32.24h6.17v4.49c1.62-3.18,4.99-5.24,9.1-5.24,4.68,0,8.48,2.5,10.35,6.49,1.5-3.99,5.61-6.49,10.47-6.49,6.73,0,11.6,5.18,11.6,12.47Z"/>
+            <path class="cls-3" d="M379.96,78.66l3.87,3.99c-2.87,3.06-8.48,4.99-13.03,4.99-8.98,0-16.58-7.05-16.58-16.96s7.17-16.78,16.08-16.78c9.85,0,15.52,7.48,15.52,19.02h-25.37c.81,5.36,4.74,9.23,10.29,9.23,3.37,0,7.29-1.5,9.23-3.49ZM360.51,68h19.33c-.69-4.99-3.74-8.61-9.29-8.61-4.99,0-9.04,3.37-10.04,8.61Z"/>
+            <path class="cls-3" d="M411.45,53.9v5.36c-6.67,0-11.41,3.68-11.97,9.29v18.34h-6.17v-32.24h6.17v6.17c2.06-4.24,6.42-6.92,11.97-6.92Z"/>
+            <path class="cls-3" d="M433.21,80.72l3.8-4.68c3.8,3.62,8.29,5.99,14.09,5.99s8.98-3.12,8.98-6.55c0-4.05-3.55-5.61-10.72-7.23-8.73-2.06-14.53-4.68-14.53-12.41,0-7.17,6.23-12.6,14.84-12.6,6.61,0,11.53,2.43,15.65,6.05l-3.62,4.74c-3.62-3.31-7.92-5.24-12.28-5.24-4.8,0-8.17,3.06-8.17,6.49,0,3.99,3.68,5.36,10.72,7.05,8.54,1.99,14.46,4.86,14.46,12.54,0,7.23-5.49,12.72-15.59,12.72-7.17,0-13.09-2.49-17.64-6.86Z"/>
+            <path class="cls-3" d="M472.25,70.74c0-9.17,7.79-16.84,17.02-16.84,4.61,0,8.79,1.93,11.84,4.99l-4.18,3.87c-1.93-2.18-4.74-3.49-7.73-3.49-5.86,0-10.72,5.24-10.72,11.48s4.86,11.54,10.78,11.54c2.99,0,5.86-1.37,7.85-3.62l4.18,3.8c-3.12,3.18-7.29,5.18-12.09,5.18-9.16,0-16.96-7.73-16.96-16.9Z"/>
+            <path class="cls-3" d="M536.4,66.38v20.52h-6.05v-19.46c0-4.8-3.05-8.17-7.42-8.17-4.86,0-8.91,3.43-8.91,7.61v20.02h-6.11v-43.6h6.11v16.15c1.93-3.24,5.86-5.55,10.29-5.55,7.11,0,12.09,5.18,12.09,12.47Z"/>
+            <path class="cls-3" d="M543.52,70.74c0-9.17,7.79-16.84,17.02-16.84s16.89,7.67,16.89,16.84-7.73,16.9-16.89,16.9-17.02-7.73-17.02-16.9ZM571.26,70.74c0-6.24-4.92-11.48-10.72-11.48s-10.85,5.24-10.85,11.48,4.92,11.54,10.85,11.54,10.72-5.24,10.72-11.54Z"/>
+            <path class="cls-3" d="M582.93,70.74c0-9.17,7.79-16.84,17.02-16.84s16.89,7.67,16.89,16.84-7.73,16.9-16.89,16.9-17.02-7.73-17.02-16.9ZM610.67,70.74c0-6.24-4.92-11.48-10.72-11.48s-10.85,5.24-10.85,11.48,4.92,11.54,10.85,11.54,10.72-5.24,10.72-11.54Z"/>
+            <path class="cls-3" d="M624.08,43.3h6.11v43.6h-6.11v-43.6Z"/>
+            <path class="cls-3" d="M655.26,70.74c0-9.17,7.79-16.84,17.02-16.84s16.89,7.67,16.89,16.84-7.73,16.9-16.89,16.9-17.02-7.73-17.02-16.9ZM683,70.74c0-6.24-4.92-11.48-10.72-11.48s-10.85,5.24-10.85,11.48,4.92,11.54,10.85,11.54,10.72-5.24,10.72-11.54Z"/>
+            <path class="cls-3" d="M724.9,66.38v20.52h-6.05v-19.46c0-4.8-3.05-8.17-7.42-8.17s-8.35,2.93-8.85,6.74v20.89h-6.17v-32.24h6.17v4.68c1.93-3.18,5.86-5.43,10.22-5.43,7.11,0,12.09,5.18,12.09,12.47Z"/>
+            <path class="cls-3" d="M193.27,138.92h-14.9l-2.18,5.74h-13.65l16.46-42.85h13.65l16.46,42.85h-13.65l-2.18-5.74ZM189.84,130.01l-3.99-10.42-4.05,10.42h8.04Z"/>
+            <path class="cls-3" d="M245.15,112.42v32.24h-12.03v-3.24c-1.99,2.5-5.24,3.99-9.1,3.99-6.92,0-11.84-5.18-11.84-12.47v-20.52h11.47v17.71c0,3.12,1.99,5.3,4.86,5.3,2.68,0,4.61-2.06,4.61-4.93v-18.09h12.03Z"/>
+            <path class="cls-3" d="M272.71,142.1c-1.99,1.93-5.42,3.3-8.29,3.3-6.42,0-10.91-4.49-10.91-10.91v-12.6h-4.05v-9.48h4.05v-8.86h11.47v8.86h6.36v9.48h-6.36v10.23c0,1.93,1.12,3.31,2.74,3.31,1.12,0,2.31-.37,2.93-.94l2.06,7.61Z"/>
+            <path class="cls-3" d="M275.96,128.51c0-9.17,8.29-16.84,18.2-16.84s18.14,7.67,18.14,16.84-8.29,16.9-18.14,16.9-18.2-7.73-18.2-16.9ZM301.08,128.51c0-3.74-3.18-6.86-6.92-6.86s-6.98,3.12-6.98,6.86,3.18,6.92,6.98,6.92,6.92-3.18,6.92-6.92Z"/>
+            <path class="cls-3" d="M350.09,124.14v20.52h-11.47v-17.71c0-3.12-1.99-5.3-4.86-5.3-2.68,0-4.61,2.06-4.61,4.93v18.09h-12.03v-32.24h12.03v3.24c1.99-2.49,5.24-3.99,9.1-3.99,6.92,0,11.84,5.18,11.84,12.47Z"/>
+            <path class="cls-3" d="M354.77,128.51c0-9.17,8.29-16.84,18.2-16.84s18.14,7.67,18.14,16.84-8.29,16.9-18.14,16.9-18.2-7.73-18.2-16.9ZM379.9,128.51c0-3.74-3.18-6.86-6.92-6.86s-6.98,3.12-6.98,6.86,3.18,6.92,6.98,6.92,6.92-3.18,6.92-6.92Z"/>
+            <path class="cls-3" d="M449.1,124.14v20.58h-11.47v-18.4c0-2.74-1.87-4.68-4.55-4.68s-4.55,1.81-4.55,4.3v18.77h-11.47v-18.4c0-2.74-1.87-4.68-4.55-4.68s-4.55,1.81-4.55,4.3v18.71h-12.03v-32.24h12.03v3.93c1.56-2.87,4.55-4.68,8.35-4.68,4.18,0,7.92,2,10.1,5.3,1.87-3.24,5.74-5.3,10.47-5.3,6.73,0,12.22,5.18,12.22,12.47Z"/>
+            <path class="cls-3" d="M453.79,128.51c0-9.17,8.29-16.84,18.2-16.84s18.14,7.67,18.14,16.84-8.29,16.9-18.14,16.9-18.2-7.73-18.2-16.9ZM478.91,128.51c0-3.74-3.18-6.86-6.92-6.86s-6.98,3.12-6.98,6.86,3.18,6.92,6.98,6.92,6.92-3.18,6.92-6.92Z"/>
+            <path class="cls-3" d="M527.73,112.42v32.24h-12.03v-3.24c-1.99,2.5-5.24,3.99-9.1,3.99-6.92,0-11.85-5.18-11.85-12.47v-20.52h11.47v17.71c0,3.12,1.99,5.3,4.86,5.3,2.68,0,4.61-2.06,4.61-4.93v-18.09h12.03Z"/>
+            <path class="cls-3" d="M531.6,140.54l4.49-7.3c3.12,2.18,7.73,3.8,11.16,3.8,2.24,0,3.05-.56,3.05-1.62,0-1.12-1.87-1.75-4.86-2.37-5.86-1.25-12.41-2.68-12.41-10.29,0-6.24,5.05-11.1,13.47-11.1,4.99,0,9.79,1.81,13.47,4.24l-4.05,7.36c-2.68-1.75-6.36-3.43-9.41-3.43-1.68,0-2.81.87-2.81,1.81,0,1.06,1.43,1.25,4.68,1.99,5.86,1.31,12.59,3.24,12.59,10.85,0,6.67-5.3,10.91-14.03,10.91-5.61,0-11.41-1.81-15.34-4.86Z"/>
+            <path class="cls-3" d="M583.17,101.81h15.96c14.96,0,25.56,8.86,25.56,21.39s-10.6,21.45-25.56,21.45h-15.96v-42.85ZM601.12,133.68c6.48,0,11.1-4.37,11.1-10.48s-4.61-10.42-11.1-10.42h-5.86v20.89h5.86Z"/>
+            <path class="cls-3" d="M652.13,111.67v9.98c-6.36,0-10.1,3.49-10.1,9.35v13.66h-12.03v-32.24h12.03v5.74c2.12-3.99,5.74-6.49,10.1-6.49Z"/>
+            <path class="cls-3" d="M656.37,102.75c0-3.24,2.74-6.11,6.23-6.11s6.11,2.87,6.11,6.11-2.74,6.24-6.11,6.24-6.23-2.87-6.23-6.24ZM656.5,112.42h12.03v32.24h-12.03v-32.24Z"/>
+            <path class="cls-3" d="M672.27,112.42h12.34l7.29,18.46,7.11-18.46h12.34l-13.9,32.24h-11.1l-14.09-32.24Z"/>
+            <path class="cls-3" d="M714.92,102.75c0-3.24,2.74-6.11,6.23-6.11s6.11,2.87,6.11,6.11-2.74,6.24-6.11,6.24-6.23-2.87-6.23-6.24ZM715.05,112.42h12.03v32.24h-12.03v-32.24Z"/>
+            <path class="cls-3" d="M766.73,124.14v20.52h-11.47v-17.71c0-3.12-1.99-5.3-4.86-5.3-2.68,0-4.61,2.06-4.61,4.93v18.09h-12.03v-32.24h12.03v3.24c1.99-2.49,5.24-3.99,9.1-3.99,6.92,0,11.84,5.18,11.84,12.47Z"/>
+            <path class="cls-3" d="M807.51,112.42v28.81c0,8.29-7.61,14.16-18.33,14.16-5.98,0-11.6-1.81-15.02-4.3l3.93-8.3c1.87,1.56,5.61,2.62,9.16,2.62,4.8,0,8.17-2.06,8.17-4.8v-2.56c-2.56,2.68-6.23,4.24-9.97,4.24-7.79,0-13.96-6.36-13.96-15.34s6.17-15.28,13.96-15.28c3.87,0,7.98,1.81,9.97,4.3v-3.56h12.09ZM795.42,126.95c0-3.12-2.43-5.3-5.8-5.3s-5.8,2.18-5.8,5.3,2.43,5.36,5.8,5.36,5.8-2.25,5.8-5.36Z"/>
+          </g>
+          <g>
+            <rect class="cls-3" x="90.93" y="43.15" width="5.29" height="100.06"/>
+            <rect class="cls-3" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(.39 186.76) rotate(-90)"/>
+            <rect class="cls-3" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(93.3 -38.88) rotate(45)"/>
+            <rect class="cls-3" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(-38.48 93.46) rotate(-45)"/>
+            <rect class="cls-3" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(-28.56 42.97) rotate(-22.53)"/>
+            <rect class="cls-3" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(43.36 215.32) rotate(-112.53)"/>
+            <rect class="cls-3" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(42.71 -28.69) rotate(22.47)"/>
+            <rect class="cls-3" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(-28.3 144.04) rotate(-67.53)"/>
+            <g>
+              <rect class="cls-2 car-v1" x="90.93" y="53.73" width="5.29" height="5.29"/>
+              <rect class="cls-1 car-v2" x="90.93" y="43.15" width="5.29" height="5.29"/>
+              <rect class="cls-2 car-v3" x="90.93" y="127.34" width="5.29" height="5.29"/>
+              <rect class="cls-1 car-v4" x="90.93" y="137.92" width="5.29" height="5.29"/>
+            </g>
+            <g>
+              <g transform="translate(-27.7 67.43) rotate(-45)"><rect class="cls-1 car-d1" x="64.9" y="64.51" width="5.29" height="5.29"/></g>
+              <g transform="translate(-24.6 59.95) rotate(-45)"><rect class="cls-2 car-d2" x="57.42" y="57.03" width="5.29" height="5.29"/></g>
+              <g transform="translate(-29.25 71.18) rotate(-45)"><rect class="cls-2 car-d3" x="68.65" y="68.25" width="5.29" height="5.29"/></g>
+              <g transform="translate(-30.8 74.92) rotate(-45)"><rect class="cls-2 car-d4" x="72.39" y="71.99" width="5.29" height="5.29"/></g>
+              <g transform="translate(-44.61 108.26) rotate(-45)"><rect class="cls-2 car-d5" x="105.73" y="105.34" width="5.29" height="5.29"/></g>
+              <g transform="translate(-47.71 115.75) rotate(-45)"><rect class="cls-2 car-d6" x="113.22" y="112.82" width="5.29" height="5.29"/></g>
+              <g transform="translate(-49.26 119.49) rotate(-45)"><rect class="cls-1 car-d7" x="116.96" y="116.56" width="5.29" height="5.29"/></g>
+              <g transform="translate(-50.81 123.23) rotate(-45)"><rect class="cls-2 car-d8" x="120.7" y="120.3" width="5.29" height="5.29"/></g>
+            </g>
+            <g>
+              <g transform="translate(292.71 26.9) rotate(112.47)"><rect class="cls-2 car-e1" x="134.72" y="108.65" width="5.29" height="5.29"/></g>
+              <g transform="translate(284.08 28.62) rotate(112.47)"><rect class="cls-2 car-e2" x="129.83" y="106.63" width="5.29" height="5.29"/></g>
+              <g transform="translate(266.83 32.07) rotate(112.47)"><rect class="cls-2 car-e3" x="120.05" y="102.58" width="5.29" height="5.29"/></g>
+              <g transform="translate(258.21 33.79) rotate(112.47)"><rect class="cls-1 car-e4" x="115.17" y="100.56" width="5.29" height="5.29"/></g>
+              <g transform="translate(249.58 35.51) rotate(112.47)"><rect class="cls-2 car-e5" x="110.28" y="98.54" width="5.29" height="5.29"/></g>
+              <g transform="translate(181.31 49.14) rotate(112.47)"><rect class="cls-2 car-e6" x="71.58" y="82.54" width="5.29" height="5.29"/></g>
+              <g transform="translate(172.69 50.87) rotate(112.47)"><rect class="cls-1 car-e7" x="66.7" y="80.51" width="5.29" height="5.29"/></g>
+              <g transform="translate(155.44 54.31) rotate(112.47)"><rect class="cls-2 car-e8" x="56.92" y="76.47" width="5.29" height="5.29"/></g>
+              <g transform="translate(138.19 57.76) rotate(112.47)"><rect class="cls-2 car-e9" x="47.14" y="72.43" width="5.29" height="5.29"/></g>
+            </g>
+            <g>
+              <g transform="translate(-14.89 33.82) rotate(-22.53)"><rect class="cls-1 car-f1" x="74.8" y="51.65" width="5.29" height="5.29"/></g>
+              <g transform="translate(-18.33 36.12) rotate(-22.53)"><rect class="cls-2 car-f2" x="78.86" y="61.43" width="5.29" height="5.29"/></g>
+              <g transform="translate(-35.36 47.51) rotate(-22.53)"><rect class="cls-2 car-f3" x="98.95" y="109.88" width="5.29" height="5.29"/></g>
+              <g transform="translate(-37.08 48.66) rotate(-22.53)"><rect class="cls-2 car-f4" x="100.98" y="114.76" width="5.29" height="5.29"/></g>
+              <g transform="translate(-40.51 50.96) rotate(-22.53)"><rect class="cls-2 car-f5" x="105.03" y="124.53" width="5.29" height="5.29"/></g>
+              <g transform="translate(-42.23 52.11) rotate(-22.53)"><rect class="cls-1 car-f6" x="107.06" y="129.42" width="5.29" height="5.29"/></g>
+              <g transform="translate(-43.95 53.26) rotate(-22.53)"><rect class="cls-2 car-f7" x="109.09" y="134.31" width="5.29" height="5.29"/></g>
+            </g>
+          </g>
+        </g>
       </svg>
-      <div>
-        <div class="hero-title-small">Summer School on</div>
-        <div class="hero-title-big">Autonomous Driving</div>
-      </div>
     </div>
 
-    <h1 class="hero-heading">Learn from Europe's<br>leading AD researchers</h1>
+    <h1 class="hero-heading">Learn from leading<br>AD researchers</h1>
     <p class="hero-sub">
       An intensive 4-day ELLIS school bringing together leading researchers
       and students to explore the frontiers of autonomous driving, perception,
@@ -647,14 +749,7 @@ footer{
         <span>📍</span> Barcelona, Spain
       </div>
       <span class="hero-dot">·</span>
-      <div class="hero-badge ellis">
-        <span>◆</span> Official ELLIS School
-      </div>
-    </div>
-
-    <div class="hero-actions">
-      <a href="#register" class="btn-primary">Get Notified →</a>
-      <a href="https://ellis.eu/news/travel-and-study-in-europe-2026-schedule-of-ellis-phd-winter-and-summer-schools" target="_blank" rel="noopener" class="btn-ghost">ELLIS Announcement ↗</a>
+      <a href="https://ellis.eu/news/travel-and-study-in-europe-2026-schedule-of-ellis-phd-winter-and-summer-schools" target="_blank" rel="noopener" class="hero-badge ellis">ELLIS Announcement ↗</a>
     </div>
   </div>
 
@@ -753,7 +848,7 @@ footer{
             <div class="stat-label">Days of lectures & workshops</div>
           </div>
           <div class="stat-card">
-            <div class="stat-number">5+</div>
+            <div class="stat-number">7+</div>
             <div class="stat-label">Invited speakers (growing)</div>
           </div>
           <div class="stat-card">
@@ -762,7 +857,7 @@ footer{
           </div>
           <div class="stat-card">
             <div class="stat-number">BCN</div>
-            <div class="stat-label">Barcelona, Catalonia</div>
+            <div class="stat-label">Barcelona, Spain</div>
           </div>
         </div>
       </div>
@@ -1095,52 +1190,6 @@ footer{
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', scrollY > 30), {passive:true});
 
-/* ── HERO CANVAS ────────────────────────────────────── */
-(function(){
-  const cv = document.getElementById('hero-canvas');
-  const cx = cv.getContext('2d');
-  let W, H, trails = [];
-  function resize(){ W = cv.width = cv.offsetWidth; H = cv.height = cv.offsetHeight; }
-  window.addEventListener('resize', resize, {passive:true});
-  resize();
-  const COLS = [[59,130,246],[168,85,247],[249,115,22],[34,211,238],[239,68,68]];
-  function mk(){
-    const c = COLS[Math.floor(Math.random()*COLS.length)];
-    const fromLeft = Math.random() < .5;
-    return {
-      x: fromLeft ? -60 : W+60, y: Math.random()*H*.75+H*.1,
-      vx: (fromLeft?1:-1)*(3+Math.random()*4.5),
-      vy: (Math.random()-.5)*.8,
-      len: 120+Math.random()*180, w: 1+Math.random()*1.5,
-      r:c[0],g:c[1],b:c[2],
-      alpha:0, maxAlpha:.35+Math.random()*.35,
-      life:0, maxLife:70+Math.random()*55
-    };
-  }
-  for(let i=0;i<14;i++){const t=mk();t.life=Math.random()*t.maxLife;trails.push(t);}
-  function draw(){
-    cx.clearRect(0,0,W,H);
-    // ambient glow
-    const g = cx.createRadialGradient(W*.5,H*.2,0,W*.5,H*.3,W*.65);
-    g.addColorStop(0,'rgba(25,45,95,.14)');g.addColorStop(1,'rgba(0,0,0,0)');
-    cx.fillStyle=g;cx.fillRect(0,0,W,H);
-    trails.forEach(t=>{
-      const f=t.life/t.maxLife;
-      t.alpha=f<.2?f/.2*t.maxAlpha:f>.8?(1-f)/.2*t.maxAlpha:t.maxAlpha;
-      const ang=Math.atan2(t.vy,t.vx);
-      const tx=t.x-Math.cos(ang)*t.len, ty=t.y-Math.sin(ang)*t.len;
-      const lg=cx.createLinearGradient(tx,ty,t.x,t.y);
-      lg.addColorStop(0,`rgba(${t.r},${t.g},${t.b},0)`);
-      lg.addColorStop(1,`rgba(${t.r},${t.g},${t.b},${t.alpha})`);
-      cx.strokeStyle=lg;cx.lineWidth=t.w;
-      cx.beginPath();cx.moveTo(tx,ty);cx.lineTo(t.x,t.y);cx.stroke();
-      t.x+=t.vx;t.y+=t.vy;t.life++;
-      if(t.life>t.maxLife||t.x<-350||t.x>W+350) Object.assign(t,mk());
-    });
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
 
 /* ── SPEAKERS DATA ──────────────────────────────────── */
 const speakers = [
@@ -1150,7 +1199,7 @@ const speakers = [
     topic:"Simulation & sensor synthesis for autonomous driving",
     ellis:"ELLIS Fellow", ellisColor:"var(--blue)",
     init:"AL", color:"#3b82f6",
-    url:"https://www.cvc.uab.cat/people/antonio-m-lopez/"
+    url:"https://pages.cvc.uab.es/antonio/"
   },
   {
     name:"Holger Caesar",
@@ -1158,7 +1207,7 @@ const speakers = [
     topic:"Dataset construction and curation",
     ellis:"ELLIS Scholar", ellisColor:"#c084fc",
     init:"HC", color:"#a855f7",
-    url:"https://scholar.google.com/citations?user=Jlue9uoAAAAJ"
+    url:"https://sites.google.com/it-caesar.de/homepage/"
   },
   {
     name:"Fatma Güney",
@@ -1174,7 +1223,7 @@ const speakers = [
     topic:"End-to-end driving & vision-language-action models",
     ellis:null,
     init:"JA", color:"#22c55e",
-    url:"https://scholar.google.com/citations?user=Oyx-_UIAAAAJ"
+    url:"https://alvarezlopezjosem.github.io/"
   },
   {
     name:"Kashyap Chitta",
@@ -1182,7 +1231,23 @@ const speakers = [
     topic:"Evaluation and benchmarking of driving models",
     ellis:null,
     init:"KC", color:"#f97316",
-    url:"https://kashyap7.github.io/"
+    url:"https://kashyap7x.github.io/"
+  },
+  {
+    name:"Vassia Simaiaki",
+    affil:"Wayve.ai",
+    topic:"World models for autonomous driving",
+    ellis:null,
+    init:"VS", color:"#eab308",
+    url:"https://uk.linkedin.com/in/vassia-wayve"
+  },
+  {
+    name:"Alexandre Boulch",
+    affil:"Valeo.ai / Inria",
+    topic:"Multi-sensor pre-training for autonomous driving",
+    ellis:null,
+    init:"AB", color:"#f43f5e",
+    url:"https://boulch.eu/"
   },
   {
     name:"More TBA",
@@ -1219,7 +1284,7 @@ const organizers = [
     ellis:null,
     ellisCls:null,
     init:"DP",
-    url:"https://scholar.google.com/citations?user=diegolpporres"
+    url:"https://www.diegoporres.com"
   },
   {
     name:"Andrei Bursuc",
@@ -1235,7 +1300,7 @@ const organizers = [
     ellis:null,
     ellisCls:null,
     init:"GV",
-    url:"https://www.cvc.uab.cat/"
+    url:"https://scholar.google.es/citations?user=byJeaV0AAAAJ&hl=es"
   },
   {
     name:"Damar Hoogland",
@@ -1243,7 +1308,7 @@ const organizers = [
     ellis:null,
     ellisCls:null,
     init:"DH",
-    url:"https://www.ijs.si/"
+    url:"https://blogs.ncl.ac.uk/phonphon/people/damar-hoogland/"
   },
   {
     name:"Meritxell Bassolas",
@@ -1251,7 +1316,7 @@ const organizers = [
     ellis:null,
     ellisCls:null,
     init:"MB",
-    url:"https://ellis.eu/units/barcelona"
+    url:"https://ellis.eu/person/meritxell-bassolas"
   },
   {
     name:"Antonio M. López",
@@ -1259,7 +1324,7 @@ const organizers = [
     ellis:"ELLIS Fellow",
     ellisCls:"badge-ellis-fellow",
     init:"AL",
-    url:"https://www.cvc.uab.cat/people/antonio-m-lopez/"
+    url:"https://pages.cvc.uab.es/antonio/"
   },
 ];
 
