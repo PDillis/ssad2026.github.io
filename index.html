@@ -294,8 +294,9 @@ section{padding:6rem 2rem}
   width:68px;height:68px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;
-  margin-bottom:.875rem;flex-shrink:0;
+  margin-bottom:.875rem;flex-shrink:0;overflow:hidden;
 }
+.speaker-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;}
 .speaker-name{
   font-family:'Space Grotesk',sans-serif;font-weight:600;
   font-size:.9rem;margin-bottom:.2rem;line-height:1.3;
@@ -637,9 +638,9 @@ footer{
     <li><a href="#program">Program</a></li>
     <li><a href="#organizers">Organizers</a></li>
     <li><a href="#venue">Venue</a></li>
-    <li><a href="#register">Register</a></li>
+    <li><a href="#register">Apply</a></li>
   </ul>
-  <a class="nav-cta" href="#register">Registration →</a>
+  <a class="nav-cta" href="#register">Apply Now →</a>
 </nav>
 
 <!-- HERO -->
@@ -778,11 +779,6 @@ footer{
             Computer Vision Center (CVC), <Valeo class="ai"></Valeo>, and ELLIS Unit Barcelona, the school combines expert lectures 
             and panels, demos from labs, and a student poster session.
           </p>
-          <!-- <p>
-            The timing in late September may coincide with Barcelona's <strong>La Mercè festival</strong>
-            (Sept 23–27), offering participants a unique cultural experience in one of Europe's most
-            vibrant cities.
-          </p> -->
           <div class="about-topics">
             <div class="about-topics-label">Research Topics</div>
             <div class="topics-list">
@@ -873,7 +869,6 @@ footer{
         <div class="section-eyebrow">Invited Speakers</div>
         <h2 class="section-title">World-class researchers</h2>
       </div>
-      <!-- <div class="badge-confirmed">✓ Confirmed speakers — more to come</div> -->
     </div>
     <div class="speakers-grid" id="speakers-grid"></div>
     <div class="speakers-more">
@@ -882,22 +877,12 @@ footer{
   </div>
 </section>
 
-<!-- ORGANIZERS -->
-<section id="organizers">
-  <div class="container">
-    <div class="section-eyebrow">Organizing Committee</div>
-    <h2 class="section-title">Who's behind the school</h2>
-    <p class="section-sub">Organized by researchers from CVC, Valeo/Inria, and ELLIS Unit Barcelona.</p>
-    <div class="org-grid" id="org-grid"></div>
-  </div>
-</section>
-
 <!-- PROGRAM -->
 <section id="program">
   <div class="container">
     <div class="section-eyebrow">Program</div>
     <h2 class="section-title">Preliminary Schedule</h2>
-    <p class="section-sub">Sessions run 09:00–17:00 each day. Mix of keynotes, tutorials, panels, and demos.</p>
+    <p class="section-sub">Sessions run 09:00–17:00 each day. Mix of keynotes, poster sessions, and panels.</p>
     <div class="days-grid">
       <div class="day-card">
         <div class="day-header">
@@ -906,10 +891,10 @@ footer{
         </div>
         <div class="day-body">
           <ul class="day-items">
-            <li>Opening ceremony & welcome</li>
+            <li>Registration & Welcome</li>
             <li>Keynote: End-to-End Driving</li>
             <li>Keynote: Perception & Sensing</li>
-            <li>Student poster session</li>
+            <li>Student poster session 1</li>
             <li>Welcome social event</li>
           </ul>
         </div>
@@ -921,10 +906,9 @@ footer{
         </div>
         <div class="day-body">
           <ul class="day-items">
-            <li>Keynote: Dataset Construction</li>
+            <li>Registration</li>
+            <li>Keynote: Dataset for Autonomous Driving</li>
             <li>Keynote: Simulation & Synthesis</li>
-            <li>Visit to CVC campus</li>
-            <li>Autonomous vehicle demos</li>
             <li>Panel #1: European AD research</li>
           </ul>
         </div>
@@ -937,10 +921,9 @@ footer{
         <div class="day-body">
           <ul class="day-items">
             <li>Keynote: Foundation Models</li>
-            <li>Hackathon: Catalunya dataset</li>
-            <li>Hands-on: CARLA simulation</li>
-            <li>TrafficRL competition</li>
-            <li>Gala dinner & awards</li>
+            <li>Lightning talk: Diving into the CARLA Simulator</li>
+            <li>Student poster session 2</li>
+            <li> & awards</li>
           </ul>
         </div>
       </div>
@@ -951,6 +934,7 @@ footer{
         </div>
         <div class="day-body">
           <ul class="day-items">
+            <li>Keynote: Data</li>
             <li>Keynote: Evaluation of AD models</li>
             <li>Panel #2: The road ahead</li>
             <li>Open research forum</li>
@@ -960,9 +944,7 @@ footer{
       </div>
     </div>
     <div class="program-note">
-      📋 Detailed schedule and speaker assignments will be published ~6 weeks before the school.
-      <!-- Hands-on sessions use the <strong>6,000+ km Catalunya driving dataset</strong> from the ELLIOT project,
-      with fallback options using CARLA simulation and open-source datasets. -->
+      📋 The final schedule and speaker assignments will be published ~6 weeks before the school.
     </div>
   </div>
 </section>
@@ -992,28 +974,21 @@ footer{
           <div class="venue-detail-icon">🚇</div>
           <div class="venue-detail-text">
             <strong>Metro</strong>
-            L4 (Hospital de Sant Pau; ~5 min) · L5 (Sant Pau | Dos de Maig or Camp de l'Arpa; ~5 min) · L2 (Sagrada Familia; ~15 min)
+            L4 (Hospital de Sant Pau; ~5 min walk) · L5 (Sant Pau | Dos de Maig or Camp de l'Arpa; ~5 min walk) · L2 (Sagrada Familia; ~15 min walk)
           </div>
         </div>
         <div class="venue-detail">
           <div class="venue-detail-icon">🚍</div>
           <div class="venue-detail-text">
             <strong>Bus</strong>
-            Lines D50, H8, V23, 19, 47, 117, 191, and 192 stop within a few minutes' walk.
-          </div>
-        </div>
-        <div class="venue-detail">
-          <div class="venue-detail-icon">🚉</div>
-          <div class="venue-detail-text">
-            <strong>Train</strong>
-            Renfe (La Sagrera-Meridiana station; ~15 min)
+            Lines D50, H8, V23, and more stop within a few minutes' walk.
           </div>
         </div>
         <div class="venue-detail">
           <div class="venue-detail-icon">🚕</div>
           <div class="venue-detail-text">
             <strong>Taxi</strong>
-            Readily available throughout the city (FreeNow is the typical app to use), as well as Ubers.
+            Readily available throughout the city (applications such as Uber and FreeNow can also be used).
           </div>
         </div>
         <div class="venue-detail">
@@ -1021,13 +996,6 @@ footer{
           <div class="venue-detail-text">
             <strong>Hotels</strong>
             Many options within walking distance, including Hotel Sant Pau, Sant Jordi Hostels, and Hotel Medicis.
-          </div>
-        </div>
-        <div class="venue-detail">
-          <div class="venue-detail-icon">🎉</div>
-          <div class="venue-detail-text">
-            <strong>La Mercè 2026</strong>
-            Barcelona's biggest festival (Sep 23–27) just after the school — stay on!
           </div>
         </div>
         <div class="venue-detail">
@@ -1039,14 +1007,6 @@ footer{
         </div>
       </div>
       <div class="venue-map">
-        <!-- <div class="map-pin">📍</div>
-        <div style="text-align:center">
-          <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:.25rem">UAB Casa Convalescència</div>
-          <div style="font-size:.82rem;color:var(--text-muted)">Barcelona, Spain</div>
-        </div>
-        <a href="https://maps.google.com/?q=UAB+Casa+Convalescencia+Barcelona" target="_blank" rel="noopener" class="map-cta">
-          Open in Google Maps →
-        </a> -->
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5984.319910901064!2d2.174577512103169!3d41.41404629422079!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a2d105b682a3%3A0xf6aacc4955cd1d47!2sUAB%20Casa%20Convalesc%C3%A8ncia!5e0!3m2!1sen!2ses!4v1774502025084!5m2!1sen!2ses"
           style="border:0; display:block;"
@@ -1064,30 +1024,35 @@ footer{
   <div class="container">
     <div class="register-card">
       <div class="section-eyebrow" style="text-align:center;margin-bottom:.6rem">Registration</div>
-      <h3>Registration Opens Soon</h3>
+      <h3>Apply Now</h3>
       <p>Application-based. Priority given to PhD students and early-career researchers, especially from underrepresented groups.</p>
-      <!-- <div class="fee-info">
+      <div class="fee-info">
         <div class="fee-badge">
-          <strong>€350</strong>
+          <strong>€375</strong>
           <span>PhD Students</span>
         </div>
         <div class="fee-badge">
           <strong>€550</strong>
           <span>Industry / Postdoc</span>
         </div>
-      </div> -->
-      <!-- <form class="notify-form" id="notify-form" onsubmit="handleNotify(event)">
-        <input type="email" class="notify-input" placeholder="your@email.com" required id="notify-email">
-        <button type="submit" class="notify-btn">Notify Me</button>
-      </form> -->
-      <p id="notify-success" style="display:none;color:#22c55e;margin-top:1rem;font-size:.875rem">
-        ✓ You're on the list — we'll be in touch when registration opens!
-      </p>
-      <!-- <div class="diversity-note">
+      </div>
+      <a id="apply-btn" class="notify-btn" style="display:inline-block;text-decoration:none;margin-top:1rem;padding:.75rem 2rem;font-size:1rem" target="_blank" rel="noopener">Apply Now →</a>
+      <div class="diversity-note">
         We are committed to diversity and inclusion. Sponsorships from industry partners will fund
         registration waivers for students from underrepresented groups and regions with limited research funding.
-      </div> -->
+        If you are interested in sponsorship, please contact us at <a href="mailto:ssadriving@cvc.uab.es" style="color:var(--blue);text-decoration:none">ssadriving@cvc.uab.es</a>.
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- ORGANIZERS -->
+<section id="organizers">
+  <div class="container">
+    <div class="section-eyebrow">Organizing Committee</div>
+    <h2 class="section-title">Who's behind the school</h2>
+    <p class="section-sub">Organized by researchers from CVC, Valeo/Inria, and ELLIS Unit Barcelona.</p>
+    <div class="org-grid" id="org-grid"></div>
   </div>
 </section>
 
@@ -1144,22 +1109,51 @@ footer{
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">
-      <svg viewBox="0 0 80 80" fill="none">
-        <line x1="40" y1="40" x2="40" y2="8" stroke="white" stroke-width="4.5" stroke-linecap="round" opacity=".8"/>
-        <line x1="40" y1="40" x2="55" y2="10" stroke="#f97316" stroke-width="3.5" stroke-linecap="round"/>
-        <line x1="40" y1="40" x2="70" y2="26" stroke="#3b82f6" stroke-width="3" stroke-linecap="round" opacity=".8"/>
-        <line x1="40" y1="40" x2="72" y2="40" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity=".7"/>
-        <line x1="40" y1="40" x2="8" y2="40" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity=".7"/>
-        <line x1="40" y1="40" x2="10" y2="26" stroke="#f97316" stroke-width="3" stroke-linecap="round" opacity=".8"/>
-        <line x1="40" y1="40" x2="26" y2="10" stroke="white" stroke-width="4" stroke-linecap="round" opacity=".8"/>
-      </svg>
+      <svg class="footer-logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="38 38 112 112">
+      <rect fill="#fff" x="90.93" y="43.15" width="5.29" height="100.06"/>
+      <rect fill="#fff" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(.39 186.76) rotate(-90)"/>
+      <rect fill="#fff" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(93.3 -38.88) rotate(45)"/>
+      <rect fill="#fff" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(-38.48 93.46) rotate(-45)"/>
+      <rect fill="#fff" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(-28.56 42.97) rotate(-22.53)"/>
+      <rect fill="#fff" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(43.36 215.32) rotate(-112.53)"/>
+      <rect fill="#fff" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(42.71 -28.69) rotate(22.47)"/>
+      <rect fill="#fff" x="90.93" y="43.15" width="5.29" height="100.06" transform="translate(-28.3 144.04) rotate(-67.53)"/>
+      <rect fill="#2a00e2" x="90.93" y="53.73" width="5.29" height="5.29"/>
+      <rect fill="#ff6734" x="90.93" y="43.15" width="5.29" height="5.29"/>
+      <rect fill="#2a00e2" x="90.93" y="127.34" width="5.29" height="5.29"/>
+      <rect fill="#ff6734" x="90.93" y="137.92" width="5.29" height="5.29"/>
+      <rect fill="#ff6734" x="64.9" y="64.51" width="5.29" height="5.29" transform="translate(-27.7 67.43) rotate(-45)"/>
+      <rect fill="#2a00e2" x="57.42" y="57.03" width="5.29" height="5.29" transform="translate(-24.6 59.95) rotate(-45)"/>
+      <rect fill="#2a00e2" x="68.65" y="68.25" width="5.29" height="5.29" transform="translate(-29.25 71.18) rotate(-45)"/>
+      <rect fill="#2a00e2" x="72.39" y="71.99" width="5.29" height="5.29" transform="translate(-30.8 74.92) rotate(-45)"/>
+      <rect fill="#2a00e2" x="105.73" y="105.34" width="5.29" height="5.29" transform="translate(-44.61 108.26) rotate(-45)"/>
+      <rect fill="#2a00e2" x="113.22" y="112.82" width="5.29" height="5.29" transform="translate(-47.71 115.75) rotate(-45)"/>
+      <rect fill="#ff6734" x="116.96" y="116.56" width="5.29" height="5.29" transform="translate(-49.26 119.49) rotate(-45)"/>
+      <rect fill="#2a00e2" x="120.7" y="120.3" width="5.29" height="5.29" transform="translate(-50.81 123.23) rotate(-45)"/>
+      <rect fill="#2a00e2" x="134.72" y="108.65" width="5.29" height="5.29" transform="translate(292.71 26.9) rotate(112.47)"/>
+      <rect fill="#2a00e2" x="129.83" y="106.63" width="5.29" height="5.29" transform="translate(284.08 28.62) rotate(112.47)"/>
+      <rect fill="#2a00e2" x="120.05" y="102.58" width="5.29" height="5.29" transform="translate(266.83 32.07) rotate(112.47)"/>
+      <rect fill="#ff6734" x="115.17" y="100.56" width="5.29" height="5.29" transform="translate(258.21 33.79) rotate(112.47)"/>
+      <rect fill="#2a00e2" x="110.28" y="98.54" width="5.29" height="5.29" transform="translate(249.58 35.51) rotate(112.47)"/>
+      <rect fill="#2a00e2" x="71.58" y="82.54" width="5.29" height="5.29" transform="translate(181.31 49.14) rotate(112.47)"/>
+      <rect fill="#ff6734" x="66.7" y="80.51" width="5.29" height="5.29" transform="translate(172.69 50.87) rotate(112.47)"/>
+      <rect fill="#2a00e2" x="56.92" y="76.47" width="5.29" height="5.29" transform="translate(155.44 54.31) rotate(112.47)"/>
+      <rect fill="#2a00e2" x="47.14" y="72.43" width="5.29" height="5.29" transform="translate(138.19 57.76) rotate(112.47)"/>
+      <rect fill="#ff6734" x="74.8" y="51.65" width="5.29" height="5.29" transform="translate(-14.89 33.82) rotate(-22.53)"/>
+      <rect fill="#2a00e2" x="78.86" y="61.43" width="5.29" height="5.29" transform="translate(-18.33 36.12) rotate(-22.53)"/>
+      <rect fill="#2a00e2" x="98.95" y="109.88" width="5.29" height="5.29" transform="translate(-35.36 47.51) rotate(-22.53)"/>
+      <rect fill="#2a00e2" x="100.98" y="114.76" width="5.29" height="5.29" transform="translate(-37.08 48.66) rotate(-22.53)"/>
+      <rect fill="#2a00e2" x="105.03" y="124.53" width="5.29" height="5.29" transform="translate(-40.51 50.96) rotate(-22.53)"/>
+      <rect fill="#ff6734" x="107.06" y="129.42" width="5.29" height="5.29" transform="translate(-42.23 52.11) rotate(-22.53)"/>
+      <rect fill="#2a00e2" x="109.09" y="134.31" width="5.29" height="5.29" transform="translate(-43.95 53.26) rotate(-22.53)"/>
+    </svg>
       ELLIS Summer School on Autonomous Driving 2026
     </div>
     <ul class="footer-links">
       <li><a href="https://ellis.eu" target="_blank" rel="noopener">ELLIS Society</a></li>
       <li><a href="https://www.cvc.uab.cat" target="_blank" rel="noopener">CVC Barcelona</a></li>
-      <li><a href="#register">Register</a></li>
-      <li><a href="mailto:dporres@cvc.uab.es">Contact</a></li>
+      <li><a href="#register">Apply Now</a></li>
+      <li><a href="mailto:ssadriving@cvc.uab.es">Contact</a></li>
     </ul>
     <div class="footer-copy">© 2026 SSAD · CVC / ELLIS Unit Barcelona</div>
   </div>
@@ -1190,6 +1184,11 @@ footer{
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', scrollY > 30), {passive:true});
 
+/* ── APPLY LINK ─────────────────────────────────────── */
+// Update this URL when the application form changes
+const APPLY_URL = "https://forms.gle/PyFNg1YNVC7WqE819";
+document.getElementById('apply-btn').href = APPLY_URL;
+
 
 /* ── SPEAKERS DATA ──────────────────────────────────── */
 const speakers = [
@@ -1198,7 +1197,7 @@ const speakers = [
     affil:"Computer Vision Center (CVC) / UAB",
     topic:"Simulation & sensor synthesis for autonomous driving",
     ellis:"ELLIS Fellow", ellisColor:"var(--blue)",
-    init:"AL", color:"#3b82f6",
+    init:"AL", color:"#3b82f6", photo:"speakers/alopez.jpg",
     url:"https://pages.cvc.uab.es/antonio/"
   },
   {
@@ -1206,7 +1205,7 @@ const speakers = [
     affil:"TU Delft",
     topic:"Dataset construction and curation",
     ellis:"ELLIS Scholar", ellisColor:"#c084fc",
-    init:"HC", color:"#a855f7",
+    init:"HC", color:"#a855f7", photo:"speakers/hcaesar.jpg",
     url:"https://sites.google.com/it-caesar.de/homepage/"
   },
   {
@@ -1214,7 +1213,7 @@ const speakers = [
     affil:"Koç University",
     topic:"Reliable perception for autonomous driving",
     ellis:"ELLIS Member", ellisColor:"var(--cyan)",
-    init:"FG", color:"#22d3ee",
+    init:"FG", color:"#22d3ee", photo:"speakers/fguney.jpeg",
     url:"https://mysite.ku.edu.tr/fguney/"
   },
   {
@@ -1222,7 +1221,7 @@ const speakers = [
     affil:"NVIDIA",
     topic:"End-to-end driving & vision-language-action models",
     ellis:null,
-    init:"JA", color:"#22c55e",
+    init:"JA", color:"#22c55e", photo:"speakers/jalvarez.jpg",
     url:"https://alvarezlopezjosem.github.io/"
   },
   {
@@ -1230,7 +1229,7 @@ const speakers = [
     affil:"NVIDIA",
     topic:"Evaluation and benchmarking of driving models",
     ellis:null,
-    init:"KC", color:"#f97316",
+    init:"KC", color:"#f97316", photo:"speakers/kchitta.jpg",
     url:"https://kashyap7x.github.io/"
   },
   {
@@ -1238,7 +1237,7 @@ const speakers = [
     affil:"Wayve.ai",
     topic:"World models for autonomous driving",
     ellis:null,
-    init:"VS", color:"#eab308",
+    init:"VS", color:"#eab308", photo:"speakers/vsimaiaki.jpg",
     url:"https://uk.linkedin.com/in/vassia-wayve"
   },
   {
@@ -1246,8 +1245,16 @@ const speakers = [
     affil:"Valeo.ai / Inria",
     topic:"Multi-sensor pre-training for autonomous driving",
     ellis:null,
-    init:"AB", color:"#f43f5e",
+    init:"AB", color:"#f43f5e", photo:"speakers/aboulch.png",
     url:"https://boulch.eu/"
+  },
+  {
+    name:"German Ros",
+    affil:"NVIDIA/CARLA",
+    topic:"CARLA simulator",
+    ellis:null,
+    init:"GR", color:"#8b5cf6", photo:"speakers/gros.jpg",
+    url:"https://germanros.net/"
   },
   {
     name:"More TBA",
@@ -1265,7 +1272,7 @@ speakers.forEach(s => {
   c.className = 'speaker-card' + (s.tba?' tba':'');
   c.innerHTML = `
     <div class="speaker-avatar" style="background:${s.tba?'var(--surface-raised)':s.color+'18'};border:2px solid ${s.tba?'var(--border)':s.color+'44'}">
-      <span style="color:${s.tba?'var(--text-dim)':s.color}">${s.init}</span>
+      ${s.photo?`<img src="${s.photo}" alt="${s.name}" loading="lazy">`:`<span style="color:${s.tba?'var(--text-dim)':s.color}">${s.init}</span>`}
     </div>
     ${s.ellis?`<div class="speaker-badges"><span class="badge-pill" style="background:${s.ellisColor}18;border:1px solid ${s.ellisColor}33;color:${s.ellisColor};font-size:.64rem;padding:.2rem .6rem">${s.ellis}</span></div>`:''}
     <div class="speaker-name">${s.tba?`<span style="color:var(--text-dim)">To Be Announced</span>`:s.url?`<a href="${s.url}" target="_blank" rel="noopener" style="color:var(--text);text-decoration:none">${s.name}</a>`:s.name}</div>
