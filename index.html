@@ -29,6 +29,62 @@
   --radius:12px;
   --radius-lg:20px;
 }
+/* Light theme overrides */
+[data-theme="light"]{
+  --bg:#f5f7fc;
+  --surface:#ffffff;
+  --surface-raised:#edf0f7;
+  --border:rgba(0,0,0,0.09);
+  --border-accent:rgba(0,0,0,0.15);
+  --text:#0f172a;
+  --text-muted:#475569;
+  --text-dim:#8492a6;
+  --blue:#2563eb;
+  --blue-light:#1d4ed8;
+  --accent-cvc:#ff2a19;
+}
+[data-theme="light"] body{background:var(--bg);color:var(--text)}
+/* Nav */
+[data-theme="light"] nav.scrolled{
+  background:rgba(245,247,252,0.95);
+  border-bottom:1px solid rgba(0,0,0,.1);
+}
+[data-theme="light"] .nav-cta{background:var(--accent-cvc)}
+[data-theme="light"] .section-eyebrow{
+  background:rgba(255,42,25,.08);border-color:rgba(255,42,25,.22);color:var(--accent-cvc);
+}
+/* Hero heading: white gradient → dark readable text */
+[data-theme="light"] .hero-heading{
+  background:linear-gradient(135deg,#0f172a 40%,#334155);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+/* "Learn from…" sub text */
+[data-theme="light"] .hero-sub{color:var(--text-muted)}
+/* Hero logo: white ELLIS wordmark → dark */
+[data-theme="light"] #hero-logo .cls-3{fill:#0f172a}
+/* Nav logo icon: white strokes → dark */
+[data-theme="light"] .nav-logo-icon rect[fill="#fff"]{fill:#0f172a}
+/* Partner showcase logos: remove white filter → show original colours */
+[data-theme="light"] .showcase-logo-item img{filter:none}
+/* Venue map: lighter filter */
+[data-theme="light"] .venue-map iframe{filter:grayscale(15%)}
+/* Apply/CTA button CVC red */
+[data-theme="light"] #apply-btn,
+[data-theme="light"] .notify-btn{background:var(--accent-cvc)}
+/* Stat numbers */
+[data-theme="light"] .stat-number{color:var(--accent-cvc)}
+/* Footer ALWAYS stays dark — override all inherited light vars */
+[data-theme="light"] footer{
+  background:#0d1420 !important;
+  border-top-color:rgba(255,255,255,.07) !important;
+}
+[data-theme="light"] .footer-logo{color:#e2e8f0}
+[data-theme="light"] .footer-links a{color:#94a3b8}
+[data-theme="light"] .footer-links a:hover{color:#e2e8f0}
+[data-theme="light"] .footer-copy{color:#64748b}
+/* Keep footer SVG icon white */
+[data-theme="light"] footer svg rect[fill="#fff"]{fill:#fff}
+
 html{scroll-behavior:smooth}
 body{
   background:var(--bg);color:var(--text);
@@ -74,6 +130,29 @@ nav.scrolled{
   transition:opacity .2s;
 }
 .nav-cta:hover{opacity:.85}
+/* Theme toggle: appearance matches TARGET state, not current */
+/* In dark mode → button looks light (bright bg) = "switch to light" */
+.theme-toggle{
+  background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:8px;padding:.38rem .65rem;cursor:pointer;
+  font-size:.95rem;line-height:1;color:#f0f4ff;
+  transition:background .2s,color .2s,border-color .2s;
+  display:flex;align-items:center;gap:.3rem;
+}
+.theme-toggle:hover{background:rgba(255,255,255,.22)}
+/* In light mode → button looks dark (dark bg) = "switch to dark" */
+[data-theme="light"] .theme-toggle{
+  background:#0f172a;
+  border-color:#0f172a;
+  color:#f0f4ff;
+}
+[data-theme="light"] .theme-toggle:hover{background:#1e293b}
+/* Icon: show ☀ in dark mode, ☾ in light mode */
+.theme-icon-light{display:none}
+.theme-icon-dark{display:inline}
+[data-theme="light"] .theme-icon-light{display:inline}
+[data-theme="light"] .theme-icon-dark{display:none}
 
 /* ── HERO ────────────────────────────────────────────────────── */
 #hero{
@@ -102,7 +181,7 @@ nav.scrolled{
 }
 @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.3}}
 
-#hero-logo{max-width:580px;width:90%;margin:0 auto 2.5rem;cursor:pointer;user-select:none;}
+#hero-logo{max-width:760px;width:90%;margin:0 auto 2.5rem;cursor:pointer;user-select:none;}
 .hero-logo-svg{width:100%;height:auto;display:block;}
 #hero-logo .cls-1{fill:#ff6734}
 #hero-logo .cls-2{fill:#2a00e2}
@@ -199,7 +278,7 @@ section{padding:6rem 2rem}
 .section-sub{color:var(--text-muted);font-size:1rem;max-width:540px;line-height:1.75}
 
 /* ── ABOUT ───────────────────────────────────────────────────── */
-#about{background:var(--surface)}
+#about{background:var(--bg)}
 .about-grid{display:grid;grid-template-columns:3fr 2fr;gap:5rem;align-items:start;margin-top:3.5rem}
 .about-text p{color:var(--text-muted);margin-bottom:1rem;line-height:1.8}
 .about-text p strong{color:var(--text)}
@@ -217,7 +296,7 @@ section{padding:6rem 2rem}
 
 .about-sidebar{}
 .info-card{
-  background:var(--bg);border:1px solid var(--border);
+  background:var(--surface);border:1px solid var(--border);
   border-radius:var(--radius);overflow:hidden;margin-bottom:1rem;
 }
 .info-card-header{
@@ -253,7 +332,7 @@ section{padding:6rem 2rem}
 .stat-label{color:var(--text-muted);font-size:.78rem;line-height:1.4}
 
 /* ── SPEAKERS ────────────────────────────────────────────────── */
-#speakers{}
+#speakers{background:var(--bg)}
 .speakers-header{
   display:flex;align-items:flex-end;justify-content:space-between;
   flex-wrap:wrap;gap:1rem;margin-bottom:2.75rem;
@@ -324,39 +403,43 @@ section{padding:6rem 2rem}
 /* ── ORGANIZERS ──────────────────────────────────────────────── */
 #organizers{background:var(--surface)}
 .org-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:1rem;margin-top:2.5rem;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
+  gap:1.25rem;margin-top:2.5rem;
 }
 .org-card{
   background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);
-  padding:1.25rem 1.25rem;
-  display:flex;align-items:flex-start;gap:1rem;
-  transition:border-color .2s;
+  padding:1.75rem 1rem 1.25rem;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  text-align:center;transition:border-color .2s,transform .2s;
 }
-.org-card:hover{border-color:var(--border-accent)}
-.org-initial{
-  width:44px;height:44px;border-radius:10px;flex-shrink:0;
+.org-card:hover{border-color:var(--border-accent);transform:translateY(-2px)}
+.org-avatar{
+  width:88px;height:88px;border-radius:50%;flex-shrink:0;
+  overflow:hidden;
+  border:2px solid var(--border-accent);
   display:flex;align-items:center;justify-content:center;
-  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;
-  background:var(--surface-raised);color:var(--text-muted);
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;
+  margin-bottom:.25rem;
 }
-.org-info{}
+.org-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.org-info{flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem;width:100%}
 .org-name{
-  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.9rem;
-  margin-bottom:.15rem;
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.92rem;color:var(--text);
 }
-.org-name a{
-  text-decoration:none;color:var(--text);transition:color .2s;
+.org-role{color:var(--text-muted);font-size:.76rem;line-height:1.45}
+.org-badges{display:flex;flex-wrap:wrap;gap:.3rem;justify-content:center;margin-top:.2rem}
+.org-link{
+  display:inline-block;margin-top:.6rem;
+  font-size:.78rem;font-weight:500;color:var(--blue);
+  text-decoration:none;transition:color .2s;
 }
-.org-name a:hover{color:var(--blue-light)}
-.org-role{color:var(--text-muted);font-size:.78rem;line-height:1.4;margin-bottom:.4rem}
-.org-badges{display:flex;flex-wrap:wrap;gap:.3rem}
+.org-link:hover{color:var(--blue-light);text-decoration:underline}
 
 /* ── PROGRAM ─────────────────────────────────────────────────── */
-#program{}
+#program{background:var(--surface)}
 .days-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.875rem;margin-top:2.5rem}
 .day-card{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);
   overflow:hidden;
 }
 .day-header{
@@ -390,7 +473,7 @@ section{padding:6rem 2rem}
 }
 
 /* ── VENUE ───────────────────────────────────────────────────── */
-#venue{background:var(--surface)}
+#venue{background:var(--bg)}
 .venue-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:stretch;margin-top:3rem}
 .venue-info h3{
   font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:600;margin-bottom:.7rem;
@@ -423,7 +506,20 @@ section{padding:6rem 2rem}
 }
 .map-cta:hover{color:var(--blue-light)}
 
-/* ── REGISTER ────────────────────────────────────────────────── */
+/* ── REGISTER (inline in about sidebar) ──────────────────────── */
+.reg-card{
+  background:linear-gradient(135deg,rgba(59,130,246,.07),rgba(168,85,247,.07));
+  border:1px solid rgba(59,130,246,.18);border-radius:var(--radius);
+  padding:1.5rem;margin-top:1.5rem;text-align:center;
+}
+.reg-card-title{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:1rem;margin-bottom:1rem;color:var(--text);letter-spacing:.02em;
+}
+.fee-includes{
+  font-size:.78rem;color:var(--text-dim);margin:.75rem 0 1rem;line-height:1.5;
+}
+/* kept for backwards compat */
 #register{text-align:center}
 .register-card{
   background:linear-gradient(135deg,rgba(59,130,246,.05),rgba(168,85,247,.05));
@@ -493,6 +589,54 @@ section{padding:6rem 2rem}
 .eu-stars-wrap{
   display:grid;grid-template-columns:repeat(4,auto);gap:2px;
   color:#FFCC00;font-size:.4rem;
+}
+
+/* ── PARTNERS SHOWCASE ───────────────────────────────────────── */
+#partners-showcase{background:var(--surface);padding:3.5rem 2rem;text-align:center}
+.showcase-inner{max-width:900px;margin:0 auto}
+.showcase-group{margin-bottom:2.5rem}
+.showcase-group:last-child{margin-bottom:0}
+.showcase-label{
+  font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:1.75rem;
+}
+.showcase-logos{
+  display:flex;align-items:center;justify-content:center;
+  gap:4rem;flex-wrap:wrap;
+}
+.showcase-logo-item{
+  opacity:.65;transition:opacity .2s;
+}
+.showcase-logo-item:hover{opacity:1}
+.showcase-logo-item img{
+  height:85px;width:auto;max-width:220px;object-fit:contain;
+  filter:brightness(0) invert(1);
+  display:block;
+}
+.showcase-divider{
+  height:1px;background:var(--border);
+  margin:0 auto 2.5rem;max-width:180px;
+}
+
+/* ── FAQ ─────────────────────────────────────────────────────── */
+#faq{background:var(--surface)}
+.faq-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1rem;margin-top:2.5rem;
+}
+.faq-item{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1.25rem 1.5rem;
+}
+.faq-q{
+  font-family:'Space Grotesk',sans-serif;font-weight:600;
+  font-size:.92rem;color:var(--text);margin-bottom:.5rem;
+}
+.faq-a{font-size:.85rem;color:var(--text-muted);line-height:1.6}
+.faq-a a{color:var(--blue);text-decoration:none}
+.faq-a a:hover{text-decoration:underline}
+@media(max-width:640px){
+  .faq-grid{grid-template-columns:1fr}
 }
 
 /* ── FOOTER ──────────────────────────────────────────────────── */
@@ -628,7 +772,7 @@ footer{
       <rect fill="#2a00e2" x="109.09" y="134.31" width="5.29" height="5.29" transform="translate(-43.95 53.26) rotate(-22.53)"/>
     </svg>
     <div>
-      <span class="nav-ellis">ELLIS School</span>
+      <span class="nav-ellis">ELLIS Summer School on</span>
       <span class="nav-name">Autonomous Driving 2026</span>
     </div>
   </a>
@@ -636,17 +780,20 @@ footer{
     <li><a href="#about">About</a></li>
     <li><a href="#speakers">Speakers</a></li>
     <li><a href="#program">Program</a></li>
-    <li><a href="#organizers">Organizers</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#venue">Venue</a></li>
-    <li><a href="#register">Apply</a></li>
   </ul>
-  <a class="nav-cta" href="#register">Apply Now →</a>
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle colour theme">
+    <span class="theme-icon-dark">☀</span>
+    <span class="theme-icon-light"> ☾</span>
+  </button>
+  <a class="nav-cta" href="#about">Apply Now →</a>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
   <div class="hero-content">
-    <div class="hero-eyebrow">ELLIS School · Barcelona · September 2026</div>
+    <!-- <div class="hero-eyebrow">ELLIS School · Barcelona · September 2026</div> -->
 
     <div id="hero-logo" title="Psst…">
       <svg class="hero-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850.39 186.81">
@@ -734,11 +881,11 @@ footer{
       </svg>
     </div>
 
-    <h1 class="hero-heading">Learn from leading<br>AD researchers</h1>
+    <h1 class="hero-heading">Where autonomous driving<br>research comes alive</h1>
     <p class="hero-sub">
-      An intensive 4-day ELLIS school bringing together leading researchers
-      and students to explore the frontiers of autonomous driving, perception,
-      end-to-end systems, and intelligent transportation.
+      An official ELLIS Summer School — four intensive days in Barcelona where
+      world-class researchers and the next generation of scientists converge to push
+      the boundaries of perception, world models, end-to-end driving, and beyond.
     </p>
 
     <div class="hero-meta">
@@ -760,6 +907,40 @@ footer{
   </div>
 </section>
 
+<!-- PARTNERS SHOWCASE -->
+<section id="partners-showcase">
+  <div class="container">
+    <div class="showcase-inner">
+      <div class="showcase-group">
+        <div class="showcase-label"><h1>Organizers</h1></div>
+        <div class="showcase-logos">
+          <a class="showcase-logo-item" href="https://ellisbarcelona.eu/" target="_blank" rel="noopener">
+            <img src="logos/ellis-logo_barcelona.png" alt="ELLIS Unit Barcelona">
+          </a>
+          <a class="showcase-logo-item" href="https://www.cvc.uab.es/" target="_blank" rel="noopener">
+            <img src="logos/CVC-logo-eng-1-scaled.png" alt="CVC">
+          </a>
+          <a class="showcase-logo-item" href="https://valeoai.github.io/" target="_blank" rel="noopener">
+            <img src="logos/valeoai_logo.png" alt="valeo.ai">
+          </a>
+        </div>
+      </div>
+      <div class="showcase-divider"></div>
+      <div class="showcase-group">
+        <div class="showcase-label"><h1>Supporting Partners</h1></div>
+        <div class="showcase-logos">
+          <a class="showcase-logo-item" href="https://www.elliot-ai.eu/" target="_blank" rel="noopener">
+            <img src="logos/ELLIOT_purple-blue.png" alt="ELLIOT">
+          </a>
+          <a class="showcase-logo-item" href="https://www.uab.cat" target="_blank" rel="noopener">
+            <img src="logos/logotipuab-v1-verd.png" alt="UAB">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ABOUT -->
 <section id="about">
   <div class="container">
@@ -771,13 +952,18 @@ footer{
           <p>
             The <strong>ELLIS Summer School on Autonomous Driving</strong> is an official
             <a href="https://ellis.eu" target="_blank" rel="noopener" style="color:var(--blue-light);text-decoration:none">ELLIS PhD Program</a>
-            school, approved for 2026. It is designed for PhD students, postdocs, and junior
-            researchers working in the field of autonomous driving and at the intersection of machine learning, computer vision, and robotics.
+            school, approved for 2026. Designed for PhD students, postdoctoral researchers, and junior
+            scientists working at the intersection of machine learning, computer vision, and robotics,
+            the school offers an intensive programme of expert keynotes, curated panels, and  poster
+            sessions, reflecting how Europe is shaping its own research priorities in this rapidly evolving field.
           </p>
           <p>
-            Hosted at the <strong>UAB Casa Convalescència in Barcelona</strong> and organized by the
-            Computer Vision Center (CVC), <Valeo class="ai"></Valeo>, and ELLIS Unit Barcelona, the school combines expert lectures 
-            and panels, demos from labs, and a student poster session.
+            Hosted at the magnificent modernist landmark <strong>UAB Casa Convalescència</strong> 
+            and organised by the Computer Vision Center (CVC),
+            Valeo.ai, and ELLIS Unit Barcelona, the school brings together voices from both academic
+            research and industry to tackle the open problems shaping the future of autonomous driving.
+            A student poster session and social activities create space for informal exchange, new
+            collaborations, and lasting connections.
           </p>
           <div class="about-topics">
             <div class="about-topics-label">Research Topics</div>
@@ -810,50 +996,39 @@ footer{
             </div>
           </div>
           <div class="info-row">
-            <span class="info-icon">📍</span>
+            <span class="info-icon">🗓️</span>
             <div>
-              <span class="info-label">Venue</span>
-              <span class="info-val">Casa Convalescència, UAB Barcelona</span>
+              <span class="info-label">Duration</span>
+              <span class="info-val">4 days · keynotes, panels & poster sessions</span>
             </div>
           </div>
           <div class="info-row">
-            <span class="info-icon">🪑</span>
+            <span class="info-icon">🎤</span>
             <div>
-              <span class="info-label">Capacity</span>
-              <span class="info-val">100 participants (limited)</span>
-            </div>
-          </div>
-          <div class="info-row">
-            <span class="info-icon">◆</span>
-            <div>
-              <span class="info-label">Status</span>
-              <span class="info-val">Official ELLIS School 2026</span>
-            </div>
-          </div>
-          <div class="info-row">
-            <span class="info-icon">💻</span>
-            <div>
-              <span class="info-label">Hands-on</span>
-              <span class="info-val">Hackathon · CARLA · Poster Session</span>
+              <span class="info-label">Speakers</span>
+              <span class="info-val">9+ confirmed & growing</span>
             </div>
           </div>
         </div>
-        <div class="stat-grid">
-          <div class="stat-card">
-            <div class="stat-number">4</div>
-            <div class="stat-label">Days of lectures & workshops</div>
+
+        <div class="reg-card" id="apply">
+          <div class="reg-card-title">Registration Fees</div>
+          <div class="fee-info">
+            <div class="fee-badge">
+              <strong>€400</strong>
+              <span>PhD Students</span>
+            </div>
+            <div class="fee-badge">
+              <strong>€600</strong>
+              <span>Postdoc / Industry</span>
+            </div>
           </div>
-          <div class="stat-card">
-            <div class="stat-number">7+</div>
-            <div class="stat-label">Invited speakers (growing)</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">150</div>
-            <div class="stat-label">Max participants</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">BCN</div>
-            <div class="stat-label">Barcelona, Spain</div>
+          <p class="fee-includes">Covers venue, coffee breaks, social event, materials &amp; welcome event. Meals and accommodation not included.</p>
+          <a id="apply-btn" class="notify-btn" style="display:inline-block;text-decoration:none;margin-top:.25rem;padding:.75rem 2rem;font-size:.95rem" target="_blank" rel="noopener">Apply Now →</a>
+          <div class="diversity-note">
+            We are committed to diversity and inclusion. Sponsorships from industry partners will fund
+            registration waivers for students from underrepresented groups. If you're interested in sponsoring the school,
+            please contact us at <a href="mailto:ssadriving@cvc.uab.es" style="color:var(--blue);text-decoration:none">ssadriving@cvc.uab.es</a>.
           </div>
         </div>
       </div>
@@ -892,8 +1067,8 @@ footer{
         <div class="day-body">
           <ul class="day-items">
             <li>Registration & Welcome</li>
-            <li>Keynote: End-to-End Driving</li>
-            <li>Keynote: Perception & Sensing</li>
+            <li>Keynote: End-to-End Driving <em>José M. Álvarez</em></li>
+            <li>Keynote: Reinforcement Learning for AD <em>Maximilian Igl</em></li>
             <li>Student poster session 1</li>
             <li>Welcome social event</li>
           </ul>
@@ -907,9 +1082,10 @@ footer{
         <div class="day-body">
           <ul class="day-items">
             <li>Registration</li>
-            <li>Keynote: Dataset for Autonomous Driving</li>
-            <li>Keynote: Simulation & Synthesis</li>
+            <li>Keynote: Simulation & Sensor Synthesis <em>Antonio M. López</em></li>
+            <li>Keynote: Perception & Sensing <em>Fatma Güney</em></li>
             <li>Panel #1: European AD research</li>
+            <li>Social event</li>
           </ul>
         </div>
       </div>
@@ -920,10 +1096,10 @@ footer{
         </div>
         <div class="day-body">
           <ul class="day-items">
-            <li>Keynote: Foundation Models</li>
-            <li>Lightning talk: Diving into the CARLA Simulator</li>
+            <li>Keynote: World Models for AD <em>Vassia Simaiaki</em></li>
+            <li>Keynote: Multi-sensor Pre-training <em>Alexandre Boulch</em></li>
+            <li>Lightning talk: CARLA Simulator <em>German Ros</em></li>
             <li>Student poster session 2</li>
-            <li> & awards</li>
           </ul>
         </div>
       </div>
@@ -934,11 +1110,10 @@ footer{
         </div>
         <div class="day-body">
           <ul class="day-items">
-            <li>Keynote: Data</li>
-            <li>Keynote: Evaluation of AD models</li>
+            <li>Keynote: Dataset for Autonomous Driving <em>Holger Caesar</em></li>
+            <li>Keynote: Evaluation of AD Models <em>Kashyap Chitta</em></li>
             <li>Panel #2: The road ahead</li>
-            <li>Open research forum</li>
-            <li>Closing ceremony</li>
+            <li>Closing ceremony & Awards</li>
           </ul>
         </div>
       </div>
@@ -1019,33 +1194,6 @@ footer{
   </div>
 </section>
 
-<!-- REGISTER -->
-<section id="register">
-  <div class="container">
-    <div class="register-card">
-      <div class="section-eyebrow" style="text-align:center;margin-bottom:.6rem">Registration</div>
-      <h3>Apply Now</h3>
-      <p>Application-based. Priority given to PhD students and early-career researchers, especially from underrepresented groups.</p>
-      <div class="fee-info">
-        <div class="fee-badge">
-          <strong>€375</strong>
-          <span>PhD Students</span>
-        </div>
-        <div class="fee-badge">
-          <strong>€550</strong>
-          <span>Industry / Postdoc</span>
-        </div>
-      </div>
-      <a id="apply-btn" class="notify-btn" style="display:inline-block;text-decoration:none;margin-top:1rem;padding:.75rem 2rem;font-size:1rem" target="_blank" rel="noopener">Apply Now →</a>
-      <div class="diversity-note">
-        We are committed to diversity and inclusion. Sponsorships from industry partners will fund
-        registration waivers for students from underrepresented groups and regions with limited research funding.
-        If you are interested in sponsorship, please contact us at <a href="mailto:ssadriving@cvc.uab.es" style="color:var(--blue);text-decoration:none">ssadriving@cvc.uab.es</a>.
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ORGANIZERS -->
 <section id="organizers">
   <div class="container">
@@ -1056,52 +1204,48 @@ footer{
   </div>
 </section>
 
-<!-- PARTNERS -->
-<section id="partners">
+<!-- FAQ -->
+<section id="faq">
   <div class="container">
-    <div class="section-eyebrow" style="text-align:center">Organized with Support from</div>
-    <div class="partners-grid">
-      <div class="partner-item">
-        <a href="https://ellisbarcelona.eu/" target="_blank" rel="noopener" style="display:contents">
-          <div class="partner-logo" style="border-radius:8px;padding:6px 10px;height:auto; filter:brightness(0) invert(1);">
-            <img src="logos/ellis-logo_barcelona.png" alt="ELLIS Unit Barcelona" style="max-height:60px;max-width:180px;object-fit:contain;">
-          </div>
-          <!-- <div class="partner-label">ELLIS Unit Barcelona</div> -->
-        </a>
+    <div class="section-eyebrow">FAQ</div>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q">What does the registration fee cover?</div>
+        <div class="faq-a">The fee covers venue access, coffee breaks,  and morning/afternoon snacks for all four days. Meals and accommodation are <em>not</em> included and must be arranged independently.</div>
       </div>
-      <div class="partner-item">
-        <a href="https://www.cvc.uab.es/" target="_blank" rel="noopener" style="display:contents">
-          <div class="partner-logo" style="border-radius:8px;padding:6px 10px;height:auto; filter:brightness(0) invert(1);">
-            <img src="logos/CVC-logo-eng-1-scaled.png" alt="CVC" style="max-height:40px;max-width:140px;object-fit:contain; ">
-          </div>
-          <!-- <div class="partner-label">Computer Vision Center, Barcelona</div> -->
-        </a>
+      <div class="faq-item">
+        <div class="faq-q">Who can apply?</div>
+        <div class="faq-a">The school is open to PhD students, postdocs, and early-career researchers. Priority is given to PhD students and researchers from underrepresented groups. Industry professionals are also welcome.</div>
       </div>
-      <div class="partner-item">
-        <a href="https://valeoai.github.io/" target="_blank" rel="noopener" style="display:contents">
-          <div class="partner-logo" style="border-radius:8px;padding:6px 10px;height:auto; filter:brightness(0) invert(1);">
-            <img src="logos/valeoai_logo.png" alt="valeo.ai" style="max-height:50px;max-width:140px;object-fit:contain;">
-          </div>
-          <!-- <div class="partner-label">valeo.ai</div> -->
-        </a>
+      <div class="faq-item">
+        <div class="faq-q">When is the application deadline?</div>
+        <div class="faq-a">The deadline is on June 1st, 11:59 pm AOE. If this deadline changes, we will update this page and notify applicants through ELLIS channels.</div>
       </div>
-      <div class="partner-item">
-        <a href="https://www.uab.cat" target="_blank" rel="noopener" style="display:contents">
-          <div class="partner-logo" style="border-radius:8px;padding:6px 10px;height:auto; filter:brightness(0) invert(1);">
-            <img src="logos/logotipuab-v1-verd.png" alt="UAB" style="max-height:40px;max-width:140px;object-fit:contain;">
-          </div>
-          <!-- <div class="partner-label">Universitat Autònoma de Barcelona</div> -->
-        </a>
+      <div class="faq-item">
+        <div class="faq-q">When will results be announced?</div>
+        <div class="faq-a">Conditional results will be announced from June 15th onwards. We will notify all applicants of their status via email, and successful applicants will receive instructions for registration and next steps.</div>
       </div>
-      <div class="partner-item">
-        <a href="https://www.elliot-ai.eu/" target="_blank" rel="noopener" style="display:contents">
-          <div class="partner-logo" style="border:none;padding:0;height:auto; filter:brightness(0) invert(1);">
-            <img src="logos/ELLIOT_white.png" alt="ELLIOT" style="max-height:50px;max-width:170px;object-fit:contain;">
-          </div>
-          <!-- <div class="partner-label">Developing open, trustworthy, and multimodal foundation models</div> -->
-        </a>
+      <div class="faq-item">
+        <div class="faq-q">Do I need to present a poster?</div>
+        <div class="faq-a">Poster presentations are strongly encouraged but not mandatory. Accepted applicants will be invited to contribute a poster. Details will be shared after acceptance.</div>
       </div>
-    </div>
+      <div class="faq-item">
+        <div class="faq-q">Is the school in-person only?</div>
+        <div class="faq-a">Yes, SSAD 2026 is a fully in-person event in Barcelona. There is no remote or hybrid attendance option at this time.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Where should I stay?</div>
+        <div class="faq-a">The venue (UAB Casa Convalescència) is well-connected by public transportation (metro and bus). Multiple hotels are within walking distance. See the Venue section above for detailed transport information.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What are the school's official languages?</div>
+        <div class="faq-a">All lectures, panels, and sessions will be conducted in English. Barcelona is an international city, and while most people will be able to speak and/or understand English, the local official languages are Catalan and Spanish, so your everyday commute and interactions may involve these languages.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How do I get to Barcelona?</div>
+        <div class="faq-a">Barcelona is well-connected by air, rail, and road. The nearest international airport is <a href="https://maps.app.goo.gl/wJFdRSm3pz9tFLAW9" target="_blank">Josep Tarradellas Barcelona-El Prat (BCN)</a>. If traveling by train, the two main train stations are <a href="https://maps.app.goo.gl/aGAuUcLT74Ejc2YE7" target="_blank">Barcelona Sants</a> and <a href="https://maps.app.goo.gl/6XLcoVfnxiULojSg6" target="_blank">Estació de França</a>.</div>
+      </div>
   </div>
 </section>
 
@@ -1152,7 +1296,6 @@ footer{
     <ul class="footer-links">
       <li><a href="https://ellis.eu" target="_blank" rel="noopener">ELLIS Society</a></li>
       <li><a href="https://www.cvc.uab.cat" target="_blank" rel="noopener">CVC Barcelona</a></li>
-      <li><a href="#register">Apply Now</a></li>
       <li><a href="mailto:ssadriving@cvc.uab.es">Contact</a></li>
     </ul>
     <div class="footer-copy">© 2026 SSAD · CVC / ELLIS Unit Barcelona</div>
@@ -1188,6 +1331,19 @@ window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', scro
 // Update this URL when the application form changes
 const APPLY_URL = "https://forms.gle/PyFNg1YNVC7WqE819";
 document.getElementById('apply-btn').href = APPLY_URL;
+
+/* ── THEME TOGGLE ────────────────────────────────────── */
+(function(){
+  const root = document.documentElement;
+  const btn  = document.getElementById('theme-toggle');
+  const saved = localStorage.getItem('ssad-theme') || 'dark';
+  root.dataset.theme = saved;
+  btn.addEventListener('click', () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    localStorage.setItem('ssad-theme', next);
+  });
+})();
 
 
 /* ── SPEAKERS DATA ──────────────────────────────────── */
@@ -1226,7 +1382,7 @@ const speakers = [
   },
   {
     name:"Kashyap Chitta",
-    affil:"NVIDIA",
+    affil:"KS:AI",
     topic:"Evaluation and benchmarking of driving models",
     ellis:null,
     init:"KC", color:"#f97316", photo:"speakers/kchitta.jpg",
@@ -1257,6 +1413,14 @@ const speakers = [
     url:"https://germanros.net/"
   },
   {
+    name:"Maximilian Igl",
+    affil:"NVIDIA",
+    topic:"Reinforcement learning for decision-making in autonomous driving",
+    ellis:null,
+    init:"MI", color:"#ec4899", photo:"speakers/migl.jpg",
+    url:"https://www.maximilianigl.com/"
+  },
+  {
     name:"More TBA",
     affil:"ELLIS Fellows · Members · Industry",
     topic:"Additional topics: world models, RL, SLAM, federated learning…",
@@ -1284,54 +1448,71 @@ speakers.forEach(s => {
 });
 
 /* ── ORGANIZERS DATA ────────────────────────────────── */
+// Place photos in organizers/ (e.g. organizers/dporres.jpg). Leave photo:null to show initials.
 const organizers = [
   {
     name:"Diego Porres",
     role:"Postdoctoral Researcher · CVC",
-    ellis:null,
-    ellisCls:null,
-    init:"DP",
+    ellis:null, ellisCls:null,
+    init:"DP", color:"#3b82f6",
+    photo:"organizers/dporres.jpg",
     url:"https://www.diegoporres.com"
   },
   {
     name:"Andrei Bursuc",
     role:"PI · Valeo.ai / Inria",
-    ellis:"ELLIS Member",
-    ellisCls:"badge-ellis-member",
-    init:"AB",
+    ellis:"ELLIS Member", ellisCls:"badge-ellis-member",
+    init:"AB", color:"#a855f7",
+    photo:"organizers/abursuc.jpg",
     url:"https://abursuc.github.io/"
   },
   {
     name:"Gabriel Villalonga",
     role:"Postdoctoral Researcher · CVC",
-    ellis:null,
-    ellisCls:null,
-    init:"GV",
+    ellis:null, ellisCls:null,
+    init:"GV", color:"#22c55e",
+    photo:"organizers/gvillalonga.jpg",
     url:"https://scholar.google.es/citations?user=byJeaV0AAAAJ&hl=es"
   },
   {
-    name:"Damar Hoogland",
-    role:"Postdoctoral Researcher · JSI",
-    ellis:null,
-    ellisCls:null,
-    init:"DH",
-    url:"https://blogs.ncl.ac.uk/phonphon/people/damar-hoogland/"
+    name:"Nuria Martínez",
+    role:"Communications & Marketing Manager · CVC",
+    ellis:null, ellisCls:null,
+    init:"NM", color:"#f43f5e",
+    photo:"organizers/nmartinez.jpg",
+    url:"https://www.linkedin.com/in/n%C3%BAria-mart%C3%ADnez-segura-978b85a5/"
   },
   {
     name:"Meritxell Bassolas",
     role:"ELLIS Unit Barcelona Manager · UAB",
-    ellis:null,
-    ellisCls:null,
-    init:"MB",
+    ellis:null, ellisCls:null,
+    init:"MB", color:"#22d3ee",
+    photo:"organizers/mbassolas.jpg",
     url:"https://ellis.eu/person/meritxell-bassolas"
+  },
+  {
+    name:"Damar Hoogland",
+    role:"Postdoctoral Researcher · JSI",
+    ellis:null, ellisCls:null,
+    init:"DH", color:"#f97316",
+    photo:"organizers/dhoogland.jpg",
+    url:"https://blogs.ncl.ac.uk/phonphon/people/damar-hoogland/"
   },
   {
     name:"Antonio M. López",
     role:"PI · CVC (ADAS) / UAB",
-    ellis:"ELLIS Fellow",
-    ellisCls:"badge-ellis-fellow",
-    init:"AL",
+    ellis:"ELLIS Fellow", ellisCls:"badge-ellis-fellow",
+    init:"AL", color:"#3b82f6",
+    photo:"speakers/alopez.jpg",
     url:"https://pages.cvc.uab.es/antonio/"
+  },
+  {
+    name:"Dimos Karatzas",
+    role:"ELLIS Unit Director · CVC (DAG) / UAB",
+    ellis:"ELLIS Fellow", ellisCls:"badge-ellis-fellow",
+    init:"DK", color:"#f43f5e",
+    photo:"organizers/dkaratzas.jpg",
+    url:"https://pages.cvc.uab.es/dimos/index.htm"
   },
 ];
 
@@ -1339,13 +1520,18 @@ const og = document.getElementById('org-grid');
 organizers.forEach(o => {
   const c = document.createElement('div');
   c.className = 'org-card';
+  const avatarStyle = o.photo ? '' : `background:${o.color}18;border-color:${o.color}44;color:${o.color}`;
+  const avatarContent = o.photo
+    ? `<img src="${o.photo}" alt="${o.name}" loading="lazy" onerror="this.parentNode.innerHTML='<span style=\\'color:${o.color}\\'>${o.init}</span>';this.parentNode.style='background:${o.color}18;border-color:${o.color}44'">`
+    : `<span style="color:${o.color}">${o.init}</span>`;
   c.innerHTML = `
-    <div class="org-initial">${o.init}</div>
+    <div class="org-avatar" style="${avatarStyle}">${avatarContent}</div>
     <div class="org-info">
-      <div class="org-name"><a href="${o.url}" target="_blank" rel="noopener">${o.name}</a></div>
+      <div class="org-name">${o.name}</div>
       <div class="org-role">${o.role}</div>
       ${o.ellis?`<div class="org-badges"><span class="badge-pill ${o.ellisCls}" style="font-size:.63rem;padding:.18rem .6rem">${o.ellis}</span></div>`:''}
     </div>
+    <a href="${o.url}" target="_blank" rel="noopener" class="org-link">Profile ↗</a>
   `;
   og.appendChild(c);
 });
