@@ -159,10 +159,18 @@ nav.scrolled{
   position:relative;min-height:100vh;
   display:flex;align-items:center;justify-content:center;
   overflow:hidden;
-  background-image:
-    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-  background-size:100px 100px;
+}
+/* ── TRAFFIC ROAD BAND ──────────────────────────────────────── */
+#traffic-road{
+  position:relative;
+  width:100%;height:204px;   /* 3 lanes × 68px */
+  overflow:hidden;
+  cursor:default;
+  flex-shrink:0;
+}
+#hero-bg-canvas{
+  display:block;
+  width:100%;height:100%;
 }
 .hero-content{
   position:relative;z-index:2;text-align:center;
@@ -181,7 +189,7 @@ nav.scrolled{
 }
 @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.3}}
 
-#hero-logo{max-width:760px;width:90%;margin:0 auto 2.5rem;cursor:pointer;user-select:none;}
+#hero-logo{max-width:760px;width:90%;margin:0 auto 2.5rem;}
 .hero-logo-svg{width:100%;height:auto;display:block;}
 #hero-logo .cls-1{fill:#ff6734}
 #hero-logo .cls-2{fill:#2a00e2}
@@ -228,7 +236,7 @@ nav.scrolled{
 
 .hero-heading{
   font-family:'Space Grotesk',sans-serif;
-  font-size:clamp(2.2rem,5.5vw,4rem);font-weight:700;
+  font-size:clamp(2.2rem,5.5vw,4rem);font-weight:600;
   line-height:1.06;letter-spacing:-.02em;margin-bottom:1.25rem;
   background:linear-gradient(135deg,#fff 35%,rgba(255,255,255,.5));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
@@ -370,7 +378,7 @@ section{padding:6rem 2rem}
 .speaker-card.tba{border-style:dashed;opacity:.7}
 .speaker-card.tba:hover{opacity:1}
 .speaker-avatar{
-  width:68px;height:68px;border-radius:50%;
+  width:120px;height:120px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;
   margin-bottom:.875rem;flex-shrink:0;overflow:hidden;
@@ -414,7 +422,7 @@ section{padding:6rem 2rem}
 }
 .org-card:hover{border-color:var(--border-accent);transform:translateY(-2px)}
 .org-avatar{
-  width:88px;height:88px;border-radius:50%;flex-shrink:0;
+  width:120px;height:120px;border-radius:50%;flex-shrink:0;
   overflow:hidden;
   border:2px solid var(--border-accent);
   display:flex;align-items:center;justify-content:center;
@@ -518,6 +526,27 @@ section{padding:6rem 2rem}
 }
 .fee-includes{
   font-size:.78rem;color:var(--text-dim);margin:.75rem 0 1rem;line-height:1.5;
+}
+.deadline-countdown{
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  margin:.25rem 0 .9rem;font-size:.78rem;color:var(--text-muted);
+}
+.deadline-countdown .cd-label{font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;}
+.deadline-countdown .cd-units{
+  display:flex;gap:.4rem;
+}
+.deadline-countdown .cd-unit{
+  background:var(--surface-raised);border:1px solid var(--border-accent);
+  border-radius:6px;padding:.2rem .5rem;font-family:'Space Grotesk',sans-serif;
+  font-weight:700;font-size:.85rem;color:var(--text);min-width:2.2rem;text-align:center;
+}
+.deadline-countdown .cd-unit span{
+  display:block;font-family:'Inter',sans-serif;font-weight:400;
+  font-size:.6rem;color:var(--text-muted);letter-spacing:.04em;text-transform:uppercase;
+}
+.deadline-countdown.expired .cd-units{display:none}
+.deadline-countdown.expired .cd-expired{
+  color:var(--text-muted);font-style:italic;font-size:.8rem;
 }
 /* kept for backwards compat */
 #register{text-align:center}
@@ -792,10 +821,11 @@ footer{
 
 <!-- HERO -->
 <section id="hero">
+
   <div class="hero-content">
     <!-- <div class="hero-eyebrow">ELLIS School · Barcelona · September 2026</div> -->
 
-    <div id="hero-logo" title="Psst…">
+    <div id="hero-logo">
       <svg class="hero-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850.39 186.81">
         <g>
           <g>
@@ -907,6 +937,11 @@ footer{
   </div>
 </section>
 
+<!-- TRAFFIC ROAD (easter egg) -->
+<div id="traffic-road" role="region" aria-label="Click the red car to play the TrafficRL mini-game">
+  <canvas id="hero-bg-canvas"></canvas>
+</div>
+
 <!-- PARTNERS SHOWCASE -->
 <section id="partners-showcase">
   <div class="container">
@@ -1009,6 +1044,13 @@ footer{
               <span class="info-val">9+ confirmed & growing</span>
             </div>
           </div>
+          <div class="info-row">
+            <span class="info-icon">⏰</span>
+            <div>
+              <span class="info-label">Apply by</span>
+              <span class="info-val">Jun 1, 2026 · 23:59 AOE</span>
+            </div>
+          </div>
         </div>
 
         <div class="reg-card" id="apply">
@@ -1024,6 +1066,7 @@ footer{
             </div>
           </div>
           <p class="fee-includes">Covers venue, coffee breaks, social event, materials &amp; welcome event. Meals and accommodation not included.</p>
+          <div class="deadline-countdown" id="deadline-countdown"></div>
           <a id="apply-btn" class="notify-btn" style="display:inline-block;text-decoration:none;margin-top:.25rem;padding:.75rem 2rem;font-size:.95rem" target="_blank" rel="noopener">Apply Now →</a>
           <div class="diversity-note">
             We are committed to diversity and inclusion. Sponsorships from industry partners will fund
@@ -1173,13 +1216,6 @@ footer{
             Many options within walking distance, including Hotel Sant Pau, Sant Jordi Hostels, and Hotel Medicis.
           </div>
         </div>
-        <div class="venue-detail">
-          <div class="venue-detail-icon">✈️</div>
-          <div class="venue-detail-text">
-            <strong>Airport</strong>
-            Barcelona–El Prat (BCN) · ~35 min by metro L9 Sud
-          </div>
-        </div>
       </div>
       <div class="venue-map">
         <iframe
@@ -1233,6 +1269,10 @@ footer{
       <div class="faq-item">
         <div class="faq-q">Is the school in-person only?</div>
         <div class="faq-a">Yes, SSAD 2026 is a fully in-person event in Barcelona. There is no remote or hybrid attendance option at this time.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Will the recording of sessions be available?</div>
+        <div class="faq-a">We plan to record all sessions and make them available after the event. However, this won't take place until after the event concludes.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Where should I stay?</div>
@@ -1345,6 +1385,35 @@ document.getElementById('apply-btn').href = APPLY_URL;
   });
 })();
 
+/* ── APPLICATION DEADLINE COUNTDOWN ─────────────────── */
+(function(){
+  // Jun 1 2026, 23:59 AOE  =  Jun 2 2026, 11:59 UTC  (AOE = UTC-12)
+  const DEADLINE = new Date('2026-06-02T11:59:00Z');
+  const el = document.getElementById('deadline-countdown');
+  if(!el) return;
+
+  function render(){
+    const diff = DEADLINE - Date.now();
+    if(diff <= 0){
+      el.classList.add('expired');
+      el.innerHTML = '<span class="cd-expired">Applications closed</span>';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    el.innerHTML = `
+      <span class="cd-label">⏰ Application closes in</span>
+      <div class="cd-units">
+        <div class="cd-unit">${d}<span>days</span></div>
+        <div class="cd-unit">${h}<span>hrs</span></div>
+        <div class="cd-unit">${m}<span>min</span></div>
+      </div>`;
+  }
+  render();
+  setInterval(render, 60000);
+})();
+
 
 /* ── SPEAKERS DATA ──────────────────────────────────── */
 const speakers = [
@@ -1352,7 +1421,7 @@ const speakers = [
     name:"Antonio M. López",
     affil:"Computer Vision Center (CVC) / UAB",
     topic:"Simulation & sensor synthesis for autonomous driving",
-    ellis:"ELLIS Fellow", ellisColor:"var(--blue)",
+    ellis:"ELLIS Fellow", ellisCls:"badge-ellis-fellow",
     init:"AL", color:"#3b82f6", photo:"speakers/alopez.jpg",
     url:"https://pages.cvc.uab.es/antonio/"
   },
@@ -1360,7 +1429,7 @@ const speakers = [
     name:"Holger Caesar",
     affil:"TU Delft",
     topic:"Dataset construction and curation",
-    ellis:"ELLIS Scholar", ellisColor:"#c084fc",
+    ellis:"ELLIS Scholar", ellisCls:"badge-ellis-scholar",
     init:"HC", color:"#a855f7", photo:"speakers/hcaesar.jpg",
     url:"https://sites.google.com/it-caesar.de/homepage/"
   },
@@ -1368,7 +1437,7 @@ const speakers = [
     name:"Fatma Güney",
     affil:"Koç University",
     topic:"Reliable perception for autonomous driving",
-    ellis:"ELLIS Member", ellisColor:"var(--cyan)",
+    ellis:"ELLIS Member", ellisCls:"badge-ellis-member",
     init:"FG", color:"#22d3ee", photo:"speakers/fguney.jpeg",
     url:"https://mysite.ku.edu.tr/fguney/"
   },
@@ -1438,7 +1507,7 @@ speakers.forEach(s => {
     <div class="speaker-avatar" style="background:${s.tba?'var(--surface-raised)':s.color+'18'};border:2px solid ${s.tba?'var(--border)':s.color+'44'}">
       ${s.photo?`<img src="${s.photo}" alt="${s.name}" loading="lazy">`:`<span style="color:${s.tba?'var(--text-dim)':s.color}">${s.init}</span>`}
     </div>
-    ${s.ellis?`<div class="speaker-badges"><span class="badge-pill" style="background:${s.ellisColor}18;border:1px solid ${s.ellisColor}33;color:${s.ellisColor};font-size:.64rem;padding:.2rem .6rem">${s.ellis}</span></div>`:''}
+    ${s.ellis?`<div class="speaker-badges"><span class="badge-pill ${s.ellisCls}" style="font-size:.64rem;padding:.2rem .6rem">${s.ellis}</span></div>`:''}
     <div class="speaker-name">${s.tba?`<span style="color:var(--text-dim)">To Be Announced</span>`:s.url?`<a href="${s.url}" target="_blank" rel="noopener" style="color:var(--text);text-decoration:none">${s.name}</a>`:s.name}</div>
     <div class="speaker-affil">${s.affil}</div>
     <div class="speaker-topic">${s.topic}</div>
@@ -1543,24 +1612,233 @@ function handleNotify(e){
   document.getElementById('notify-success').style.display='block';
 }
 
-/* ── EASTER EGG ─────────────────────────────────────── */
-let logoClicks=0, logoTimer=null;
-document.getElementById('hero-logo').addEventListener('click', () => {
-  logoClicks++;
-  clearTimeout(logoTimer);
-  logoTimer = setTimeout(() => logoClicks=0, 2000);
-  if(logoClicks===1) showHint('Click 2 more times… 🚗');
-  else if(logoClicks===2) showHint('One more… 🏎️');
-  else if(logoClicks>=3){ logoClicks=0; openGame(); }
-});
+/* ── HINT TOAST ─────────────────────────────────────────────── */
 let hintEl=null;
 function showHint(msg){
   if(hintEl) hintEl.remove();
-  hintEl = document.createElement('div');
-  hintEl.className='logo-hint'; hintEl.textContent=msg;
+  hintEl=document.createElement('div');
+  hintEl.className='logo-hint';hintEl.textContent=msg;
   document.body.appendChild(hintEl);
-  setTimeout(() => { if(hintEl){hintEl.remove();hintEl=null;} },3200);
+  setTimeout(()=>{if(hintEl){hintEl.remove();hintEl=null;}},3200);
 }
+
+/* ── HERO BACKGROUND CANVAS ─────────────────────────────────── */
+(function(){
+  const canvas = document.getElementById('hero-bg-canvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  // --- Geometry (mirrors the mini-game, rotated 90°) ---
+  // The game has 6 lanes, each 68px wide, vertical.
+  // Here we draw 2 horizontal road strips (same 6-lane structure each).
+  // Cars are 52px wide × 32px tall (game's 32w×52h, rotated).
+  const LW = 68;           // lane width (same as game)
+  const NLANES = 3;        // lanes per strip
+  const ROAD_H = LW * NLANES; // total road height per strip = 204px
+  const CW = 52, CH = 32; // car: wide × tall (rotated from game's 32×52)
+  // Lane 0 (top) = fastest, lane 2 (bottom) = slowest — no variance so cars never catch up
+  const LANE_SPEEDS = [180, 130, 85];           // px/s, exact constants
+  const MIN_GAP = CW + 60;                      // minimum bumper-to-bumper gap when spawning
+  const CVC_RED = '#ff2a19';                    // special car colour
+  const SPECIAL_PROB = 0.007;                   // ~1-in-140 spawn chance for the red car
+
+  // Single road strip filling the full band height
+  const STRIP_CENTRES = [0.5];
+
+  let W, H, strips, bgAnimId, hovered = false;
+  // strips[i] = { roadTop, lanes: [{ y: lane-centre-y }], cars: [] }
+
+  function resize(){
+    W = canvas.offsetWidth;
+    H = canvas.offsetHeight;
+    canvas.width  = W;
+    canvas.height = H;
+    buildStrips();
+  }
+
+  function buildStrips(){
+    strips = STRIP_CENTRES.map(fc => {
+      const roadTop = fc * H - ROAD_H / 2;
+      const lanes = [];
+      for(let i = 0; i < NLANES; i++){
+        lanes.push({ y: roadTop + LW * i + LW / 2 });
+      }
+      return { roadTop, lanes, cars: [] };
+    });
+    // Seed with cars already on screen, evenly spaced per lane so no overlaps
+    strips.forEach(s => {
+      for(let lane = 0; lane < NLANES; lane++){
+        const spacing = Math.max(MIN_GAP + CW, W / 2);
+        // Place 2 cars per lane at evenly spaced starting positions
+        for(let k = 0; k < 2; k++){
+          const x = k * spacing + Math.random() * (spacing * 0.4);
+          s.cars.push(makeCar(lane, s, x));
+        }
+      }
+    });
+    // Exactly one special car across all strips combined
+    const allCars = strips.flatMap(s => s.cars);
+    allCars.forEach(c => c.special = false);
+    if(allCars.length) allCars[Math.floor(Math.random() * allCars.length)].special = true;
+  }
+
+  function makeCar(lane, strip, x){
+    return {
+      lane,
+      x,
+      y: strip.lanes[lane].y,
+      speed: LANE_SPEEDS[lane],   // exact constant — no variance, no catch-up
+      special: false,
+    };
+  }
+
+  // Draw one car at (cx, cy) facing right.  cx/cy = centre of car.
+  function drawBgCar(cx, cy, special){
+    const rx = cx - CW/2, ry = cy - CH/2;
+    const isLight = document.documentElement.dataset.theme === 'light';
+    // Regular cars: muted monochrome that matches the theme
+    const bodyCol = special
+      ? CVC_RED
+      : (isLight ? 'rgba(100,116,139,.55)' : 'rgba(71,85,105,.75)');
+    // shadow
+    ctx.fillStyle = 'rgba(0,0,0,.28)';
+    ctx.fillRect(rx+3, ry+3, CW, CH);
+    // body
+    ctx.fillStyle = bodyCol;
+    ctx.beginPath(); ctx.roundRect(rx, ry, CW, CH, 5); ctx.fill();
+    // windows
+    ctx.fillStyle = special ? 'rgba(255,255,255,.30)' : 'rgba(255,255,255,.18)';
+    ctx.fillRect(rx + CW - 14, ry + 4, 10, CH - 8);  // front windscreen
+    ctx.fillRect(rx + 4,        ry + 4, 10, CH - 8);  // rear windscreen
+    // headlights (right = front)
+    ctx.fillStyle = 'rgba(255,250,180,.85)';
+    ctx.fillRect(rx + CW - 3, ry + 3,      3, 6);
+    ctx.fillRect(rx + CW - 3, ry + CH - 9, 3, 6);
+    // taillights (left = rear)
+    ctx.fillStyle = 'rgba(255,50,50,.85)';
+    ctx.fillRect(rx,           ry + 3,      3, 6);
+    ctx.fillRect(rx,           ry + CH - 9, 3, 6);
+    // CVC red glow outline for special car
+    if(special){
+      ctx.strokeStyle = 'rgba(255,42,25,.65)';
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.roundRect(rx - 2, ry - 2, CW + 4, CH + 4, 7); ctx.stroke();
+    }
+  }
+
+  function drawStrip(s, dt){
+    const roadBot = s.roadTop + ROAD_H;
+    const isLight = document.documentElement.dataset.theme === 'light';
+
+    // Asphalt fill
+    ctx.fillStyle = isLight ? 'rgba(0,0,0,.07)' : '#1a2535';
+    ctx.fillRect(0, s.roadTop, W, ROAD_H);
+
+    // Shoulders / edge lines
+    ctx.strokeStyle = isLight ? 'rgba(0,0,0,.25)' : 'rgba(249,115,22,.65)';
+    ctx.lineWidth = 3; ctx.setLineDash([]);
+    ctx.beginPath(); ctx.moveTo(0, s.roadTop);  ctx.lineTo(W, s.roadTop);  ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0, roadBot);    ctx.lineTo(W, roadBot);    ctx.stroke();
+
+    // Lane dashes — static (only cars move)
+    ctx.strokeStyle = isLight ? 'rgba(0,0,0,.18)' : 'rgba(255,255,255,.18)';
+    ctx.lineWidth = 2; ctx.setLineDash([18, 14]);
+    ctx.lineDashOffset = 0;
+    for(let i = 1; i < NLANES; i++){
+      const ly = s.roadTop + LW * i;
+      ctx.beginPath(); ctx.moveTo(0, ly); ctx.lineTo(W, ly); ctx.stroke();
+    }
+    ctx.setLineDash([]);
+  }
+
+  let lastBgT = 0;
+  function bgLoop(t = 0){
+    bgAnimId = requestAnimationFrame(bgLoop);
+    const dt = Math.min((t - lastBgT) / 1000, 0.05); lastBgT = t;
+    if(dt <= 0) return;
+
+    ctx.clearRect(0, 0, W, H);
+
+    strips.forEach(s => {
+      drawStrip(s, dt);
+
+      // Move cars
+      s.cars.forEach(c => { c.x += c.speed * dt; });
+
+      // Remove off-screen, respawn on left
+      s.cars = s.cars.filter(c => c.x < W + CW + 20);
+
+      // Spawn new cars — enforce MIN_GAP so same-speed cars never overlap
+      for(let lane = 0; lane < NLANES; lane++){
+        const inLane = s.cars.filter(c => c.lane === lane);
+        if(inLane.length >= 3) continue;              // at most 3 per lane
+        // Find the leftmost car (closest to spawn edge)
+        const leftmostX = inLane.reduce((m, c) => Math.min(m, c.x), Infinity);
+        // Only spawn when there is enough clear space off the left edge
+        const spawnX = -CW / 2;
+        if(leftmostX !== Infinity && leftmostX - spawnX < MIN_GAP) continue;
+        const newCar = makeCar(lane, s, spawnX);
+        s.cars.push(newCar);
+        // Occasionally make the new one the CVC special car, only if none exists globally
+        const anySpecial = strips.some(s2 => s2.cars.some(c => c.special));
+        if(!anySpecial && Math.random() < SPECIAL_PROB){
+          newCar.special = true;
+        }
+      }
+
+      // Draw cars (regular first so special renders on top)
+      s.cars.filter(c => !c.special).forEach(c => drawBgCar(c.x, c.y, false));
+      s.cars.filter(c =>  c.special).forEach(c => drawBgCar(c.x, c.y, true));
+    });
+  }
+
+  // Click / touch detection on the canvas
+  function hitGolden(px, py){
+    for(const s of strips){
+      for(const c of s.cars){
+        if(!c.special) continue;
+        if(px >= c.x - CW/2 - 6 && px <= c.x + CW/2 + 6 &&
+           py >= c.y - CH/2 - 6 && py <= c.y + CH/2 + 6) return true;
+      }
+    }
+    return false;
+  }
+
+  canvas.style.pointerEvents = 'auto';
+  canvas.style.cursor = 'default';
+
+  canvas.addEventListener('mousemove', e => {
+    const r = canvas.getBoundingClientRect();
+    const px = e.clientX - r.left, py = e.clientY - r.top;
+    const over = hitGolden(px, py);
+    canvas.style.cursor = over ? 'pointer' : 'default';
+    if(over && !hovered){ hovered = true; showHint('Click to play the mini-game! 🏎️'); }
+    else if(!over){ hovered = false; }
+  });
+
+  function handleTap(e){
+    const r = canvas.getBoundingClientRect();
+    let px, py;
+    if(e.touches){
+      px = e.touches[0].clientX - r.left;
+      py = e.touches[0].clientY - r.top;
+    } else {
+      px = e.clientX - r.left;
+      py = e.clientY - r.top;
+    }
+    if(hitGolden(px, py)){
+      if(e.cancelable) e.preventDefault();
+      openGame();
+    }
+  }
+  canvas.addEventListener('click',      handleTap);
+  canvas.addEventListener('touchstart', handleTap, {passive: false});
+
+  // Init
+  resize();
+  new ResizeObserver(resize).observe(canvas);
+  bgLoop();
+})();
 
 /* ── MINI GAME ──────────────────────────────────────── */
 const gameModal = document.getElementById('game-modal');
@@ -1596,7 +1874,7 @@ function resetGame(){
 document.getElementById('game-close-btn').addEventListener('click',closeGame);
 document.getElementById('game-restart-btn').addEventListener('click',()=>{resetGame();if(!gameRunning){gameRunning=true;requestAnimationFrame(gameLoop);}});
 gameModal.addEventListener('click',e=>{if(e.target===gameModal)closeGame();});
-window.addEventListener('keydown',e=>{keys[e.key]=true;if(e.key==='Escape'&&gameModal.classList.contains('active'))closeGame();});
+window.addEventListener('keydown',e=>{keys[e.key]=true;if(e.key==='Escape'&&gameModal.classList.contains('active'))closeGame();if(gameRunning&&['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();});
 window.addEventListener('keyup',e=>{keys[e.key]=false;});
 
 const TCOLS=['#ef4444','#f59e0b','#22c55e','#a855f7','#e5e7eb','#60a5fa'];
