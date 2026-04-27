@@ -117,6 +117,7 @@ nav.scrolled{
   color:var(--blue);display:block;line-height:1;
 }
 .nav-name{display:block;line-height:1.2}
+.nav-name-short{display:none;font-size:.9rem;font-weight:700;line-height:1.2}
 .nav-links{display:flex;gap:1.75rem;list-style:none}
 .nav-links a{
   text-decoration:none;color:var(--text-muted);
@@ -821,8 +822,12 @@ footer{
 @media(max-width:720px){
   nav{padding:1rem 1.25rem}
   .nav-links{display:none}
-  .nav-hamburger{display:flex}
-  .nav-cta{padding:.45rem .9rem;font-size:.8rem}
+  .nav-cta{display:none}               /* lives in drawer on mobile */
+  .nav-hamburger{display:flex;order:-1} /* hamburger first */
+  .nav-logo{order:0}                    /* logo centre */
+  .theme-toggle{order:1}               /* theme toggle last */
+  .nav-ellis,.nav-name{display:none}   /* hide full two-line name */
+  .nav-name-short{display:block}       /* show short name */
   section{padding:4rem 1.25rem}
   .footer-inner{flex-direction:column;text-align:center}
   .footer-links{justify-content:center}
@@ -830,6 +835,14 @@ footer{
 }
 @media(max-width:480px){
   .hero-content{padding:6rem 1.25rem 3rem}
+  /* 2 cards per row on small phones */
+  .speakers-grid{grid-template-columns:repeat(2,1fr);gap:.7rem}
+  .org-grid{grid-template-columns:repeat(2,1fr);gap:.7rem}
+  /* smaller avatars so cards don't overflow */
+  .speaker-avatar{width:72px;height:72px;font-size:.95rem}
+  .org-avatar{width:72px;height:72px;font-size:1rem}
+  .speaker-card{padding:1rem .75rem}
+  .org-card{padding:1.25rem .75rem 1rem}
 }
 </style>
 </head>
@@ -879,14 +892,16 @@ footer{
     <div>
       <span class="nav-ellis">ELLIS Summer School on</span>
       <span class="nav-name">Autonomous Driving 2026</span>
+      <span class="nav-name-short">SSAD 2026</span>
     </div>
   </a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#speakers">Speakers</a></li>
     <li><a href="#program">Program</a></li>
-    <li><a href="#faq">FAQ</a></li>
     <li><a href="#venue">Venue</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#organizers">Organizers</a></li>
   </ul>
   <button id="theme-toggle" class="theme-toggle" aria-label="Toggle colour theme">
     <span class="theme-icon-dark">☀</span>
@@ -899,10 +914,12 @@ footer{
 </nav>
 
 <div id="nav-drawer">
-  <a href="#speakers" onclick="closeDrawer()">Speakers</a>
-  <a href="#program"  onclick="closeDrawer()">Program</a>
-  <a href="#venue"    onclick="closeDrawer()">Venue</a>
-  <a href="#faq"      onclick="closeDrawer()">FAQ</a>
+  <a href="#about"       onclick="closeDrawer()">About</a>
+  <a href="#speakers"    onclick="closeDrawer()">Speakers</a>
+  <a href="#program"     onclick="closeDrawer()">Program</a>
+  <a href="#venue"       onclick="closeDrawer()">Venue</a>
+  <a href="#faq"         onclick="closeDrawer()">FAQ</a>
+  <a href="#organizers"  onclick="closeDrawer()">Organizers</a>
   <a class="nav-cta" style="margin-top:1.5rem;text-align:center;display:block" href="#about" onclick="closeDrawer()">Apply Now →</a>
 </div>
 
@@ -1317,16 +1334,6 @@ footer{
   </div>
 </section>
 
-<!-- ORGANIZERS -->
-<section id="organizers">
-  <div class="container">
-    <div class="section-eyebrow">Organizing Committee</div>
-    <h2 class="section-title">Who's behind the school</h2>
-    <p class="section-sub">Organized by researchers from CVC, Valeo/Inria, and ELLIS Unit Barcelona.</p>
-    <div class="org-grid" id="org-grid"></div>
-  </div>
-</section>
-
 <!-- FAQ -->
 <section id="faq">
   <div class="container">
@@ -1375,6 +1382,17 @@ footer{
       </div>
   </div>
 </section>
+
+<!-- ORGANIZERS -->
+<section id="organizers">
+  <div class="container">
+    <div class="section-eyebrow">Organizing Committee</div>
+    <h2 class="section-title">Who's behind the school</h2>
+    <p class="section-sub">Organized by researchers from CVC, Valeo/Inria, and ELLIS Unit Barcelona.</p>
+    <div class="org-grid" id="org-grid"></div>
+  </div>
+</section>
+
 
 <!-- FOOTER -->
 <footer>
@@ -1484,7 +1502,7 @@ document.addEventListener('click', e => {
 
 /* ── APPLY LINK ─────────────────────────────────────── */
 // Update this URL when the application form changes
-const APPLY_URL = "https://forms.gle/PyFNg1YNVC7WqE819";
+const APPLY_URL = "https://forms.gle/zfjazuXQnWzyyy2F9";
 document.getElementById('apply-btn').href = APPLY_URL;
 
 /* ── THEME TOGGLE ────────────────────────────────────── */
@@ -1719,13 +1737,6 @@ organizers.forEach(o => {
   `;
   og.appendChild(c);
 });
-
-/* ── NOTIFY FORM ────────────────────────────────────── */
-function handleNotify(e){
-  e.preventDefault();
-  document.getElementById('notify-form').style.display='none';
-  document.getElementById('notify-success').style.display='block';
-}
 
 /* ── HINT TOAST ─────────────────────────────────────────────── */
 let hintEl=null;
