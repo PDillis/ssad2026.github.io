@@ -130,6 +130,48 @@ nav.scrolled{
   transition:opacity .2s;
 }
 .nav-cta:hover{opacity:.85}
+/* Hamburger button — hidden on desktop, visible on mobile */
+.nav-hamburger{
+  display:none;
+  flex-direction:column;gap:5px;
+  background:none;border:none;cursor:pointer;
+  padding:.4rem;border-radius:6px;
+}
+.nav-hamburger span{
+  display:block;width:22px;height:2px;
+  background:var(--text);border-radius:2px;
+  transition:transform .25s,opacity .25s;
+}
+.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Mobile nav drawer */
+#nav-drawer{
+  position:fixed;
+  top:58px;left:0;right:0;bottom:0;
+  background:var(--surface);z-index:99;
+  flex-direction:column;
+  padding:1.5rem 2rem;
+  border-top:1px solid var(--border);
+  overflow-y:auto;
+  /* hidden by default via visibility+pointer-events so display:flex is never overridden */
+  display:flex;
+  visibility:hidden;pointer-events:none;
+  opacity:0;
+  transition:opacity .2s,visibility .2s;
+}
+#nav-drawer.open{visibility:visible;pointer-events:auto;opacity:1;}
+#nav-drawer a{
+  display:block;padding:1rem 0;
+  border-bottom:1px solid var(--border);
+  color:var(--text);text-decoration:none;
+  font-size:1.05rem;font-weight:500;
+  transition:color .2s;
+}
+#nav-drawer a:last-child{border-bottom:none}
+#nav-drawer a:hover{color:var(--blue)}
+
 /* Theme toggle: appearance matches TARGET state, not current */
 /* In dark mode → button looks light (bright bg) = "switch to light" */
 .theme-toggle{
@@ -310,7 +352,7 @@ section{padding:6rem 2rem}
 .info-card-header{
   padding:.75rem 1.1rem;
   border-bottom:1px solid var(--border);
-  font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  font-size:.72rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;
   color:var(--text-dim);
 }
 .info-row{
@@ -459,13 +501,13 @@ section{padding:6rem 2rem}
   color:var(--blue);margin-bottom:.2rem;
 }
 .day-date{
-  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.9rem;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.9rem;
   color:var(--text);
 }
 .day-body{padding:.75rem 1rem}
 .day-items{list-style:none}
 .day-items li{
-  color:var(--text-muted);font-size:.8rem;
+  font-size:.8rem;
   padding:.3rem 0;border-bottom:1px solid var(--border);
   display:flex;align-items:flex-start;gap:.5rem;line-height:1.4;
 }
@@ -642,6 +684,7 @@ section{padding:6rem 2rem}
   filter:brightness(0) invert(1);
   display:block;
 }
+.showcase-logo-item img.logo-wide{max-width:400px}
 .showcase-divider{
   height:1px;background:var(--border);
   margin:0 auto 2.5rem;max-width:180px;
@@ -732,6 +775,34 @@ footer{
   padding:.38rem .85rem;border-radius:6px;cursor:pointer;transition:background .2s;
 }
 .game-restart:hover{background:rgba(255,255,255,.08)}
+/* D-pad */
+#dpad{
+  display:grid;
+  grid-template-areas:". up ." "left down right";
+  grid-template-columns:44px 44px 44px;
+  grid-template-rows:44px 44px;
+  gap:4px;
+}
+#btn-up   {grid-area:up}
+#btn-left {grid-area:left}
+#btn-down {grid-area:down}
+#btn-right{grid-area:right}
+.dpad-btn{
+  background:var(--surface-raised);
+  border:1px solid var(--border-accent);
+  border-radius:8px;color:var(--text);
+  font-size:.95rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .1s,border-color .1s,transform .08s;
+  user-select:none;-webkit-user-select:none;
+  touch-action:manipulation;
+}
+.dpad-btn:hover{background:rgba(255,255,255,.1)}
+.dpad-btn.pressed{
+  background:var(--blue);
+  border-color:var(--blue);
+  transform:scale(.92);
+}
 .logo-hint{
   position:fixed;bottom:2rem;right:2rem;z-index:50;
   background:var(--surface);border:1px solid var(--border-accent);
@@ -750,10 +821,15 @@ footer{
 @media(max-width:720px){
   nav{padding:1rem 1.25rem}
   .nav-links{display:none}
+  .nav-hamburger{display:flex}
+  .nav-cta{padding:.45rem .9rem;font-size:.8rem}
   section{padding:4rem 1.25rem}
   .footer-inner{flex-direction:column;text-align:center}
   .footer-links{justify-content:center}
   .days-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .hero-content{padding:6rem 1.25rem 3rem}
 }
 </style>
 </head>
@@ -816,8 +892,19 @@ footer{
     <span class="theme-icon-dark">☀</span>
     <span class="theme-icon-light"> ☾</span>
   </button>
+  <button id="nav-hamburger" class="nav-hamburger" aria-label="Open navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
   <a class="nav-cta" href="#about">Apply Now →</a>
 </nav>
+
+<div id="nav-drawer">
+  <a href="#speakers" onclick="closeDrawer()">Speakers</a>
+  <a href="#program"  onclick="closeDrawer()">Program</a>
+  <a href="#venue"    onclick="closeDrawer()">Venue</a>
+  <a href="#faq"      onclick="closeDrawer()">FAQ</a>
+  <a class="nav-cta" style="margin-top:1.5rem;text-align:center;display:block" href="#about" onclick="closeDrawer()">Apply Now →</a>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -950,7 +1037,7 @@ footer{
         <div class="showcase-label"><h1>Organizers</h1></div>
         <div class="showcase-logos">
           <a class="showcase-logo-item" href="https://ellisbarcelona.eu/" target="_blank" rel="noopener">
-            <img src="logos/ellis-logo_barcelona.png" alt="ELLIS Unit Barcelona">
+            <img src="logos/ellis-logo_barcelona.png" alt="ELLIS Unit Barcelona" class="logo-wide">
           </a>
           <a class="showcase-logo-item" href="https://www.cvc.uab.es/" target="_blank" rel="noopener">
             <img src="logos/CVC-logo-eng-1-scaled.png" alt="CVC">
@@ -987,10 +1074,10 @@ footer{
           <p>
             The <strong>ELLIS Summer School on Autonomous Driving</strong> is an official
             <a href="https://ellis.eu" target="_blank" rel="noopener" style="color:var(--blue-light);text-decoration:none">ELLIS PhD Program</a>
-            school, approved for 2026. Designed for PhD students, postdoctoral researchers, and junior
-            scientists working at the intersection of machine learning, computer vision, and robotics,
-            the school offers an intensive programme of expert keynotes, curated panels, and  poster
-            sessions, reflecting how Europe is shaping its own research priorities in this rapidly evolving field.
+            school designed for PhD students, postdoctoral researchers, and junior
+            scientists working at the intersection of machine learning, computer vision, and robotics.
+            The school offers an intensive programme of expert keynotes, curated panels, and  poster
+            sessions, reflecting how this rapidly evolving field is shaping its own research priorities.
           </p>
           <p>
             Hosted at the magnificent modernist landmark <strong>UAB Casa Convalescència</strong> 
@@ -1048,7 +1135,7 @@ footer{
             <span class="info-icon">⏰</span>
             <div>
               <span class="info-label">Apply by</span>
-              <span class="info-val">Jun 1, 2026 · 23:59 AOE</span>
+              <span class="info-val">June 8, 2026 · 23:59 AOE</span>
             </div>
           </div>
         </div>
@@ -1256,11 +1343,11 @@ footer{
       </div>
       <div class="faq-item">
         <div class="faq-q">When is the application deadline?</div>
-        <div class="faq-a">The deadline is on June 1st, 11:59 pm AOE. If this deadline changes, we will update this page and notify applicants through ELLIS channels.</div>
+        <div class="faq-a">The deadline is on June 8th, 11:59 pm AOE. If this deadline changes, we will update this page and notify applicants through ELLIS channels.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">When will results be announced?</div>
-        <div class="faq-a">Conditional results will be announced from June 15th onwards. We will notify all applicants of their status via email, and successful applicants will receive instructions for registration and next steps.</div>
+        <div class="faq-a">Conditional results will be announced towards the end of June. We will notify all applicants of their status via email, and successful applicants will receive instructions for registration and next steps.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Do I need to present a poster?</div>
@@ -1272,7 +1359,7 @@ footer{
       </div>
       <div class="faq-item">
         <div class="faq-q">Will the recording of sessions be available?</div>
-        <div class="faq-a">We plan to record all sessions and make them available after the event. However, this won't take place until after the event concludes.</div>
+        <div class="faq-a">We plan to record all sessions. However, these recordings won't take be available until after the event concludes.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Where should I stay?</div>
@@ -1356,7 +1443,13 @@ footer{
     </div>
     <canvas id="game-canvas" width="640" height="370"></canvas>
     <div class="game-footer">
-      <div class="game-hint">Arrow keys or WASD · Dodge traffic · Watch for emergency vehicles!</div>
+      <div class="game-hint">Arrow keys / WASD or use the buttons · Dodge traffic!</div>
+      <div id="dpad">
+        <button class="dpad-btn" id="btn-up"    data-key="ArrowUp"    aria-label="Accelerate">▲</button>
+        <button class="dpad-btn" id="btn-left"  data-key="ArrowLeft"  aria-label="Lane left">◀</button>
+        <button class="dpad-btn" id="btn-down"  data-key="ArrowDown"  aria-label="Brake">▼</button>
+        <button class="dpad-btn" id="btn-right" data-key="ArrowRight" aria-label="Lane right">▶</button>
+      </div>
       <button class="game-restart" id="game-restart-btn">Restart (R)</button>
     </div>
   </div>
@@ -1366,6 +1459,28 @@ footer{
 /* ── NAV SCROLL ─────────────────────────────────────── */
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', scrollY > 30), {passive:true});
+
+/* ── HAMBURGER MENU ──────────────────────────────────── */
+const hamburger = document.getElementById('nav-hamburger');
+const navDrawer  = document.getElementById('nav-drawer');
+hamburger.addEventListener('click', () => {
+  const open = navDrawer.classList.toggle('open');
+  hamburger.classList.toggle('open', open);
+  hamburger.setAttribute('aria-expanded', String(open));
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+function closeDrawer(){
+  navDrawer.classList.remove('open');
+  hamburger.classList.remove('open');
+  hamburger.setAttribute('aria-expanded','false');
+  document.body.style.overflow = '';
+}
+// Close drawer when clicking outside it (on the dimmed page area behind it)
+document.addEventListener('click', e => {
+  if(navDrawer.classList.contains('open') && !navDrawer.contains(e.target) && e.target !== hamburger && !hamburger.contains(e.target)){
+    closeDrawer();
+  }
+});
 
 /* ── APPLY LINK ─────────────────────────────────────── */
 // Update this URL when the application form changes
@@ -1388,7 +1503,7 @@ document.getElementById('apply-btn').href = APPLY_URL;
 /* ── APPLICATION DEADLINE COUNTDOWN ─────────────────── */
 (function(){
   // Jun 1 2026, 23:59 AOE  =  Jun 2 2026, 11:59 UTC  (AOE = UTC-12)
-  const DEADLINE = new Date('2026-06-02T11:59:00Z');
+  const DEADLINE = new Date('2026-06-09T11:59:00Z');
   const el = document.getElementById('deadline-countdown');
   if(!el) return;
 
@@ -1429,7 +1544,7 @@ const speakers = [
     name:"Holger Caesar",
     affil:"TU Delft",
     topic:"Dataset construction and curation",
-    ellis:"ELLIS Scholar", ellisCls:"badge-ellis-scholar",
+    ellis:"ELLIS Scholar", ellisColor:"#c084fc",
     init:"HC", color:"#a855f7", photo:"speakers/hcaesar.jpg",
     url:"https://sites.google.com/it-caesar.de/homepage/"
   },
@@ -1437,7 +1552,7 @@ const speakers = [
     name:"Fatma Güney",
     affil:"Koç University",
     topic:"Reliable perception for autonomous driving",
-    ellis:"ELLIS Member", ellisCls:"badge-ellis-member",
+    ellis:"ELLIS Member", ellisColor:"var(--cyan)",
     init:"FG", color:"#22d3ee", photo:"speakers/fguney.jpeg",
     url:"https://mysite.ku.edu.tr/fguney/"
   },
@@ -1451,7 +1566,7 @@ const speakers = [
   },
   {
     name:"Kashyap Chitta",
-    affil:"KS:AI",
+    affil:"KE:SAI",
     topic:"Evaluation and benchmarking of driving models",
     ellis:null,
     init:"KC", color:"#f97316", photo:"speakers/kchitta.jpg",
@@ -1640,7 +1755,7 @@ function showHint(msg){
   const LANE_SPEEDS = [180, 130, 85];           // px/s, exact constants
   const MIN_GAP = CW + 60;                      // minimum bumper-to-bumper gap when spawning
   const CVC_RED = '#ff2a19';                    // special car colour
-  const SPECIAL_PROB = 0.007;                   // ~1-in-140 spawn chance for the red car
+  const SPECIAL_PROB = 0.01;                   // ~1-in-100 spawn chance for the red car
 
   // Single road strip filling the full band height
   const STRIP_CENTRES = [0.5];
@@ -1876,6 +1991,17 @@ document.getElementById('game-restart-btn').addEventListener('click',()=>{resetG
 gameModal.addEventListener('click',e=>{if(e.target===gameModal)closeGame();});
 window.addEventListener('keydown',e=>{keys[e.key]=true;if(e.key==='Escape'&&gameModal.classList.contains('active'))closeGame();if(gameRunning&&['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();});
 window.addEventListener('keyup',e=>{keys[e.key]=false;});
+
+/* ── D-PAD CONTROLS ─────────────────────────────────── */
+document.querySelectorAll('.dpad-btn').forEach(btn => {
+  const key = btn.dataset.key;
+  function press(e){ e.preventDefault(); keys[key]=true;  btn.classList.add('pressed'); }
+  function release(){                     keys[key]=false; btn.classList.remove('pressed'); }
+  btn.addEventListener('pointerdown',   press,   {passive:false});
+  btn.addEventListener('pointerup',     release);
+  btn.addEventListener('pointercancel', release);
+  btn.addEventListener('pointerleave',  release);
+});
 
 const TCOLS=['#ef4444','#f59e0b','#22c55e','#a855f7','#e5e7eb','#60a5fa'];
 const LANE_SPEEDS=[100,90,78,68,58,48];
