@@ -1015,7 +1015,7 @@ footer{
       </svg>
     </div>
 
-    <h1 class="hero-heading">Where autonomous driving<br>research comes alive</h1>
+    <h1 class="hero-heading">Where autonomous driving research<br>comes alive</h1>
     <p class="hero-sub">
       An official ELLIS Summer School — four intensive days in Barcelona where
       world-class researchers and the next generation of scientists converge to push
@@ -1152,7 +1152,7 @@ footer{
             <span class="info-icon">⏰</span>
             <div>
               <span class="info-label">Apply by</span>
-              <span class="info-val">June 8, 2026 · 23:59 AOE</span>
+              <span class="info-val">June 12, 2026 · 23:59 AOE <span style="display:inline-block;margin-left:.35em;font-size:.7em;background:var(--blue);color:#fff;font-weight:700;letter-spacing:.06em;border-radius:4px;padding:.1em .45em;vertical-align:middle;">EXTENDED</span></span>
             </div>
           </div>
         </div>
@@ -1229,7 +1229,7 @@ footer{
         <div class="day-body">
           <ul class="day-items">
             <li>Registration</li>
-            <li>Keynote: Simulation & Sensor Synthesis <em>Antonio M. López</em></li>
+            <li>Keynote: TBA <em>Antonio M. López</em></li>
             <li>Keynote: Perception & Sensing <em>Fatma Güney</em></li>
             <li>Panel #1: European AD research</li>
             <li>Social event</li>
@@ -1350,7 +1350,7 @@ footer{
       </div>
       <div class="faq-item">
         <div class="faq-q">When is the application deadline?</div>
-        <div class="faq-a">The deadline is on June 8th, 11:59 pm AOE. If this deadline changes, we will update this page and notify applicants through ELLIS channels.</div>
+        <div class="faq-a"><span style="display:inline-block;font-size:.72em;font-weight:700;letter-spacing:.06em;background:var(--blue);color:#fff;border-radius:4px;padding:.15em .5em;margin-right:.4em;vertical-align:middle;">EXTENDED</span>The deadline has been extended to <strong>June 12th, 11:59 pm AOE</strong>. If this deadline changes, we will update this page and notify applicants through ELLIS channels.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">When will results be announced?</div>
@@ -1520,8 +1520,8 @@ document.getElementById('apply-btn').href = APPLY_URL;
 
 /* ── APPLICATION DEADLINE COUNTDOWN ─────────────────── */
 (function(){
-  // Jun 1 2026, 23:59 AOE  =  Jun 2 2026, 11:59 UTC  (AOE = UTC-12)
-  const DEADLINE = new Date('2026-06-09T11:59:00Z');
+  // Jun 12 2026, 23:59 AOE  =  Jun 13 2026, 11:59 UTC  (AOE = UTC-12)
+  const DEADLINE = new Date('2026-06-13T11:59:00Z');
   const el = document.getElementById('deadline-countdown');
   if(!el) return;
 
@@ -1536,11 +1536,16 @@ document.getElementById('apply-btn').href = APPLY_URL;
     const h = Math.floor((diff % 86400000) / 3600000);
     const m = Math.floor((diff % 3600000) / 60000);
     el.innerHTML = `
-      <span class="cd-label">⏰ Application closes in</span>
-      <div class="cd-units">
-        <div class="cd-unit">${d}<span>days</span></div>
-        <div class="cd-unit">${h}<span>hrs</span></div>
-        <div class="cd-unit">${m}<span>min</span></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:.35rem;width:100%">
+        <span style="display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.08em;background:var(--blue);color:#fff;border-radius:4px;padding:.2em .6em;">⏰ DEADLINE EXTENDED</span>
+        <div style="display:flex;align-items:center;gap:.4rem">
+          <span class="cd-label">closes in</span>
+          <div class="cd-units">
+            <div class="cd-unit">${d}<span>days</span></div>
+            <div class="cd-unit">${h}<span>hrs</span></div>
+            <div class="cd-unit">${m}<span>min</span></div>
+          </div>
+        </div>
       </div>`;
   }
   render();
@@ -1553,7 +1558,7 @@ const speakers = [
   {
     name:"Antonio M. López",
     affil:"Computer Vision Center (CVC) / UAB",
-    topic:"Simulation & sensor synthesis for autonomous driving",
+    topic:"TBA (will be announced closer to the event)",
     ellis:"ELLIS Fellow", ellisCls:"badge-ellis-fellow",
     init:"AL", color:"#3b82f6", photo:"speakers/alopez.jpg",
     url:"https://pages.cvc.uab.es/antonio/"
@@ -1562,7 +1567,7 @@ const speakers = [
     name:"Holger Caesar",
     affil:"TU Delft",
     topic:"Dataset construction and curation",
-    ellis:"ELLIS Scholar", ellisColor:"#c084fc",
+    ellis:"ELLIS Scholar", ellisCls:"badge-ellis-scholar",
     init:"HC", color:"#a855f7", photo:"speakers/hcaesar.jpg",
     url:"https://sites.google.com/it-caesar.de/homepage/"
   },
@@ -1570,7 +1575,7 @@ const speakers = [
     name:"Fatma Güney",
     affil:"Koç University",
     topic:"Reliable perception for autonomous driving",
-    ellis:"ELLIS Member", ellisColor:"var(--cyan)",
+    ellis:"ELLIS Member", ellisCls:"badge-ellis-member",
     init:"FG", color:"#22d3ee", photo:"speakers/fguney.jpeg",
     url:"https://mysite.ku.edu.tr/fguney/"
   },
