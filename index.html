@@ -108,7 +108,7 @@ nav.scrolled{
   display:flex;align-items:center;gap:.75rem;
   text-decoration:none;color:var(--text);
   font-family:'Space Grotesk',sans-serif;
-  font-weight:700;font-size:.9rem;cursor:pointer;user-select:none;
+  font-weight:700;font-size:.9rem;cursor:pointer;-webkit-user-select:none; user-select:none;
 }
 .nav-logo-icon{width:30px;height:30px}
 .nav-ellis{
@@ -488,39 +488,98 @@ section{padding:6rem 2rem}
 
 /* ── PROGRAM ─────────────────────────────────────────────────── */
 #program{background:var(--surface)}
-.days-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.875rem;margin-top:2.5rem}
-.day-card{
-  background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);
-  overflow:hidden;
+
+/* Time-aligned schedule grid */
+.sched-outer{margin-top:2.5rem;overflow-x:auto}
+.sched-grid{
+  display:grid;
+  /* col 1: time labels, cols 2-5: days */
+  grid-template-columns:3rem repeat(4,1fr);
+  /* 16 half-hour rows, 09:00-17:00 */
+  grid-template-rows:2rem repeat(16,2.25rem);
+  gap:0;
+  min-width:520px;
 }
-.day-header{
-  padding:.875rem 1rem;
-  border-bottom:1px solid var(--border);
+/* Day header row */
+.sched-day-hdr{
+  grid-row:1;
+  background:var(--bg);border:1px solid var(--border);
+  border-right:none;
+  padding:.35rem .6rem;
+  display:flex;flex-direction:column;justify-content:center;
 }
-.day-number{
-  font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--blue);margin-bottom:.2rem;
+.sched-day-hdr:last-child{border-right:1px solid var(--border)}
+.sched-day-hdr .day-number{
+  font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--blue);
 }
-.day-date{
-  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.9rem;
+.sched-day-hdr .day-date{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.78rem;
   color:var(--text);
 }
-.day-body{padding:.75rem 1rem}
-.day-items{list-style:none}
-.day-items li{
-  font-size:.8rem;
-  padding:.3rem 0;border-bottom:1px solid var(--border);
-  display:flex;align-items:flex-start;gap:.5rem;line-height:1.4;
+/* Time label column */
+.sched-time-col{
+  grid-column:1;
+  display:contents;
 }
-.day-items li:last-child{border-bottom:none}
-.day-items li::before{
-  content:'';width:4px;height:4px;border-radius:50%;
-  background:var(--text-dim);flex-shrink:0;margin-top:6px;
+.sched-tick{
+  grid-column:1;
+  display:flex;align-items:flex-start;padding-top:.1rem;
+  font-size:.6rem;font-variant-numeric:tabular-nums;
+  color:var(--text-dim);justify-content:flex-end;padding-right:.35rem;
+  border-top:1px solid var(--border);
 }
+/* Row separator lines across all day columns */
+.sched-rowline{
+  grid-column:2/-1;
+  border-top:1px solid var(--border);
+  pointer-events:none;
+}
+/* Individual schedule blocks */
+.sched-block{
+  border-left:1px solid var(--border);
+  border-right:none;
+  padding:.25rem .5rem;
+  font-size:.72rem;line-height:1.3;
+  display:flex;flex-direction:column;justify-content:center;
+  overflow:hidden;position:relative;
+}
+.sched-block:last-of-type,
+.sched-col-5 .sched-block{border-right:1px solid var(--border)}
+/* Bottom border on last row of each block */
+.sched-block::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;
+  height:1px;background:var(--border);
+}
+/* speaker blocks: color set via --sc inline custom property */
+.sched-block.speaker{background:color-mix(in srgb,var(--sc) 12%,transparent);border-left:3px solid var(--sc)}
+.sched-block.coffee{background:color-mix(in srgb,var(--text-dim) 8%,transparent);font-weight:600;color:var(--text-muted)}
+.sched-block.lunch{background:color-mix(in srgb,var(--text-dim) 5%,transparent);color:var(--text-muted)}
+.sched-block.welcome{background:color-mix(in srgb,#f59e0b 15%,transparent);border-left:3px solid #f59e0b;font-weight:600}
+.sched-block.social-drinks{background:color-mix(in srgb,#f59e0b 10%,transparent);color:var(--text);border-left:3px solid #f59e0b}
+.sched-block.social-event{background:color-mix(in srgb,#e879f9 12%,transparent);border-left:3px solid #e879f9;font-weight:600}
+.sched-block.panel{background:color-mix(in srgb,#675ee8 12%,transparent);border-left:3px solid #675ee8;font-weight:600}
+.sched-block.closing{background:color-mix(in srgb,#22c55e 10%,transparent);border-left:3px solid #22c55e;font-weight:600}
+.sched-block.tba{background:color-mix(in srgb,var(--text-dim) 6%,transparent);color:var(--text-muted);font-style:italic}
+.sched-block.empty{background:transparent}
+.sched-block em{font-style:italic;color:var(--text-muted);font-size:.68rem;display:block;margin-top:.1rem}
+/* Right border on last day column */
+.sched-block[style*="grid-column: 5"]{border-right:1px solid var(--border)}
+/* Bottom border on last row */
+.sched-bottom-border{grid-column:1/-1;border-top:1px solid var(--border);height:0}
+
+.sched-dur{font-size:.62rem;font-weight:600;color:var(--text-dim);background:var(--surface-raised);border-radius:3px;padding:.05em .3em;margin-top:.15rem;align-self:flex-start;white-space:nowrap}
+
 .program-note{
   background:var(--surface);border:1px solid var(--border);
   border-left:3px solid var(--blue);border-radius:var(--radius);
   padding:1.1rem 1.4rem;color:var(--text-muted);margin-top:1.5rem;font-size:.875rem;
+}
+@media(max-width:640px){
+  .sched-grid{grid-template-columns:2.5rem repeat(4,1fr);min-width:400px;grid-template-rows:2.5rem repeat(16,2rem)}
+  .sched-block{font-size:.62rem;padding:.2rem .3rem}
+  .sched-block em{font-size:.58rem}
+  .sched-day-hdr .day-date{font-size:.68rem}
 }
 
 /* ── VENUE ───────────────────────────────────────────────────── */
@@ -816,7 +875,6 @@ footer{
 
 /* ── RESPONSIVE ──────────────────────────────────────────────── */
 @media(max-width:900px){
-  .days-grid{grid-template-columns:1fr 1fr}
   .about-grid,.venue-grid{grid-template-columns:1fr;gap:2.5rem}
 }
 @media(max-width:720px){
@@ -831,7 +889,7 @@ footer{
   section{padding:4rem 1.25rem}
   .footer-inner{flex-direction:column;text-align:center}
   .footer-links{justify-content:center}
-  .days-grid{grid-template-columns:1fr}
+
 }
 @media(max-width:480px){
   .hero-content{padding:6rem 1.25rem 3rem}
@@ -910,7 +968,6 @@ footer{
   <button id="nav-hamburger" class="nav-hamburger" aria-label="Open navigation" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
-  <a class="nav-cta" href="#about">Apply Now →</a>
 </nav>
 
 <div id="nav-drawer">
@@ -920,7 +977,6 @@ footer{
   <a href="#venue"       onclick="closeDrawer()">Venue</a>
   <a href="#faq"         onclick="closeDrawer()">FAQ</a>
   <a href="#organizers"  onclick="closeDrawer()">Organizers</a>
-  <a class="nav-cta" style="margin-top:1.5rem;text-align:center;display:block" href="#about" onclick="closeDrawer()">Apply Now →</a>
 </div>
 
 <!-- HERO -->
@@ -1059,8 +1115,8 @@ footer{
           <a class="showcase-logo-item" href="https://www.cvc.uab.es/" target="_blank" rel="noopener">
             <img src="logos/CVC-logo-eng-1-scaled.png" alt="CVC">
           </a>
-          <a class="showcase-logo-item" href="https://valeoai.github.io/" target="_blank" rel="noopener">
-            <img src="logos/valeoai_logo.png" alt="valeo.ai">
+          <a class="showcase-logo-item" href="https://www.valeo.com/" target="_blank" rel="noopener">
+            <img src="logos/FR.PA_BIG.png" alt="Valeo">
           </a>
         </div>
       </div>
@@ -1071,8 +1127,8 @@ footer{
           <a class="showcase-logo-item" href="https://www.elliot-ai.eu/" target="_blank" rel="noopener">
             <img src="logos/ELLIOT_purple-blue.png" alt="ELLIOT">
           </a>
-          <a class="showcase-logo-item" href="https://www.uab.cat" target="_blank" rel="noopener">
-            <img src="logos/logotipuab-v1-verd.png" alt="UAB">
+          <a class="showcase-logo-item" href="https://www.eliza.school" target="_blank" rel="noopener">
+            <img src="logos/logo-eliza-ellisda.svg" alt="ELIZA">
           </a>
         </div>
       </div>
@@ -1097,9 +1153,9 @@ footer{
             sessions, reflecting how this rapidly evolving field is shaping its own research priorities.
           </p>
           <p>
-            Hosted at the magnificent modernist landmark <strong>UAB Casa Convalescència</strong> 
+            Hosted at the magnificent modernist landmark <strong>UAB Casa Convalescència</strong>
             and organised by the Computer Vision Center (CVC),
-            Valeo.ai, and ELLIS Unit Barcelona, the school brings together voices from both academic
+            Valeo, and ELLIS Unit Barcelona, the school brings together voices from both academic
             research and industry to tackle the open problems shaping the future of autonomous driving.
             A student poster session and social activities create space for informal exchange, new
             collaborations, and lasting connections.
@@ -1145,14 +1201,14 @@ footer{
             <span class="info-icon">🎤</span>
             <div>
               <span class="info-label">Speakers</span>
-              <span class="info-val">9+ confirmed & growing</span>
+              <span class="info-val">11 confirmed speakers</span>
             </div>
           </div>
           <div class="info-row">
             <span class="info-icon">⏰</span>
             <div>
-              <span class="info-label">Apply by</span>
-              <span class="info-val">June 12, 2026 · 23:59 AOE <span style="display:inline-block;margin-left:.35em;font-size:.7em;background:var(--blue);color:#fff;font-weight:700;letter-spacing:.06em;border-radius:4px;padding:.1em .45em;vertical-align:middle;">EXTENDED</span></span>
+              <span class="info-label">Applications</span>
+              <span class="info-val">Closed — contact <a href="mailto:ssadriving@cvc.uab.es" style="color:var(--blue-light);text-decoration:none">ssadriving@cvc.uab.es</a></span>
             </div>
           </div>
         </div>
@@ -1171,7 +1227,7 @@ footer{
           </div>
           <p class="fee-includes">Covers venue, coffee breaks, social event, materials &amp; welcome event. Meals and accommodation not included.</p>
           <div class="deadline-countdown" id="deadline-countdown"></div>
-          <a id="apply-btn" class="notify-btn" style="display:inline-block;text-decoration:none;margin-top:.25rem;padding:.75rem 2rem;font-size:.95rem" target="_blank" rel="noopener">Apply Now →</a>
+          <a class="notify-btn" style="display:inline-block;text-decoration:none;margin-top:.25rem;padding:.75rem 2rem;font-size:.95rem" href="mailto:ssadriving@cvc.uab.es">Contact Us →</a>
           <div class="diversity-note">
             We are committed to diversity and inclusion. Sponsorships from industry partners will fund
             registration waivers for students from underrepresented groups. If you're interested in sponsoring the school,
@@ -1194,7 +1250,7 @@ footer{
     </div>
     <div class="speakers-grid" id="speakers-grid"></div>
     <div class="speakers-more">
-      <strong>Additional speakers being confirmed.</strong> Full lineup will be announced closer to the event. Follow <a href="https://ellis.eu" target="_blank" rel="noopener" style="color:var(--blue)">ELLIS Society</a> and <a href="https://www.cvc.uab.cat" target="_blank" rel="noopener" style="color:var(--blue)">CVC Barcelona</a> for updates.
+      This is our full lineup of invited speakers. Follow <a href="https://ellis.eu" target="_blank" rel="noopener" style="color:var(--blue)">ELLIS Society</a> and <a href="https://www.cvc.uab.cat" target="_blank" rel="noopener" style="color:var(--blue)">CVC Barcelona</a> for updates.
     </div>
   </div>
 </section>
@@ -1204,69 +1260,169 @@ footer{
   <div class="container">
     <div class="section-eyebrow">Program</div>
     <h2 class="section-title">Preliminary Schedule</h2>
-    <p class="section-sub">Sessions run 09:00–17:00 each day. Mix of keynotes, poster sessions, and panels.</p>
-    <div class="days-grid">
-      <div class="day-card">
-        <div class="day-header">
+    <p class="section-sub">Sessions run 09:00–17:00 each day. Coffee breaks at 11:00 and 15:00. Lunch 12:30–14:00. Keynotes include Q&amp;A within their slot.</p>
+    <div class="sched-outer">
+      <div class="sched-grid">
+
+        <!-- ── Header row ── -->
+        <div style="grid-column:1;grid-row:1"></div>
+        <div class="sched-day-hdr" style="grid-column:2;grid-row:1">
           <div class="day-number">Day 1 · Tuesday</div>
           <div class="day-date">September 15</div>
         </div>
-        <div class="day-body">
-          <ul class="day-items">
-            <li>Registration & Welcome</li>
-            <li>Keynote: End-to-End Driving <em>José M. Álvarez</em></li>
-            <li>Keynote: Reinforcement Learning for AD <em>Maximilian Igl</em></li>
-            <li>Student poster session 1</li>
-            <li>Welcome social event</li>
-          </ul>
-        </div>
-      </div>
-      <div class="day-card">
-        <div class="day-header">
+        <div class="sched-day-hdr" style="grid-column:3;grid-row:1;border-left:none">
           <div class="day-number">Day 2 · Wednesday</div>
           <div class="day-date">September 16</div>
         </div>
-        <div class="day-body">
-          <ul class="day-items">
-            <li>Registration</li>
-            <li>Keynote: TBA <em>Antonio M. López</em></li>
-            <li>Keynote: Perception & Sensing <em>Fatma Güney</em></li>
-            <li>Panel #1: European AD research</li>
-            <li>Social event</li>
-          </ul>
-        </div>
-      </div>
-      <div class="day-card">
-        <div class="day-header">
+        <div class="sched-day-hdr" style="grid-column:4;grid-row:1;border-left:none">
           <div class="day-number">Day 3 · Thursday</div>
           <div class="day-date">September 17</div>
         </div>
-        <div class="day-body">
-          <ul class="day-items">
-            <li>Keynote: World Models for AD <em>Vassia Simaiaki</em></li>
-            <li>Keynote: Multi-sensor Pre-training <em>Alexandre Boulch</em></li>
-            <li>Lightning talk: CARLA Simulator <em>German Ros</em></li>
-            <li>Student poster session 2</li>
-          </ul>
-        </div>
-      </div>
-      <div class="day-card">
-        <div class="day-header">
+        <div class="sched-day-hdr" style="grid-column:5;grid-row:1;border-left:none;border-right:1px solid var(--border)">
           <div class="day-number">Day 4 · Friday</div>
           <div class="day-date">September 18</div>
         </div>
-        <div class="day-body">
-          <ul class="day-items">
-            <li>Keynote: Dataset for Autonomous Driving <em>Holger Caesar</em></li>
-            <li>Keynote: Evaluation of AD Models <em>Kashyap Chitta</em></li>
-            <li>Panel #2: The road ahead</li>
-            <li>Closing ceremony & Awards</li>
-          </ul>
+
+        <!-- ── Time ticks (rows 2–17 = 09:00–17:00) ── -->
+        <div class="sched-tick" style="grid-row:2">09:00</div>
+        <div class="sched-tick" style="grid-row:3">09:30</div>
+        <div class="sched-tick" style="grid-row:4">10:00</div>
+        <div class="sched-tick" style="grid-row:5">10:30</div>
+        <div class="sched-tick" style="grid-row:6">11:00</div>
+        <div class="sched-tick" style="grid-row:7">11:30</div>
+        <div class="sched-tick" style="grid-row:8">12:00</div>
+        <div class="sched-tick" style="grid-row:9">12:30</div>
+        <div class="sched-tick" style="grid-row:10">13:00</div>
+        <div class="sched-tick" style="grid-row:11">13:30</div>
+        <div class="sched-tick" style="grid-row:12">14:00</div>
+        <div class="sched-tick" style="grid-row:13">14:30</div>
+        <div class="sched-tick" style="grid-row:14">15:00</div>
+        <div class="sched-tick" style="grid-row:15">15:30</div>
+        <div class="sched-tick" style="grid-row:16">16:00</div>
+        <div class="sched-tick" style="grid-row:17">16:30</div>
+        <div class="sched-tick" style="grid-row:18">17:00</div>
+
+        <!-- ── DAY 1 (col 2) ── -->
+        <!-- 09:00 Welcome (row 2, 30min) -->
+        <div class="sched-block welcome" style="grid-column:2;grid-row:2/3">Welcome &amp; Registration</div>
+        <!-- 09:30 Boulch (rows 3–5, 1.5h) -->
+        <div class="sched-block speaker" style="--sc:#f43f5e;grid-column:2;grid-row:3/6">
+          Multi-sensor Pre-training
+          <em>Alexandre Boulch</em>
+          <span class="sched-dur">1.5 h</span>
         </div>
+        <!-- 11:00 Coffee (row 6) -->
+        <div class="sched-block coffee" style="grid-column:2;grid-row:6/7">☕ Coffee</div>
+        <!-- 11:30 Álvarez (rows 7–8, 1h) -->
+        <div class="sched-block speaker" style="--sc:#22c55e;grid-column:2;grid-row:7/9">
+          End-to-End Driving
+          <em>José M. Álvarez</em>
+        </div>
+        <!-- 12:30 Lunch (rows 9–11, 1.5h) -->
+        <div class="sched-block lunch" style="grid-column:2;grid-row:9/12">🍽 Lunch</div>
+        <!-- 14:00 Igl (rows 12–13, 1h) -->
+        <div class="sched-block speaker" style="--sc:#ec4899;grid-column:2;grid-row:12/14">
+          Reinforcement Learning for AD
+          <em>Maximilian Igl</em>
+        </div>
+        <!-- 15:00 Coffee (row 14) -->
+        <div class="sched-block coffee" style="grid-column:2;grid-row:14/15">☕ Coffee</div>
+        <!-- 15:30 Panel #1 (row 15, 30min) -->
+        <div class="sched-block panel" style="grid-column:2;grid-row:15/16">Panel #1</div>
+        <!-- 15:30 Social drinks + Welcome event (rows 16–17) -->
+        <div class="sched-block social-drinks" style="grid-column:2;grid-row:16/18">Social drinks &amp; Welcome event</div>
+
+        <!-- ── DAY 2 (col 3) ── -->
+        <!-- 09:00 empty (row 2, 30min) -->
+        <div class="sched-block empty" style="grid-column:3;grid-row:2/3"></div>
+        <!-- 09:30 López (rows 3–6, 1.5h extendable to 11:00) -->
+        <div class="sched-block speaker" style="--sc:#3b82f6;grid-column:3;grid-row:3/6">
+          TBA
+          <em>Antonio M. López</em>
+          <span class="sched-dur">up to 1.5 h</span>
+        </div>
+        <!-- 11:00 Coffee (row 6) -->
+        <div class="sched-block coffee" style="grid-column:3;grid-row:6/7">☕ Coffee</div>
+        <!-- 11:30 Sergio Casas (rows 7–8, 1h) -->
+        <div class="sched-block speaker" style="--sc:#0ea5e9;grid-column:3;grid-row:7/9">
+          Perception &amp; Behavior Reasoning
+          <em>Sergio Casas</em>
+        </div>
+        <!-- 12:30 Lunch (rows 9–11, 1.5h) -->
+        <div class="sched-block lunch" style="grid-column:3;grid-row:9/12">🍽 Lunch</div>
+        <!-- 14:00 Fatma Güney (rows 12–13, 1h) -->
+        <div class="sched-block speaker" style="--sc:#22d3ee;grid-column:3;grid-row:12/14">
+          Reliable Perception for AD
+          <em>Fatma Güney</em>
+        </div>
+        <!-- 15:00 Coffee (row 14) -->
+        <div class="sched-block coffee" style="grid-column:3;grid-row:14/15">☕ Coffee</div>
+        <!-- 15:30 Panel #2 (row 15, 30min) -->
+        <div class="sched-block panel" style="grid-column:3;grid-row:15/16">Panel #2</div>
+        <!-- 16:00 Social event (rows 16–17) -->
+        <div class="sched-block social-event" style="grid-column:3;grid-row:16/18">Social event (TBA)</div>
+        <!-- ── DAY 3 (col 4) ── -->
+        <!-- 09:30 Holger Caesar (rows 3–6, up to 11:00) -->
+        <div class="sched-block speaker" style="--sc:#a855f7;grid-column:4;grid-row:3/6">
+          Dataset Construction &amp; Curation
+          <em>Holger Caesar</em>
+          <span class="sched-dur">up to 1.5 h</span>
+        </div>
+        <!-- 11:00 Coffee (row 6) -->
+        <div class="sched-block coffee" style="grid-column:4;grid-row:6/7">☕ Coffee</div>
+        <!-- 11:30 Sofía Lago Dudas (rows 7–8, 1h) -->
+        <div class="sched-block speaker" style="--sc:#eab308;grid-column:4;grid-row:7/9">
+          World Models for AD
+          <em>Sofía Lago Dudas</em>
+        </div>
+        <!-- 12:30 Lunch (rows 9–11, 1.5h) -->
+        <div class="sched-block lunch" style="grid-column:4;grid-row:9/12">🍽 Lunch</div>
+        <!-- 14:00 German Ros (rows 12–13, 1h) -->
+        <div class="sched-block speaker" style="--sc:#8b5cf6;grid-column:4;grid-row:12/14">
+          CARLA Simulator
+          <em>German Ros</em>
+        </div>
+        <!-- 15:00 Coffee (row 14) -->
+        <div class="sched-block coffee" style="grid-column:4;grid-row:14/15">☕ Coffee</div>
+        <!-- 15:30 Panel #3 (row 15, 30min) -->
+        <div class="sched-block panel" style="grid-column:4;grid-row:15/16">Panel #3</div>
+        <!-- 16:00 Social Event TBA (rows 16–17) -->
+        <div class="sched-block social-event" style="grid-column:4;grid-row:16/18">Social event (TBA)</div>
+
+        <!-- ── DAY 4 (col 5) ── -->
+        <!-- 09:00 empty (row 2, 30min) -->
+        <div class="sched-block empty" style="grid-column:5;grid-row:2/3;border-right:1px solid var(--border)"></div>
+        <!-- 09:30 Chitta (rows 3–4, 1h) -->
+        <div class="sched-block speaker" style="--sc:#f97316;grid-column:5;grid-row:3/6;border-right:1px solid var(--border)">
+          Evaluation of AD Models
+          <em>Kashyap Chitta</em>
+        </div>
+        <!-- 11:00 Coffee (row 6) -->
+        <div class="sched-block coffee" style="grid-column:5;grid-row:6/7;border-right:1px solid var(--border)">☕ Coffee</div>
+        <!-- 11:00 Dirk Hornung (rows 6–8, 1.5h) -->
+        <div class="sched-block speaker" style="--sc:#10b981;grid-column:5;grid-row:7/9;border-right:1px solid var(--border)">
+          HPC in Autonomous Driving
+          <em>Dirk Hornung</em>
+          <span class="sched-dur">1.5 h</span>
+        </div>
+        <!-- 12:30 Lunch (rows 9–11, 1.5h) -->
+        <div class="sched-block lunch" style="grid-column:5;grid-row:9/12;border-right:1px solid var(--border)">🍽 Lunch</div>
+        <!-- 14:00 TBA (rows 12–13) -->
+        <div class="sched-block tba" style="grid-column:5;grid-row:12/14;border-right:1px solid var(--border)">TBA</div>
+        <!-- 15:00 Coffee (row 14) -->
+        <div class="sched-block coffee" style="grid-column:5;grid-row:14/15;border-right:1px solid var(--border)">☕ Coffee</div>
+        <!-- 15:30 Panel #4 (row 15, 30min) -->
+        <div class="sched-block panel" style="grid-column:5;grid-row:15/16;border-right:1px solid var(--border)">Panel #4</div>
+        <!-- 16:00 Closing (rows 16–17) -->
+        <div class="sched-block closing" style="grid-column:5;grid-row:16/18;border-right:1px solid var(--border)">Closing ceremony &amp; Awards</div>
+
+        <!-- Bottom border -->
+        <div class="sched-bottom-border" style="grid-row:18"></div>
+
       </div>
     </div>
     <div class="program-note">
-      📋 The final schedule and speaker assignments will be published ~6 weeks before the school.
+      📋 The final schedule will be released ~4 weeks before the school starts.
     </div>
   </div>
 </section>
@@ -1342,7 +1498,7 @@ footer{
     <div class="faq-grid">
       <div class="faq-item">
         <div class="faq-q">What does the registration fee cover?</div>
-        <div class="faq-a">The fee covers venue access, coffee breaks,  and morning/afternoon snacks for all four days. Meals and accommodation are <em>not</em> included and must be arranged independently.</div>
+        <div class="faq-a">The fee covers venue access, coffee breaks,  and morning snacks for all four days. Meals and accommodation are <em>not</em> included and must be arranged independently.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Who can apply?</div>
@@ -1350,7 +1506,7 @@ footer{
       </div>
       <div class="faq-item">
         <div class="faq-q">When is the application deadline?</div>
-        <div class="faq-a"><span style="display:inline-block;font-size:.72em;font-weight:700;letter-spacing:.06em;background:var(--blue);color:#fff;border-radius:4px;padding:.15em .5em;margin-right:.4em;vertical-align:middle;">EXTENDED</span>The deadline has been extended to <strong>June 12th, 11:59 pm AOE</strong>. If this deadline changes, we will update this page and notify applicants through ELLIS channels.</div>
+        <div class="faq-a"><span style="display:inline-block;font-size:.72em;font-weight:700;letter-spacing:.06em;background:var(--text-dim);color:#fff;border-radius:4px;padding:.15em .5em;margin-right:.4em;vertical-align:middle;">CLOSED</span>The application deadline was <strong>June 12th, 11:59 pm AOE</strong>. Applications are now closed. If you missed the deadline and would still like to attend, please send an email to <a href="mailto:ssadriving@cvc.uab.es" style="color:var(--blue-light)">ssadriving@cvc.uab.es</a>.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">When will results be announced?</div>
@@ -1358,7 +1514,7 @@ footer{
       </div>
       <div class="faq-item">
         <div class="faq-q">Do I need to present a poster?</div>
-        <div class="faq-a">Poster presentations are strongly encouraged but not mandatory. Accepted applicants will be invited to contribute a poster. Details will be shared after acceptance.</div>
+        <div class="faq-a">Poster presentations are strongly encouraged but not mandatory. Accepted applicants will be invited to contribute a poster. The list of accepted posters will be released shortly.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Is the school in-person only?</div>
@@ -1378,7 +1534,11 @@ footer{
       </div>
       <div class="faq-item">
         <div class="faq-q">How do I get to Barcelona?</div>
-        <div class="faq-a">Barcelona is well-connected by air, rail, and road. The nearest international airport is <a href="https://maps.app.goo.gl/wJFdRSm3pz9tFLAW9" target="_blank">Josep Tarradellas Barcelona-El Prat (BCN)</a>. If traveling by train, the two main train stations are <a href="https://maps.app.goo.gl/aGAuUcLT74Ejc2YE7" target="_blank">Barcelona Sants</a> and <a href="https://maps.app.goo.gl/6XLcoVfnxiULojSg6" target="_blank">Estació de França</a>.</div>
+        <div class="faq-a">Barcelona is well-connected by air, rail, and road. The nearest international airport is <a href="https://maps.app.goo.gl/wJFdRSm3pz9tFLAW9" target="_blank" rel="noopener">Josep Tarradellas Barcelona-El Prat (BCN)</a>. If traveling by train, the two main train stations are <a href="https://maps.app.goo.gl/aGAuUcLT74Ejc2YE7" target="_blank" rel="noopener">Barcelona Sants</a> and <a href="https://maps.app.goo.gl/6XLcoVfnxiULojSg6" target="_blank" rel="noopener">Estació de França</a>.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Are there mobility funds available for ELLIS PhD students?</div>
+        <div class="faq-a"><a href="https://www.eliza.school" target="_blank" rel="noopener" style="color:var(--blue-light)">ELIZA</a> is offering mobility funds (travel, accommodation, registration) for ELLIS PhD students whose main or co-supervisor is based in Berlin, Darmstadt, Freiburg, Heidelberg, München, Saarbrücken, or Tübingen. Please <a href="https://eliza.school/application/#section-8" target="_blank" rel="noopener" style="color:var(--blue-light)">apply here</a>.</div>
       </div>
   </div>
 </section>
@@ -1388,7 +1548,7 @@ footer{
   <div class="container">
     <div class="section-eyebrow">Organizing Committee</div>
     <h2 class="section-title">Who's behind the school</h2>
-    <p class="section-sub">Organized by researchers from CVC, Valeo/Inria, and ELLIS Unit Barcelona.</p>
+    <p class="section-sub">Organized by researchers from CVC, Valeo, and ELLIS Unit Barcelona.</p>
     <div class="org-grid" id="org-grid"></div>
   </div>
 </section>
@@ -1500,10 +1660,7 @@ document.addEventListener('click', e => {
   }
 });
 
-/* ── APPLY LINK ─────────────────────────────────────── */
-// Update this URL when the application form changes
-const APPLY_URL = "https://forms.gle/zfjazuXQnWzyyy2F9";
-document.getElementById('apply-btn').href = APPLY_URL;
+/* Applications closed — contact ssadriving@cvc.uab.es */
 
 /* ── THEME TOGGLE ────────────────────────────────────── */
 (function(){
@@ -1516,40 +1673,6 @@ document.getElementById('apply-btn').href = APPLY_URL;
     root.dataset.theme = next;
     localStorage.setItem('ssad-theme', next);
   });
-})();
-
-/* ── APPLICATION DEADLINE COUNTDOWN ─────────────────── */
-(function(){
-  // Jun 12 2026, 23:59 AOE  =  Jun 13 2026, 11:59 UTC  (AOE = UTC-12)
-  const DEADLINE = new Date('2026-06-13T11:59:00Z');
-  const el = document.getElementById('deadline-countdown');
-  if(!el) return;
-
-  function render(){
-    const diff = DEADLINE - Date.now();
-    if(diff <= 0){
-      el.classList.add('expired');
-      el.innerHTML = '<span class="cd-expired">Applications closed</span>';
-      return;
-    }
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor((diff % 86400000) / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    el.innerHTML = `
-      <div style="display:flex;flex-direction:column;align-items:center;gap:.35rem;width:100%">
-        <span style="display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.08em;background:var(--blue);color:#fff;border-radius:4px;padding:.2em .6em;">⏰ DEADLINE EXTENDED</span>
-        <div style="display:flex;align-items:center;gap:.4rem">
-          <span class="cd-label">closes in</span>
-          <div class="cd-units">
-            <div class="cd-unit">${d}<span>days</span></div>
-            <div class="cd-unit">${h}<span>hrs</span></div>
-            <div class="cd-unit">${m}<span>min</span></div>
-          </div>
-        </div>
-      </div>`;
-  }
-  render();
-  setInterval(render, 60000);
 })();
 
 
@@ -1596,16 +1719,16 @@ const speakers = [
     url:"https://kashyap7x.github.io/"
   },
   {
-    name:"Vassia Simaiaki",
-    affil:"Wayve.ai",
+    name:"Sofía Lago Dudas",
+    affil:"Wayve",
     topic:"World models for autonomous driving",
     ellis:null,
-    init:"VS", color:"#eab308", photo:"speakers/vsimaiaki.jpg",
-    url:"https://uk.linkedin.com/in/vassia-wayve"
+    init:"SL", color:"#eab308", photo:"speakers/slagodudas.jpeg",
+    url:"https://uk.linkedin.com/in/sof%C3%ADa-josefina-lago-dudas-2b0737132"
   },
   {
     name:"Alexandre Boulch",
-    affil:"Valeo.ai / Inria",
+    affil:"Valeo / Inria",
     topic:"Multi-sensor pre-training for autonomous driving",
     ellis:null,
     init:"AB", color:"#f43f5e", photo:"speakers/aboulch.png",
@@ -1628,12 +1751,20 @@ const speakers = [
     url:"https://www.maximilianigl.com/"
   },
   {
-    name:"More TBA",
-    affil:"ELLIS Fellows · Members · Industry",
-    topic:"Additional topics: world models, RL, SLAM, federated learning…",
-    ellis:null, tba:true,
-    init:"?", color:"#374151",
-    url:null
+    name:"Sergio Casas",
+    affil:"Waabi",
+    topic:"Perception and Behavior Reasoning",
+    ellis:null,
+    init:"SC", color:"#0ea5e9", photo:"speakers/scasas.jpg",
+    url:"https://sergiocasas.github.io/"
+  },
+  {
+    name:"Dirk Hornung",
+    affil:"Google Zurich",
+    topic:"HPC in Autonomous Driving",
+    ellis:null,
+    init:"DH", color:"#10b981", photo:"speakers/dhornung.jpeg",
+    url:"https://www.linkedin.com/in/drdirk/"
   },
 ];
 
@@ -1667,7 +1798,7 @@ const organizers = [
   },
   {
     name:"Andrei Bursuc",
-    role:"PI · Valeo.ai / Inria",
+    role:"PI · Valeo / Inria",
     ellis:"ELLIS Member", ellisCls:"badge-ellis-member",
     init:"AB", color:"#a855f7",
     photo:"organizers/abursuc.jpg",
