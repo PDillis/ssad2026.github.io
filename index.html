@@ -926,6 +926,113 @@ footer{
 }
 @keyframes hint-fade{0%,70%{opacity:1}100%{opacity:0}}
 
+/* ── POSTER MODAL ────────────────────────────────────────────── */
+.sched-block.poster{cursor:pointer}
+.sched-block.poster:hover{background:color-mix(in srgb,#f59e0b 20%,transparent)}
+#poster-modal{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,.87);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  display:none;align-items:center;justify-content:center;padding:1.5rem;
+}
+#poster-modal.active{display:flex;animation:modal-in .22s ease}
+.poster-window{
+  background:var(--surface);border:1px solid var(--border-accent);
+  border-radius:var(--radius-lg);overflow:hidden;width:min(620px,95vw);
+  max-height:85vh;display:flex;flex-direction:column;
+}
+.poster-header{
+  display:flex;align-items:center;padding:.875rem 1.25rem;
+  border-bottom:1px solid var(--border);gap:1rem;
+}
+.poster-title{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;flex:1;
+}
+.poster-title span{color:#f59e0b}
+.poster-close{
+  background:none;border:none;color:var(--text-muted);
+  cursor:pointer;font-size:1.4rem;line-height:1;transition:color .2s;
+}
+.poster-close:hover{color:var(--text)}
+.poster-list{overflow-y:auto;padding:.5rem 1.25rem}
+.poster-item{
+  display:flex;align-items:center;justify-content:space-between;gap:.75rem;
+  padding:.6rem 0;border-bottom:1px solid var(--border);
+}
+.poster-item:last-child{border-bottom:none}
+.poster-item-info{display:flex;flex-direction:column;gap:.1rem}
+.poster-item-num{color:var(--text-dim);font-size:.68rem}
+.poster-item-name{font-size:.85rem;font-weight:600;color:var(--text)}
+.poster-item-topic{font-size:.75rem;color:var(--text-muted)}
+.poster-item-link{
+  flex-shrink:0;font-size:.72rem;font-weight:600;color:var(--blue);
+  text-decoration:none;border:1px solid var(--border-accent);
+  border-radius:6px;padding:.3rem .7rem;transition:background .2s;
+  white-space:nowrap;
+}
+.poster-item-link:hover{background:rgba(255,255,255,.08)}
+.poster-footer{
+  padding:.65rem 1.25rem;border-top:1px solid var(--border);
+  font-size:.74rem;color:var(--text-dim);
+}
+
+/* ── MENTOR MODAL ────────────────────────────────────────────── */
+.sched-block.mentor{cursor:pointer}
+.sched-block.mentor:hover{background:color-mix(in srgb,#8b5cf6 20%,transparent)}
+#mentor-modal{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,.87);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  display:none;align-items:center;justify-content:center;padding:1.5rem;
+}
+#mentor-modal.active{display:flex;animation:modal-in .22s ease}
+.sched-block.panel{cursor:pointer}
+.sched-block.panel:hover{background:color-mix(in srgb,#8b5cf6 20%,transparent)}
+#fireside-modal{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,.87);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  display:none;align-items:center;justify-content:center;padding:1.5rem;
+}
+#fireside-modal.active{display:flex;animation:modal-in .22s ease}
+.mentor-window{
+  background:var(--surface);border:1px solid var(--border-accent);
+  border-radius:var(--radius-lg);overflow:hidden;width:min(860px,95vw);
+  max-height:85vh;display:flex;flex-direction:column;
+}
+.mentor-header{
+  display:flex;align-items:center;padding:.875rem 1.25rem;
+  border-bottom:1px solid var(--border);gap:1rem;
+}
+.mentor-title{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;flex:1;
+}
+.mentor-title span{color:#8b5cf6}
+.mentor-close{
+  background:none;border:none;color:var(--text-muted);
+  cursor:pointer;font-size:1.4rem;line-height:1;transition:color .2s;
+}
+.mentor-close:hover{color:var(--text)}
+.mentor-grid{
+  overflow-y:auto;padding:1.5rem;
+  display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;
+}
+.mentor-item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.6rem;width:140px}
+.mentor-avatar{
+  width:96px;height:96px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;
+  font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:700;
+}
+.mentor-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.mentor-name{font-size:.95rem;font-weight:600;color:var(--text);line-height:1.3}
+.mentor-name a{color:inherit;text-decoration:none}
+.mentor-name a:hover{color:var(--blue)}
+.mentor-num{color:var(--text-dim);font-weight:400;margin-right:.2rem}
+.mentor-org{
+  font-size:.62rem;font-weight:600;letter-spacing:.02em;text-transform:uppercase;
+  margin-top:-.3rem;padding:.12rem .5rem;border-radius:999px;
+}
+.mentor-org.org-academia{color:#3b82f6;background:color-mix(in srgb,#3b82f6 14%,transparent)}
+.mentor-org.org-industry{color:#f59e0b;background:color-mix(in srgb,#f59e0b 14%,transparent)}
+.mentor-org.org-both{color:#a855f7;background:color-mix(in srgb,#a855f7 14%,transparent)}
+
 /* ── RESPONSIVE ──────────────────────────────────────────────── */
 @media(max-width:900px){
   .about-grid,.venue-grid{grid-template-columns:1fr;gap:2.5rem}
@@ -1311,9 +1418,6 @@ footer{
       </div>
     </div>
     <div class="speakers-grid" id="speakers-grid"></div>
-    <div class="speakers-more">
-      This is our full lineup of invited speakers. Follow <a href="https://ellis.eu" target="_blank" rel="noopener" style="color:var(--blue)">ELLIS Society</a> and <a href="https://www.cvc.uab.cat" target="_blank" rel="noopener" style="color:var(--blue)">CVC Barcelona</a> for updates.
-    </div>
   </div>
 </section>
 
@@ -1393,7 +1497,7 @@ footer{
         <!-- 15:00 Coffee (row 14) -->
         <div class="sched-block coffee" style="grid-column:2;grid-row:14/15">☕ Coffee</div>
         <!-- 15:30 Fireside Chat #1 (row 15, 30min) -->
-        <div class="sched-block panel" style="grid-column:2;grid-row:15/16">Fireside Chat #1</div>
+        <div class="sched-block panel" style="grid-column:2;grid-row:15/16" data-fireside="1" role="button" tabindex="0" aria-haspopup="dialog">Fireside Chat #1</div>
         <!-- 15:30 Social drinks + Welcome event (rows 16–17) -->
         <div class="sched-block social-drinks" style="grid-column:2;grid-row:16/18">Social drinks &amp; Welcome event</div>
 
@@ -1423,9 +1527,9 @@ footer{
         <!-- 15:00 Coffee (row 14) -->
         <div class="sched-block coffee" style="grid-column:3;grid-row:14/15">☕ Coffee</div>
         <!-- 15:30 Fireside Chat #2 (row 15, 30min) -->
-        <div class="sched-block panel" style="grid-column:3;grid-row:15/16">Fireside Chat #2</div>
+        <div class="sched-block panel" style="grid-column:3;grid-row:15/16" data-fireside="2" role="button" tabindex="0" aria-haspopup="dialog">Fireside Chat #2</div>
         <!-- 16:00 Poster Session #1 (rows 16–17) -->
-        <div class="sched-block poster" style="grid-column:3;grid-row:16/18">Poster Session #1</div>
+        <div class="sched-block poster" style="grid-column:3;grid-row:16/18" data-session="1" role="button" tabindex="0" aria-haspopup="dialog">Poster Session #1</div>
         <!-- ── DAY 3 (col 4) ── -->
         <!-- 09:30 Sofía Lago Dudas (rows 3–6, 1.5h) -->
         <div class="sched-block speaker" style="--sc:#eab308;grid-column:4;grid-row:3/6">
@@ -1443,20 +1547,20 @@ footer{
         <!-- 12:30 Lunch (rows 9–11, 1.5h) -->
         <div class="sched-block lunch" style="grid-column:4;grid-row:9/12">🍽 Lunch</div>
         <!-- 14:00 Mentorship Session (rows 12–13, 1h) -->
-        <div class="sched-block mentor" style="grid-column:4;grid-row:12/14">Mentorship Session</div>
+        <div class="sched-block mentor" style="grid-column:4;grid-row:12/14" id="mentorship-block" role="button" tabindex="0" aria-haspopup="dialog">Mentorship Session</div>
         <!-- 15:00 Coffee (row 14) -->
         <div class="sched-block coffee" style="grid-column:4;grid-row:14/15">☕ Coffee</div>
         <!-- 15:30 Fireside Chat #3 (row 15, 30min) -->
-        <div class="sched-block panel" style="grid-column:4;grid-row:15/16">Fireside Chat #3</div>
+        <div class="sched-block panel" style="grid-column:4;grid-row:15/16" data-fireside="3" role="button" tabindex="0" aria-haspopup="dialog">Fireside Chat #3</div>
         <!-- 16:00 Poster Session #2 (rows 16–17) -->
-        <div class="sched-block poster" style="grid-column:4;grid-row:16/18">Poster Session #2</div>
+        <div class="sched-block poster" style="grid-column:4;grid-row:16/18" data-session="2" role="button" tabindex="0" aria-haspopup="dialog">Poster Session #2</div>
 
         <!-- ── DAY 4 (col 5) ── -->
         <!-- 09:00 empty (row 2, 30min) -->
         <div class="sched-block empty" style="grid-column:5;grid-row:2/3;border-right:1px solid var(--border)"></div>
         <!-- 09:30 López (rows 3–5, 1h) -->
         <div class="sched-block speaker" style="--sc:#3b82f6;grid-column:5;grid-row:3/6;border-right:1px solid var(--border)">
-          TBA
+          Vision-based End-to-End Driving: CVC Experiences
           <em>Antonio M. López</em>
           <span class="sched-dur">1 h</span>
         </div>
@@ -1464,7 +1568,7 @@ footer{
         <div class="sched-block coffee" style="grid-column:5;grid-row:6/7;border-right:1px solid var(--border)">☕ Coffee</div>
         <!-- 11:30 Holger Caesar (rows 7–8, 1h) -->
         <div class="sched-block speaker" style="--sc:#a855f7;grid-column:5;grid-row:7/9;border-right:1px solid var(--border)">
-          Dataset Construction &amp; Curation
+          AD at the Crossroads
           <em>Holger Caesar</em>
         </div>
         <!-- 12:30 Lunch (rows 9–11, 1.5h) -->
@@ -1477,7 +1581,7 @@ footer{
         <!-- 15:00 Coffee (row 14) -->
         <div class="sched-block coffee" style="grid-column:5;grid-row:14/15;border-right:1px solid var(--border)">☕ Coffee</div>
         <!-- 15:30 Fireside Chat #4 (row 15, 30min) -->
-        <div class="sched-block panel" style="grid-column:5;grid-row:15/16;border-right:1px solid var(--border)">Fireside Chat #4</div>
+        <div class="sched-block panel" style="grid-column:5;grid-row:15/16;border-right:1px solid var(--border)" data-fireside="4" role="button" tabindex="0" aria-haspopup="dialog">Fireside Chat #4</div>
         <!-- 16:00 Closing (rows 16–17) -->
         <div class="sched-block closing" style="grid-column:5;grid-row:16/18;border-right:1px solid var(--border)">Closing ceremony &amp; Awards</div>
 
@@ -1711,6 +1815,40 @@ footer{
   </div>
 </div>
 
+<!-- POSTER MODAL -->
+<div id="poster-modal" role="dialog" aria-modal="true" aria-label="Poster session list">
+  <div class="poster-window">
+    <div class="poster-header">
+      <div class="poster-title">📌 <span id="poster-modal-title">Poster Session</span></div>
+      <button class="poster-close" id="poster-close-btn" aria-label="Close">×</button>
+    </div>
+    <div class="poster-list" id="poster-list"></div>
+    <div class="poster-footer">Click a presenter's poster link to view it on Drive (links added as they become available).</div>
+  </div>
+</div>
+
+<!-- MENTOR MODAL -->
+<div id="mentor-modal" role="dialog" aria-modal="true" aria-label="Mentorship session mentors">
+  <div class="mentor-window">
+    <div class="mentor-header">
+      <div class="mentor-title">🤝 <span>Mentorship Session</span></div>
+      <button class="mentor-close" id="mentor-close-btn" aria-label="Close">×</button>
+    </div>
+    <div class="mentor-grid" id="mentor-grid"></div>
+  </div>
+</div>
+
+<!-- FIRESIDE MODAL -->
+<div id="fireside-modal" role="dialog" aria-modal="true" aria-label="Fireside chat speakers">
+  <div class="mentor-window">
+    <div class="mentor-header">
+      <div class="mentor-title">💬 <span id="fireside-modal-title">Fireside Chat</span></div>
+      <button class="mentor-close" id="fireside-close-btn" aria-label="Close">×</button>
+    </div>
+    <div class="mentor-grid" id="fireside-grid"></div>
+  </div>
+</div>
+
 <script>
 /* ── NAV SCROLL ─────────────────────────────────────── */
 const navbar = document.getElementById('navbar');
@@ -1759,7 +1897,7 @@ const speakers = [
   {
     name:"Antonio M. López",
     affil:"Computer Vision Center (CVC) / UAB",
-    topic:"TBA (will be announced closer to the event)",
+    topic:"Vision-based End-to-End Driving: CVC Experiences",
     ellis:"ELLIS Fellow", ellisCls:"badge-ellis-fellow",
     init:"AL", color:"#3b82f6", photo:"speakers/alopez.jpg",
     url:"https://pages.cvc.uab.es/antonio/"
@@ -1767,7 +1905,7 @@ const speakers = [
   {
     name:"Holger Caesar",
     affil:"TU Delft",
-    topic:"Dataset construction and curation",
+    topic:"AD at the Crossroads",
     ellis:"ELLIS Scholar", ellisCls:"badge-ellis-scholar",
     init:"HC", color:"#a855f7", photo:"speakers/hcaesar.jpg",
     url:"https://sites.google.com/it-caesar.de/homepage/"
@@ -1862,6 +2000,173 @@ speakers.forEach(s => {
   `;
   sg.appendChild(c);
 });
+
+/* ── POSTER SESSIONS DATA ──────────────────────────────
+   Split evenly across the two sessions (max 24 slots/day).
+   Add `link:"https://drive.google.com/..."` once poster PDFs are collected. */
+const posterSession1 = [
+  {name:"Ainoa Contreras", link:"https://drive.google.com/file/d/1WK8Il2dtCP9y5dcsh2EtcEQR6uxZYwsO/view?usp=sharing"},
+  {name:"Alexander Prutsch", link:"https://drive.google.com/open?id=1cAL9CE0xTF0AkcNyKizQHc0KFk8IKN0F"},
+  {name:"Andrea Abascal Molina", link:"https://drive.google.com/open?id=1PxibRdiI2F7QD9g9Up1B4A_BnkHQYZ_Y"},
+  {name:"Badr-Eddine Marani", link:"https://drive.google.com/file/d/1XwXMfewnTf8zAEnfh78N_P1Z65BnOf2y/view?usp=sharing"},
+  {name:"Borhaneddine Hamadou", link:"https://drive.google.com/open?id=1aSfUG-eh9TAmv37OwLZ4QZjbPXdeYw2k"},
+  {name:"Chenghao Qian", link:"https://drive.google.com/open?id=1bsRS1VPXPW7gDA4JB170CWnqs1Scpv_L"},
+  {name:"Diego Porres", link:"https://drive.google.com/file/d/12TrRDIx4fJ5JApZzY1BNPYS7WSkEq3x5/view?usp=sharing"},
+  {name:"Francisco Roldan Sanchez"},
+  {name:"Gerard De Mas Giménez", link:"https://drive.google.com/open?id=10AxAZhcQF5udjfgZyhAWD5jqTWI1UzvJ"},
+  {name:"Iddamalgoda Laknamali Ranatunga", link:"https://drive.google.com/file/d/11iRvPPruzqDtn9HfV0U-SFKrCrV8kcYO/view?usp=drive_link"},
+  {name:"In-Jae Lee", link:"https://drive.google.com/file/d/11l2olPBIQYu1CKMN_V_-7NCERaY2Oc1y/view?usp=drive_link"},
+  {name:"João Miguel Pereira de Almeida", link:"https://drive.google.com/open?id=1ygbgfBg0PxzqUwH_yJbBIc2JcjztwPlT"},
+  {name:"Lounès Meddahi", link:"https://drive.google.com/file/d/1Acq8IjAjqsaJFMUMS15Vy6sQ9NXx9O4L/view?usp=sharing"},
+  {name:"Luca Brembilla", link:"https://drive.google.com/file/d/1c0vDTgyRzHu3YyNjK2raQi2LwbhHJixk/view?usp=sharing"},
+  {name:"Muhammad Amin Khan", link:"https://drive.google.com/open?id=1zkMVfCI5L4zsVrd_SJYsnIbi15C1Pwj_"},
+  {name:"Nicolas Sereyjol-Garros", link:"https://drive.google.com/open?id=1N16GtSxqQpVvoFAnv0Vy6iqCMqDaQrvJ"},
+  {name:"Peiyuan Zhai", link:"https://drive.google.com/file/d/11o-CodxiL9rmyFq48x54UV_A9bDXZ1pY/view?usp=sharing"},
+  {name:"Silvio Galesso", link:"https://drive.google.com/file/d/1d6vX7wcnc6GUEuyECPM1iVadAMGCVL0X/view?usp=sharing"},
+];
+const posterSession2 = [
+  {name:"Abdulwahab Felemban", link:"https://drive.google.com/file/d/1j7paTukNjj35W_l1Ywx3WCcO3HzaMxmh/view?usp=sharing"},
+  {name:"Andreu Plana Joya", link:"https://drive.google.com/file/d/1Xy67WtP_UH-EdilaEqKTEKjZQ7EIpMsi/view?usp=sharing"},
+  {name:"Bruno Fernando Silva Plata", link:"https://drive.google.com/open?id=1cSKjtYNBL_3-koLXyphuI98vZV-IKRdJ"},
+  {name:"Daniel Diegel"},
+  {name:"Franco Gallo Franz", link:"https://drive.google.com/open?id=160OB8USlsr6k9BG1mh5FL8eqSId4z5XJ"},
+  {name:"Joachim Sicking", link:"https://drive.google.com/open?id=1D0qjiR4rS_qZ1u_Yc1PG_8E9BQsGq-4E"},
+  {name:"Jorge Daniel Rodriguez-Vidal", link:"https://drive.google.com/open?id=1J0kkXg_g5Hj-ZYeAyc-FEXqmrOT2DYqX"},
+  {name:"Katerina Vinciguerra", link:"https://drive.google.com/file/d/1UZun0F7-1R2oJeWb64eaNFXgOKbXvrIS/view?usp=drive_link"},
+  {name:"Manan Jignesh Shah"},
+  {name:"Milad Hossein", link:"https://drive.google.com/file/d/1npFPH354fFLJW4JfjO9rxiaJt3iA2CF4/view?usp=sharing"},
+  {name:"Muralidharan Perumal", link:"https://drive.google.com/open?id=1Q4z4SHhfrhhzuh2aWu2QSfwEFnt0i7Jn"},
+  {name:"Nahid Alam", link:"https://drive.google.com/open?id=18OV8wwY_JbOVqC9tU0DnWfK04jU22qQk"},
+  {name:"Prince Osei Aboagye", link:"https://drive.google.com/open?id=1ajmW61DauMsacOIB742ctxdTSxKYtHOY"},
+  {name:"Ramakrishnan Subramanian", link:"https://drive.google.com/file/d/1YZasn2Ck3O1K-nrkHxkHHmh2G5G-ufvu/view?usp=drive_link"},
+  {name:"S M Rifaiya Abrar", link:"https://drive.google.com/open?id=1cG1Aor6GJawlIg88vs2DU9l2lF6_0ut9"},
+  {name:"Samuel Leitenmaier", link:"https://drive.google.com/open?id=19ApTs_0VCeR78BkrTEP7YoQP5Zivphbz"},
+  {name:"Santiago Montiel-Marín", link:"https://drive.google.com/open?id=10mEMcBeo2Dr64Q5FArdinHbaO5OOLuo_"},
+  {name:"Sikhar Modi"},
+  {name:"Tarik Taoui", link:"https://drive.google.com/file/d/1iBxTOj_aa72iRj_rXSlLOjDB6HlrwV5_/view?usp=sharing"},
+  {name:"Veronika Morozova"},
+  {name:"Willi Poh", link:"https://drive.google.com/open?id=1RHhYQMiiSn3-YduWcdkY9hzzb-VitO3-"},
+];
+const posterSessions = {1:posterSession1, 2:posterSession2};
+
+/* ── POSTER MODAL ───────────────────────────────────── */
+const posterModal = document.getElementById('poster-modal');
+const posterModalTitle = document.getElementById('poster-modal-title');
+const posterListEl = document.getElementById('poster-list');
+
+function openPosterSession(n){
+  const list = posterSessions[n] || [];
+  posterModalTitle.textContent = `Poster Session #${n} — ${list.length} posters`;
+  posterListEl.innerHTML = list.map((p,i) => `
+    <div class="poster-item">
+      <div class="poster-item-info">
+        <span class="poster-item-num">#${i+1}</span>
+        <span class="poster-item-name">${p.name}</span>
+        ${p.topic?`<span class="poster-item-topic">${p.topic}</span>`:''}
+      </div>
+      ${p.link?`<a href="${p.link}" target="_blank" rel="noopener" class="poster-item-link">Poster ↗</a>`:''}
+    </div>
+  `).join('');
+  posterModal.classList.add('active');
+}
+function closePosterSession(){
+  posterModal.classList.remove('active');
+}
+document.querySelectorAll('.sched-block.poster').forEach(el => {
+  el.addEventListener('click', () => openPosterSession(el.dataset.session));
+  el.addEventListener('keydown', e => {
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();openPosterSession(el.dataset.session);}
+  });
+});
+document.getElementById('poster-close-btn').addEventListener('click', closePosterSession);
+posterModal.addEventListener('click', e => { if(e.target===posterModal) closePosterSession(); });
+window.addEventListener('keydown', e => { if(e.key==='Escape' && posterModal.classList.contains('active')) closePosterSession(); });
+
+/* ── MENTORS DATA ───────────────────────────────────────
+   Reuses speaker photos/colors where available; Sergio Casas and Andrei
+   Bursuc added directly since they aren't in the `speakers` list. */
+const mentors = [
+  {name:"Antonio M. López", init:"AL", color:"#3b82f6", photo:"speakers/alopez.jpg", url:"https://pages.cvc.uab.es/antonio/", org:"Academia"},
+  {name:"Fatma Güney", init:"FG", color:"#22d3ee", photo:"speakers/fguney.jpeg", url:"https://mysite.ku.edu.tr/fguney/", org:"Academia"},
+  {name:"José M. Álvarez", init:"JA", color:"#22c55e", photo:"speakers/jalvarez.jpg", url:"https://alvarezlopezjosem.github.io/", org:"Industry"},
+  {name:"Kashyap Chitta", init:"KC", color:"#f97316", photo:"speakers/kchitta.jpg", url:"https://kashyap7x.github.io/", org:"Industry"},
+  {name:"Sofía Lago Dudas", init:"SL", color:"#eab308", photo:"speakers/slagodudas.jpeg", url:"https://uk.linkedin.com/in/sof%C3%ADa-josefina-lago-dudas-2b0737132", org:"Industry"},
+  {name:"Alexandre Boulch", init:"AB", color:"#f43f5e", photo:"speakers/aboulch.png", url:"https://boulch.eu/", org:"Industry"},
+  {name:"German Ros", init:"GR", color:"#8b5cf6", photo:"speakers/gros.jpg", url:"https://germanros.net/", org:"Industry"},
+  {name:"Maximilian Igl", init:"MI", color:"#ec4899", photo:"speakers/migl.jpg", url:"https://www.maximilianigl.com/", org:"Industry"},
+  {name:"Puneet Dokania", init:"PD", color:"#0ea5e9", photo:"speakers/pdokania.jpg", url:"https://puneetdokania.github.io/", org:"Academia & Industry"},
+  {name:"Sergio Casas", init:"SC", color:"#14b8a6", photo:"speakers/scasas.jpg", url:null, org:"Industry"},
+  {name:"Andrei Bursuc", init:"AB", color:"#a855f7", photo:"organizers/abursuc.jpg", url:"https://abursuc.github.io/", org:"Industry"},
+];
+
+/* ── MENTOR MODAL ───────────────────────────────────── */
+const mentorModal = document.getElementById('mentor-modal');
+const mentorGridEl = document.getElementById('mentor-grid');
+
+function openMentorModal(){
+  mentorGridEl.innerHTML = mentors.map((m,i) => `
+    <div class="mentor-item">
+      <div class="mentor-avatar" style="background:${m.color}18;border:2px solid ${m.color}44">
+        ${m.photo?`<img src="${m.photo}" alt="${m.name}" loading="lazy">`:`<span style="color:${m.color}">${m.init}</span>`}
+      </div>
+      <div class="mentor-name"><span class="mentor-num">${i+1}.</span>${m.url?`<a href="${m.url}" target="_blank" rel="noopener">${m.name}</a>`:m.name}</div>
+      ${m.org?`<div class="mentor-org org-${m.org==='Academia'?'academia':m.org==='Industry'?'industry':'both'}">${m.org}</div>`:''}
+    </div>
+  `).join('');
+  mentorModal.classList.add('active');
+}
+function closeMentorModal(){
+  mentorModal.classList.remove('active');
+}
+const mentorshipBlock = document.getElementById('mentorship-block');
+mentorshipBlock.addEventListener('click', openMentorModal);
+mentorshipBlock.addEventListener('keydown', e => {
+  if(e.key==='Enter'||e.key===' '){e.preventDefault();openMentorModal();}
+});
+document.getElementById('mentor-close-btn').addEventListener('click', closeMentorModal);
+mentorModal.addEventListener('click', e => { if(e.target===mentorModal) closeMentorModal(); });
+window.addEventListener('keydown', e => { if(e.key==='Escape' && mentorModal.classList.contains('active')) closeMentorModal(); });
+
+/* ── FIRESIDE CHATS DATA ─────────────────────────────────
+   Each fireside chat pairs with that day's talk speakers (looked up in `speakers`). */
+const firesideSpeakers = {
+  1:["Alexandre Boulch","José M. Álvarez","Maximilian Igl"],
+  2:["Kashyap Chitta","German Ros","Fatma Güney"],
+  3:["Sofía Lago Dudas","Puneet Dokania"],
+  4:["Antonio M. López","Holger Caesar","Dirk Hornung"],
+};
+
+/* ── FIRESIDE MODAL ─────────────────────────────────── */
+const firesideModal = document.getElementById('fireside-modal');
+const firesideModalTitle = document.getElementById('fireside-modal-title');
+const firesideGridEl = document.getElementById('fireside-grid');
+
+function openFiresideModal(n){
+  firesideModalTitle.textContent = `Fireside Chat #${n}`;
+  const names = firesideSpeakers[n] || [];
+  const list = names.map(name => speakers.find(s => s.name === name)).filter(Boolean);
+  firesideGridEl.innerHTML = list.map(s => `
+    <div class="mentor-item">
+      <div class="mentor-avatar" style="background:${s.color}18;border:2px solid ${s.color}44">
+        ${s.photo?`<img src="${s.photo}" alt="${s.name}" loading="lazy">`:`<span style="color:${s.color}">${s.init}</span>`}
+      </div>
+      <div class="mentor-name">${s.url?`<a href="${s.url}" target="_blank" rel="noopener">${s.name}</a>`:s.name}</div>
+    </div>
+  `).join('');
+  firesideModal.classList.add('active');
+}
+function closeFiresideModal(){
+  firesideModal.classList.remove('active');
+}
+document.querySelectorAll('.sched-block.panel[data-fireside]').forEach(el => {
+  el.addEventListener('click', () => openFiresideModal(el.dataset.fireside));
+  el.addEventListener('keydown', e => {
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();openFiresideModal(el.dataset.fireside);}
+  });
+});
+document.getElementById('fireside-close-btn').addEventListener('click', closeFiresideModal);
+firesideModal.addEventListener('click', e => { if(e.target===firesideModal) closeFiresideModal(); });
+window.addEventListener('keydown', e => { if(e.key==='Escape' && firesideModal.classList.contains('active')) closeFiresideModal(); });
 
 /* ── ORGANIZERS DATA ────────────────────────────────── */
 // Place photos in organizers/ (e.g. organizers/dporres.jpg). Leave photo:null to show initials.
